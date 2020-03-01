@@ -1,0 +1,15 @@
+﻿<Properties StartupConfiguration="{913B03BB-A55C-4E05-2C8D-795C0E08F255}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Player/FirstPersonCharacter/Scripts/FirstPersonController.cs">
+    <Files>
+      <File FileName="Assets/Player/FirstPersonCharacter/Scripts/FirstPersonController.cs" Line="224" Column="53" />
+      <File FileName="Assets/Player/FirstPersonCharacter/Scripts/MouseLook.cs" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="6de1373d-1bb5-44a1-8d71-ebfbe30c33eb" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
