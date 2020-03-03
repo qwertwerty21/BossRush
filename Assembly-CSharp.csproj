@@ -63,13 +63,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Bosses\Scripts\AICharacterControl.cs" />
+    <Compile Include="Assets\Bosses\Scripts\ThirdPersonCharacter.cs" />
     <Compile Include="Assets\Player\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
-    <Compile Include="Assets\Player\FirstPersonCharacter\Scripts\HeadBob.cs" />
     <Compile Include="Assets\Player\FirstPersonCharacter\Scripts\MouseLook.cs" />
-    <Compile Include="Assets\Player\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs" />
     <Compile Include="Assets\Player\FirstPersonCharacter\Scripts\Weapon.cs" />
-    <Compile Include="Assets\Player\ThirdPersonController\Scripts\ThirdPersonCameraController.cs" />
-    <Compile Include="Assets\Player\ThirdPersonController\Scripts\ThirdPersonCharacterController.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
@@ -78,6 +76,8 @@
     <Compile Include="Assets\SampleScenes\Scripts\ParticleSceneControls.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
+    <Compile Include="Assets\SampleScenes\ThirdPersonController\Scripts\ThirdPersonCameraController.cs" />
+    <Compile Include="Assets\SampleScenes\ThirdPersonController\Scripts\ThirdPersonCharacterController.cs" />
     <Compile Include="Assets\Third Party Assets\Cinemachine\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
     <Compile Include="Assets\Third Party Assets\Cinemachine\Cinemachine\Base\Runtime\Behaviours\CinemachineBrain.cs" />
     <Compile Include="Assets\Third Party Assets\Cinemachine\Cinemachine\Base\Runtime\Behaviours\CinemachineClearShot.cs" />
