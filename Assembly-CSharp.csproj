@@ -63,11 +63,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Bosses\Scripts\AIBossController.cs" />
     <Compile Include="Assets\Bosses\Scripts\AICharacterControl.cs" />
+    <Compile Include="Assets\Bosses\Scripts\BossBaseFSM.cs" />
+    <Compile Include="Assets\Bosses\Scripts\Chase.cs" />
     <Compile Include="Assets\Bosses\Scripts\ThirdPersonCharacter.cs" />
-    <Compile Include="Assets\Player\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
-    <Compile Include="Assets\Player\FirstPersonCharacter\Scripts\MouseLook.cs" />
-    <Compile Include="Assets\Player\FirstPersonCharacter\Scripts\Weapon.cs" />
+    <Compile Include="Assets\Player\Scripts\MouseLook.cs" />
+    <Compile Include="Assets\Player\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Player\Scripts\Weapon.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
@@ -165,7 +168,7 @@
     <None Include="Assets\Third Party Assets\ProCore\ProBuilder\Shader\pb_NormalPreview.shader" />
     <None Include="Assets\Third Party Assets\3D Game Kit - Character Pack\Shaders\Dissolve.shader" />
     <None Include="Assets\Third Party Assets\ProCore\ProBuilder\Shader\pb_ScrollHighlight.shader" />
-    <None Include="Assets\Player\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
+    <None Include="Assets\Player\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Third Party Assets\ProCore\ProBuilder\readme.txt" />
     <None Include="Assets\Third Party Assets\3D Game Kit - Character Pack\Shaders\ToonSkin.shader" />
     <None Include="Assets\Third Party Assets\ProCore\ProBuilder\Shader\pb_SmoothingPreview.shader" />

@@ -8,7 +8,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 {
   [RequireComponent(typeof(CharacterController))]
   [RequireComponent(typeof(AudioSource))]
-  public class FirstPersonController : MonoBehaviour
+  public class PlayerController : MonoBehaviour
   {
     [SerializeField] private bool m_IsWalking;
     [SerializeField] private float m_WalkSpeed;
@@ -43,7 +43,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
     private AudioSource m_AudioSource;
     private float m_DoubleTapLastTapped = -0.1f;
 
-
     // Use this for initialization
     private void Start()
     {
@@ -55,7 +54,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
       m_AudioSource = GetComponent<AudioSource>();
       m_MouseLook.Init(transform, m_Camera.transform);
     }
-
 
     // Update is called once per frame
     private void Update()
@@ -101,14 +99,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
       m_PreviouslyGrounded = m_CharacterController.isGrounded;
     }
 
-
     private void PlayLandingSound()
     {
       m_AudioSource.clip = m_LandSound;
       m_AudioSource.Play();
       m_NextStep = m_StepCycle + .5f;
     }
-
 
     private void FixedUpdate()
     {
@@ -157,13 +153,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
       m_MouseLook.UpdateCursorLock();
     }
 
-
     private void PlayJumpSound()
     {
       m_AudioSource.clip = m_JumpSound;
       m_AudioSource.Play();
     }
-
 
     private void ProgressStepCycle(float speed)
     {
@@ -183,7 +177,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
       PlayFootStepAudio();
     }
 
-
     private void PlayFootStepAudio()
     {
       if (!m_CharacterController.isGrounded)
@@ -199,7 +192,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
       m_FootstepSounds[n] = m_FootstepSounds[0];
       m_FootstepSounds[0] = m_AudioSource.clip;
     }
-
 
     private void SetLocomotionInput(out float speed)
     {
@@ -228,12 +220,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
     }
 
-
     private void RotateView()
     {
       m_MouseLook.LookRotation(transform, m_Camera.transform);
     }
-
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
