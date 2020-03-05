@@ -10,6 +10,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
   [RequireComponent(typeof(AudioSource))]
   public class PlayerController : MonoBehaviour
   {
+    [SerializeField] private float m_Health;
     [SerializeField] private bool m_IsWalking;
     [SerializeField] private float m_WalkSpeed;
     [SerializeField] private float m_RunSpeed;
@@ -73,6 +74,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
       if (m_CanJump)
       {
         m_CurrentJumpCount++;
+        Debug.Log("CurrenJumpCpunt " + m_CurrentJumpCount);
       }
 
       // dash
@@ -109,6 +111,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
     private void FixedUpdate()
     {
+
       float speed;
       SetLocomotionInput(out speed);
       // always move along the camera forward as it is the direction that it being aimed at
@@ -141,6 +144,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
       if (m_CanJump)
       {
+        Debug.Log("jumping");
         m_Animator.SetTrigger("jump");
         m_MoveDir.y = m_JumpSpeed;
         PlayJumpSound();
@@ -228,7 +232,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-      Debug.Log("hit by " + hit.collider.name);
+      // Debug.Log("hit by " + hit.collider.name);
       Rigidbody body = hit.collider.attachedRigidbody;
       //dont move the rigidbody if the character is on top of it
       if (m_CollisionFlags == CollisionFlags.Below)
