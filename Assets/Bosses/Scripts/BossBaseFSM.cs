@@ -26,6 +26,7 @@ public class BossBaseFSM : StateMachineBehaviour
   private void SetDistanceFromPlayer(Animator animator)
   {
     float distanceFromPlayer = Vector3.Distance(m_Boss.transform.position, m_Player.transform.position);
+    // Debug.Log("Distance " + distanceFromPlayer);
     animator.SetFloat("distanceFromPlayer", distanceFromPlayer);
   }
 }

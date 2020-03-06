@@ -69,6 +69,7 @@
     <Compile Include="Assets\Bosses\Scripts\Chase.cs" />
     <Compile Include="Assets\Bosses\Scripts\Idle.cs" />
     <Compile Include="Assets\Bosses\Scripts\ThirdPersonCharacter.cs" />
+    <Compile Include="Assets\Bosses\Scripts\ToothyStomp.cs" />
     <Compile Include="Assets\Player\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Player\Scripts\Weapon.cs" />

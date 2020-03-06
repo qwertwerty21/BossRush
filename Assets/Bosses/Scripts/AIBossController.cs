@@ -42,6 +42,14 @@ public class AIBossController : MonoBehaviour
     UpdateLocomotionAnimator(move);
   }
 
+  public void RotateTowards(Transform target)
+  {
+    Vector3 direction = (target.position - transform.position).normalized;
+    direction.y = 0f;
+    Quaternion lookRotation = Quaternion.LookRotation(direction);
+    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * m_MovingTurnSpeed);
+  }
+
   private void ApplyExtraTurnRotation()
   {
     // help the character turn faster (this is in addition to root rotation in the animation)

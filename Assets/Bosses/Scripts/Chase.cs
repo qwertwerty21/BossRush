@@ -16,5 +16,6 @@ public class Chase : BossBaseFSM
     // Debug.Log("player position" + m_Player.transform.position);
     m_Agent.SetDestination(m_Player.transform.position);
     m_BossController.Move(m_Agent.desiredVelocity);
+
   }
 }

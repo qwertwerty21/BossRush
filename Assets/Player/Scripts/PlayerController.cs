@@ -232,7 +232,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-      // Debug.Log("hit by " + hit.collider.name);
+      Debug.Log("hit by " + hit.collider.name);
       Rigidbody body = hit.collider.attachedRigidbody;
       //dont move the rigidbody if the character is on top of it
       if (m_CollisionFlags == CollisionFlags.Below)
@@ -245,6 +245,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         return;
       }
       body.AddForceAtPosition(m_CharacterController.velocity * 0.1f, hit.point, ForceMode.Impulse);
+    }
+
+    private void OnTriggerEnter()
+    {
+      Debug.Log("Set IsHurt trigger here and take damage");
     }
   }
 }
