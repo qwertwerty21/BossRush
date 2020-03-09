@@ -1,13 +1,12 @@
 ﻿<Properties StartupConfiguration="{913B03BB-A55C-4E05-2C8D-795C0E08F255}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Player/FirstPersonCharacter/Scripts/FirstPersonController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Bosses/Scripts/ToothyAIBossController.cs">
     <Files>
-      <File FileName="Assets/Player/FirstPersonCharacter/Scripts/FirstPersonController.cs" Line="103" Column="1" />
-      <File FileName="Assets/Player/FirstPersonCharacter/Scripts/MouseLook.cs" />
+      <File FileName="Assets/Bosses/Scripts/ToothyAIBossController.cs" Line="23" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e9766736-2ade-4954-a26b-bb9e62b93f67" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e5332910-bf29-47bd-ad20-23fd32d52891" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

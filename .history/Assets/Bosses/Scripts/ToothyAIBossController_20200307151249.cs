@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ToothyAIBossController : AIBossController
+{
+  [SerializeField] float m_AttackRange = 3f;
+
+  private static readonly Dictionary<string, int> m_State = new Dictionary<string, int> {
+    {"Idle", 0},
+    {"Intro", 1},
+    {"Chase", 2},
+    {"Combat", 3},
+  };
+
+
+  // Update is called once per frame
+  private void Update()
+  {
+    var distanceFromPlayer = GetDistanceFromPlayer();
+    Debug.Log("Distance " + distanceFromPlayer);
+
+    if (distanceFromPlayer <= m_AttackRange)
+    {
+      Debug.Log("attack " + distanceFromPlayer);
+
+      // attack
+      m_Animator.SetInteger("state", m_State["Combat"]);
+    }
+    else
+      Debug.Log("chase " + distanceFromPlayer);
+    {
+      //chase 
+      m_Animator.SetInteger("state", m_State["Chase"]);
+    }
+  }
+
+}
