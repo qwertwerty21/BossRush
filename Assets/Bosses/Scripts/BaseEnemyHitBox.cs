@@ -5,9 +5,10 @@ using UnityEngine;
 public class BaseEnemyHitBox : MonoBehaviour
 {
   [SerializeField] private float m_KnockbackForce = 3f;
+  [SerializeField] public Collider m_Collider;
 
 
-  virtual public float GetKnockbackForce()
+    virtual public float GetKnockbackForce()
   {
     return m_KnockbackForce;
   }

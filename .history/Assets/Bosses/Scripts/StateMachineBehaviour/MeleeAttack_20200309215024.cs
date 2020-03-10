@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeAttack : BaseBossFSM
+public class MeleeAttack : BaseBossStateMachineBehaviour
 {
   // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
   override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -14,7 +14,7 @@ public class MeleeAttack : BaseBossFSM
   override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
   {
     base.OnStateUpdate(animator, stateInfo, layerIndex);
-    m_BossController.RotateTowards(m_Player.transform);
+    m_AIBossController.RotateTowards(m_Player.transform);
   }
 
   // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

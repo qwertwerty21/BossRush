@@ -64,14 +64,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Bosses\Scripts\AIBossController.cs" />
-    <Compile Include="Assets\Bosses\Scripts\BaseBossFSM.cs" />
     <Compile Include="Assets\Bosses\Scripts\BaseEnemyHitBox.cs" />
-    <Compile Include="Assets\Bosses\Scripts\Chase.cs" />
-    <Compile Include="Assets\Bosses\Scripts\ChooseAttack.cs" />
-    <Compile Include="Assets\Bosses\Scripts\Idle.cs" />
-    <Compile Include="Assets\Bosses\Scripts\MeleeAttack.cs" />
-    <Compile Include="Assets\Bosses\Scripts\ToothyAIBossController.cs" />
-    <Compile Include="Assets\Bosses\Scripts\ToothyStompHitBox.cs" />
+    <Compile Include="Assets\Bosses\Scripts\StateMachineBehaviour\BaseBossStateMachineBehaviour.cs" />
+    <Compile Include="Assets\Bosses\Scripts\StateMachineBehaviour\Chase.cs" />
+    <Compile Include="Assets\Bosses\Scripts\StateMachineBehaviour\ChooseAttack.cs" />
+    <Compile Include="Assets\Bosses\Scripts\StateMachineBehaviour\Idle.cs" />
+    <Compile Include="Assets\Bosses\Scripts\StateMachineBehaviour\MeleeAttack.cs" />
+    <Compile Include="Assets\Bosses\Toothy\Scripts\StateMachineBehaviour\ToothyStomp.cs" />
+    <Compile Include="Assets\Bosses\Toothy\Scripts\ToothyAIBossController.cs" />
+    <Compile Include="Assets\Bosses\Toothy\Scripts\ToothyStompHitBox.cs" />
     <Compile Include="Assets\Player\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Player\Scripts\Weapon.cs" />

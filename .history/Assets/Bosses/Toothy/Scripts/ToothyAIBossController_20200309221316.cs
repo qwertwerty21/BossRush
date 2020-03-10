@@ -14,6 +14,9 @@ public class ToothyAIBossController : AIBossController
   };
 
 
+
+
+
   // Update is called once per frame
   private void Update()
   {
@@ -34,5 +37,7 @@ public class ToothyAIBossController : AIBossController
       m_Animator.SetInteger("state", m_State["Chase"]);
     }
   }
+
+
 
 }

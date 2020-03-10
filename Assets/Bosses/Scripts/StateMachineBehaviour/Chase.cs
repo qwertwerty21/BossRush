@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chase : BaseBossFSM
+public class Chase : BaseBossStateMachineBehaviour
 {
 
   // var to keep track of stopping distance?
@@ -17,7 +17,7 @@ public class Chase : BaseBossFSM
     base.OnStateUpdate(animator, stateInfo, layerIndex);
     // Debug.Log("player position" + m_Player.transform.position);
     m_Agent.SetDestination(m_Player.transform.position);
-    m_BossController.Move(m_Agent.desiredVelocity);
+    m_AIBossController.Move(m_Agent.desiredVelocity);
 
   }
 }

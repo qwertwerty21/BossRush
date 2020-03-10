@@ -58,3 +58,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_KnockbackForce: 40
+  m_Collider: {fileID: 9028538514115109444}

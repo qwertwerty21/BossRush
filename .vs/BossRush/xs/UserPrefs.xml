@@ -1,12 +1,51 @@
 ﻿<Properties StartupConfiguration="{913B03BB-A55C-4E05-2C8D-795C0E08F255}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Bosses/Scripts/ToothyAIBossController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Bosses/Toothy/Scripts/StateMachineBehaviour/ToothyStomp.cs">
     <Files>
-      <File FileName="Assets/Bosses/Scripts/ToothyAIBossController.cs" Line="23" Column="6" />
+      <File FileName="Assets/Bosses/Scripts/ToothyAIBossController.cs" Line="52" Column="1" />
+      <File FileName="Assets/Bosses/Scripts/MeleeAttack.cs" Line="38" Column="1" />
+      <File FileName="Assets/Bosses/Scripts/BaseBossFSM.cs" Line="29" Column="1" />
+      <File FileName="Assets/Bosses/Scripts/Chase.cs" Line="24" Column="1" />
+      <File FileName="Assets/Bosses/Scripts/ChooseAttack.cs" Line="45" Column="1" />
+      <File FileName="Assets/Bosses/Scripts/StateMachineBehaviour/Idle.cs" Line="18" Column="1" />
+      <File FileName="Assets/Bosses/Toothy/Scripts/StateMachineBehaviour/ToothyStomp.cs" Line="43" Column="1" />
+      <File FileName="Assets/Bosses/Scripts/AIBossController.cs" Line="18" Column="4" />
+      <File FileName="Assets/Bosses/Toothy/Scripts/ToothyStompHitBox.cs" Line="1" Column="1" />
+      <File FileName="Assets/Bosses/Scripts/BaseEnemyHitBox.cs" Line="8" Column="26" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="BossRush" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Bosses" expanded="True">
+                <Node name="Scripts" expanded="True">
+                  <Node name="StateMachineBehaviour" expanded="True" />
+                </Node>
+                <Node name="Toothy" expanded="True">
+                  <Node name="Scripts" expanded="True">
+                    <Node name="StateMachineBehaviour" expanded="True">
+                      <Node name="ToothyStomp.cs" selected="True" />
+                    </Node>
+                  </Node>
+                </Node>
+              </Node>
+              <Node name="Player" expanded="True">
+                <Node name="Scripts" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="BossRush" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e5332910-bf29-47bd-ad20-23fd32d52891" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="863683d3-38bf-47be-bbec-73f3f0e27377" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

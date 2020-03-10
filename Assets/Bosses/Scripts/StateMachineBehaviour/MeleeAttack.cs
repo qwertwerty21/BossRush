@@ -1,27 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public class ChooseAttack : BaseBossFSM
+public class MeleeAttack : BaseBossStateMachineBehaviour
 {
-  [SerializeField] private string[] m_AvailableAttacks;
-
+  // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
   override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
   {
     base.OnStateEnter(animator, stateInfo, layerIndex);
-    Debug.Log("randomAttack " + m_AvailableAttacks.Length);
-    string randomAttack = m_AvailableAttacks[Random.Range(0, m_AvailableAttacks.Length)];
-    animator.SetTrigger(randomAttack);
   }
 
+  // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
   override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
   {
     base.OnStateUpdate(animator, stateInfo, layerIndex);
-    // Debug.Log("player position" + m_Player.transform.position);
-    // m_Agent.SetDestination(m_Player.transform.position);
-    // m_BossController.Move(m_Agent.desiredVelocity);
-
+    m_AIBossController.RotateTowards(m_Player.transform);
   }
 
   // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
