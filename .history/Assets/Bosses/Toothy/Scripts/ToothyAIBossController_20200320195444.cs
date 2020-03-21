@@ -12,6 +12,8 @@ public class ToothyAIBossController : AIBossController
     { "Combat", 3 },
   };
 
+
+
   // Update is called once per frame
   private void Update()
   {

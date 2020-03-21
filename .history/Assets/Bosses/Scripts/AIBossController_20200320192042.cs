@@ -84,19 +84,6 @@ public abstract class AIBossController : MonoBehaviour
     }
   }
 
-  public void PlayParticleSystemEffect(string name)
-  {
-    ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
-    Debug.Log("play  particleSystems" + particleSystems);
-    for (int i = 0; i < particleSystems.Length; i++)
-    {
-      if (name == particleSystems[i].name)
-      {
-        particleSystems[i].Play();
-      }
-    }
-  }
-
   void Awake()
   {
     m_Animator = GetComponent<Animator>();

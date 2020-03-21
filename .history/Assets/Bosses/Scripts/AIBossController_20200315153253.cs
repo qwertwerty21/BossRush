@@ -71,32 +71,6 @@ public abstract class AIBossController : MonoBehaviour
     return distanceFromPlayer;
   }
 
-  public void ToggleHitboxColliders(string name, bool isEnabled)
-  {
-    BaseEnemyHitBox[] hitboxes = GetComponentsInChildren<BaseEnemyHitBox>();
-    Debug.Log("toggle swipe hitboxes" + hitboxes);
-    for (int i = 0; i < hitboxes.Length; i++)
-    {
-      if (name == hitboxes[i].m_HitBoxName)
-      {
-        hitboxes[i].m_Collider.enabled = isEnabled;
-      }
-    }
-  }
-
-  public void PlayParticleSystemEffect(string name)
-  {
-    ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
-    Debug.Log("play  particleSystems" + particleSystems);
-    for (int i = 0; i < particleSystems.Length; i++)
-    {
-      if (name == particleSystems[i].name)
-      {
-        particleSystems[i].Play();
-      }
-    }
-  }
-
   void Awake()
   {
     m_Animator = GetComponent<Animator>();

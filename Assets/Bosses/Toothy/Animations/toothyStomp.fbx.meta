@@ -196,8 +196,8 @@ ModelImporter:
       curves: []
       events:
       - time: 0.38253012
-        functionName: fuk
-        data: 
+        functionName: PlayParticleSystemEffect
+        data: PlasmaExplosionEffect
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0

@@ -90,7 +90,7 @@ public abstract class AIBossController : MonoBehaviour
     Debug.Log("play  particleSystems" + particleSystems);
     for (int i = 0; i < particleSystems.Length; i++)
     {
-      if (name == particleSystems[i].name)
+      if (name == particleSystems[i].m_HitBoxName)
       {
         particleSystems[i].Play();
       }
