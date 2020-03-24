@@ -11,8 +11,8 @@ public class ToothySwipe : BaseBossStateMachineBehaviour
   {
     base.OnStateEnter(animator, stateInfo, layerIndex);
     m_ToothyAIBossController = m_AIBossController.GetComponent<ToothyAIBossController>();
-    // m_ToothyAIBossController.ToggleToothyHitboxColliders("ToothySwipe", true);
-    // m_ToothyAIBossController.ToggleToothyParticleSystemEmission (true);
+    // m_ToothyAIBossController.RotateTowards(m_Player.transform);
+    // m_ToothyAIBossController.transform.LookAt(m_Player.transform);
   }
 
   // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -20,6 +20,7 @@ public class ToothySwipe : BaseBossStateMachineBehaviour
   {
     base.OnStateUpdate(animator, stateInfo, layerIndex);
     m_ToothyAIBossController.RotateTowards(m_Player.transform);
+    // m_ToothyAIBossController.transform.LookAt(m_Player.transform);
   }
 
   // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
