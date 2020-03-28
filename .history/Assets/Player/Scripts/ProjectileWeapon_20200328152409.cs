@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using CinemachineVirtualCamera;
 
 public class ProjectileWeapon : MonoBehaviour
 {
-  [SerializeField] Camera m_Camera;
+  [SerializeField] CinemachineVirtualCamera m_Camera;
   [SerializeField] float m_Range = 100f;
   [SerializeField] float m_Damage = 30f;
   [SerializeField] float m_TimeBetweenShots = 0.5f;

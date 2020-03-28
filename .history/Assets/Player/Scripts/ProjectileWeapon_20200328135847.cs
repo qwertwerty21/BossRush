@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProjectileWeapon : MonoBehaviour
+public class ProjectileWeapons : MonoBehaviour
 {
   [SerializeField] Camera m_Camera;
   [SerializeField] float m_Range = 100f;
