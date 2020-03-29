@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9028538514115109447}
   - component: {fileID: 9028538514115109444}
-  - component: {fileID: 9028538514115109445}
   m_Layer: 0
   m_Name: ToothyStompHitBox
   m_TagString: EnemyHitBox
@@ -45,17 +44,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9028538514115109445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9028538514115109446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 347c8f31096b54e48ad40bf19dc94fc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_KnockbackForce: 40
-  m_Collider: {fileID: 9028538514115109444}

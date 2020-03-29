@@ -34,8 +34,7 @@ public class ProjectileWeapon : MonoBehaviour
   IEnumerator Shoot()
   {
     Debug.Log("gameObject" + gameObject);
-    MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
-    meshRenderer.enabled = true;
+    gameObject.SetActive(true);
     m_Animator.SetBool("isShooting", true);
     m_CanShoot = false;
     PlayMuzzleFlash();
@@ -43,7 +42,7 @@ public class ProjectileWeapon : MonoBehaviour
     yield return new WaitForSeconds(m_TimeBetweenShots);
     m_CanShoot = true;
     m_Animator.SetBool("isShooting", false);
-    meshRenderer.enabled = false;
+    gameObject.SetActive(false);
   }
 
   private void PlayMuzzleFlash()

@@ -34,7 +34,7 @@ public class ProjectileWeapon : MonoBehaviour
   IEnumerator Shoot()
   {
     Debug.Log("gameObject" + gameObject);
-    MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
+    MeshRenderer meshRenderer = gameObject.GetComponent<MeshCollider>();
     meshRenderer.enabled = true;
     m_Animator.SetBool("isShooting", true);
     m_CanShoot = false;

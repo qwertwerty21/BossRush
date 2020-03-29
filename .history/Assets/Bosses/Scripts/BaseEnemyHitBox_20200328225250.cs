@@ -9,6 +9,11 @@ public class BaseEnemyHitBox : MonoBehaviour
   [SerializeField] public Damage m_Damage;
   [SerializeField] public Collider m_Collider;
 
+  virtual public float GetKnockbackForce()
+  {
+    return m_KnockbackForce;
+  }
+
   virtual public Vector3 GetDirection(Rigidbody otherRigidBody)
   {
     Vector3 direction = otherRigidBody.transform.position - transform.position;

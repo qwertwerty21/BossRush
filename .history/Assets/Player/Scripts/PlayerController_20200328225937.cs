@@ -147,7 +147,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
       if (m_CanDash)
       {
         Debug.Log("dash" + m_MoveDir);
-        m_Animator.SetTrigger("dash");
         m_MoveDir.x = m_MoveDir.x * m_DashThrust;
         m_MoveDir.z = m_MoveDir.z * m_DashThrust;
 

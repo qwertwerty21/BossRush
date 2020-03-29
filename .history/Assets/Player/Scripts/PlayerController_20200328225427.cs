@@ -147,7 +147,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
       if (m_CanDash)
       {
         Debug.Log("dash" + m_MoveDir);
-        m_Animator.SetTrigger("dash");
         m_MoveDir.x = m_MoveDir.x * m_DashThrust;
         m_MoveDir.z = m_MoveDir.z * m_DashThrust;
 
@@ -280,7 +279,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
       {
         BaseEnemyHitBox enemyHitbox = otherCollider.gameObject.GetComponent<BaseEnemyHitBox>();
         Vector3 direction = enemyHitbox.GetDirection(m_RigidBody);
-        float force = enemyHitbox.m_Damage.m_KnockbackForce;
+        Debug.Log("Diretion" + direction);
+        float force = enemyHitbox.m_Damage.m_KnockbackForce();
         AddImpact(direction, force);
       }
     }
@@ -292,7 +292,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
       {
         BaseEnemyHitBox enemyHitbox = other.GetComponent<BaseEnemyHitBox>();
         Vector3 direction = enemyHitbox.GetDirection(m_RigidBody);
-        float force = enemyHitbox.m_Damage.m_KnockbackForce;
+        Debug.Log("Diretion" + direction);
+        float force = enemyHitbox.m_Damage.m_KnockbackForce();
         AddImpact(direction, force);
       }
     }
