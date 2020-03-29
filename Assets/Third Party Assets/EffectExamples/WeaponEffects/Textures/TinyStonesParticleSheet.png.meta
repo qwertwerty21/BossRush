@@ -1,13 +1,21 @@
 fileFormatVersion: 2
-guid: 1c1f5fdffb8c5a944a978e8debb8fdfe
+guid: ce97ed62c0a56e84ab25e22c8dfd5bca
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: SmallDustPuff_0
-    21300002: SmallDustPuff_1
-    21300004: SmallDustPuff_2
-    21300006: SmallDustPuff_3
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: TinyStones_0
+  - first:
+      213: 21300002
+    second: TinyStones_1
+  - first:
+      213: 21300004
+    second: TinyStones_2
+  - first:
+      213: 21300006
+    second: TinyStones_3
   externalObjects: {}
-  serializedVersion: 9
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -61,8 +69,9 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -73,7 +82,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -84,11 +94,12 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SmallDustPuff_0
+      name: TinyStones_0
       rect:
         serializedVersion: 2
         x: 0
@@ -102,13 +113,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18d90b935f11340bfa95fab9b0381dca
+      spriteID: 7083094963746441cae8cf44840abca9
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SmallDustPuff_1
+      name: TinyStones_1
       rect:
         serializedVersion: 2
         x: 128
@@ -122,13 +134,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39c2dfcafe6b54474ad6dcde411572b3
+      spriteID: ef4e83c2b32f74e37b25fda096aaa85e
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SmallDustPuff_2
+      name: TinyStones_2
       rect:
         serializedVersion: 2
         x: 0
@@ -142,13 +155,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a95b55cf3b3a64b63abb9ab4058e3bc3
+      spriteID: a7b68f328d6084757bc0618d5e219866
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SmallDustPuff_3
+      name: TinyStones_3
       rect:
         serializedVersion: 2
         x: 128
@@ -162,7 +176,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 740005146650d4750ba5cf88f68379f7
+      spriteID: b265d8c1d56654c3aaef75a9b0189564
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -171,10 +186,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
