@@ -1985,7 +1985,6 @@ GameObject:
   - component: {fileID: 477601853}
   - component: {fileID: 477601852}
   - component: {fileID: 477601851}
-  - component: {fileID: 2085194496}
   m_Layer: 0
   m_Name: Toothy
   m_TagString: Untagged
@@ -2144,23 +2143,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2085194496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9062710089018428642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4bc3a8cc601b4b35871e02bedbcc237, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Player: {fileID: 0}
-  m_MovingTurnSpeed: 360
-  m_StationaryTurnSpeed: 180
-  m_initialHealth: 100
-  m_AttackRange: 3
 --- !u!1 &9062710089018428644
 GameObject:
   m_ObjectHideFlags: 0

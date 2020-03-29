@@ -7,7 +7,6 @@ public class ProjectileWeapon : MonoBehaviour
 {
   [SerializeField] Camera m_Camera;
   [SerializeField] float m_Range = 100f;
-  [SerializeField] float m_Damage = 30f;
   [SerializeField] float m_TimeBetweenShots = 0.5f;
   [SerializeField] ParticleSystem m_MuzzleFlash;
   [SerializeField] GameObject m_HitEffect;
@@ -15,6 +14,7 @@ public class ProjectileWeapon : MonoBehaviour
   [SerializeField] string m_CrosshairName;
   private Animator m_Animator;
   private bool m_CanShoot = true;
+  private Damage m_Damage;
   private Sprite m_CrosshairSprite;
   // Layer 8 is the Player Layer
   // Bit shift the index of the layer (8) to get a bit mask
@@ -60,6 +60,8 @@ public class ProjectileWeapon : MonoBehaviour
 
         Debug.Log("HIT " + hit);
         CreateHitImpact(m_HitEffect, hit);
+        Target target = hit.transform.GetComponent<Target>();
+        target.TakeDamage(m_Damage);
       }
       else
       {
@@ -82,7 +84,7 @@ public class ProjectileWeapon : MonoBehaviour
   {
     Debug.Log("ransformparet fuck" + GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>());
     m_Animator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
-
+    m_Damage = GetComponent<Damage>();
     SetCrosshair();
   }
 
