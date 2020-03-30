@@ -15,6 +15,8 @@ public class ProjectileWeapon : MonoBehaviour
   [SerializeField] GameObject m_MissEffect;
   [SerializeField] string m_CrosshairName;
 
+
+  private MeshRenderer m_MeshRenderer;
   private float m_ShotsLeft;
   private Animator m_Animator;
   private bool m_CanShoot = true;
@@ -39,8 +41,7 @@ public class ProjectileWeapon : MonoBehaviour
   {
     m_ShotsLeft--;
     Debug.Log("gameObject" + gameObject);
-    MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
-    meshRenderer.enabled = true;
+    m_MeshRenderer.enabled = true;
     m_Animator.SetBool("isShooting", true);
     m_CanShoot = false;
     PlayMuzzleFlash();
@@ -48,8 +49,10 @@ public class ProjectileWeapon : MonoBehaviour
     yield return new WaitForSeconds(m_TimeBetweenShots);
     m_CanShoot = true;
     m_Animator.SetBool("isShooting", false);
-    meshRenderer.enabled = false;
+    m_MeshRenderer.enabled = false;
   }
+
+
 
   private void PlayMuzzleFlash()
   {
@@ -91,11 +94,13 @@ public class ProjectileWeapon : MonoBehaviour
 
   IEnumerator Reload()
   {
+    m_MeshRenderer.enabled = true;
     m_Animator.SetBool("isReloading", true);
     m_CanShoot = false;
     yield return new WaitForSeconds(m_ReloadTime);
     m_ShotsLeft = m_ShotsPerRound;
     m_Animator.SetBool("isReloading", false);
+    m_MeshRenderer.enabled = false;
     m_CanShoot = true;
 
   }
@@ -105,6 +110,7 @@ public class ProjectileWeapon : MonoBehaviour
     Debug.Log("ransformparet fuck" + GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>());
     m_Animator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
     m_Damage = GetComponent<Damage>();
+    m_MeshRenderer = gameObject.GetComponent<MeshRenderer>();
     m_ShotsLeft = m_ShotsPerRound;
     SetCrosshair();
   }
