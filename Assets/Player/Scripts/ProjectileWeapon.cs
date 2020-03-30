@@ -6,12 +6,16 @@ using UnityEngine.UI;
 public class ProjectileWeapon : MonoBehaviour
 {
   [SerializeField] Camera m_Camera;
+  [SerializeField] float m_ShotsPerRound = 10f;
+  [SerializeField] float m_ReloadTime = 2f;
   [SerializeField] float m_Range = 100f;
   [SerializeField] float m_TimeBetweenShots = 0.5f;
   [SerializeField] ParticleSystem m_MuzzleFlash;
   [SerializeField] GameObject m_HitEffect;
   [SerializeField] GameObject m_MissEffect;
   [SerializeField] string m_CrosshairName;
+
+  private float m_ShotsLeft;
   private Animator m_Animator;
   private bool m_CanShoot = true;
   private Damage m_Damage;
@@ -33,6 +37,7 @@ public class ProjectileWeapon : MonoBehaviour
 
   IEnumerator Shoot()
   {
+    m_ShotsLeft--;
     Debug.Log("gameObject" + gameObject);
     MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
     meshRenderer.enabled = true;
@@ -84,11 +89,23 @@ public class ProjectileWeapon : MonoBehaviour
     Destroy(impact, 1f);
   }
 
+  IEnumerator Reload()
+  {
+    m_Animator.SetBool("isReloading", true);
+    m_CanShoot = false;
+    yield return new WaitForSeconds(m_ReloadTime);
+    m_ShotsLeft = m_ShotsPerRound;
+    m_Animator.SetBool("isReloading", false);
+    m_CanShoot = true;
+
+  }
+
   private void Awake()
   {
     Debug.Log("ransformparet fuck" + GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>());
     m_Animator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
     m_Damage = GetComponent<Damage>();
+    m_ShotsLeft = m_ShotsPerRound;
     SetCrosshair();
   }
 
@@ -97,7 +114,18 @@ public class ProjectileWeapon : MonoBehaviour
   {
     if (Input.GetButton("Fire1") && m_CanShoot)
     {
-      StartCoroutine(Shoot());
+      if (m_ShotsLeft > 0)
+      {
+        StartCoroutine(Shoot());
+      }
+      else
+      {
+        StartCoroutine(Reload());
+      }
+    }
+    if (Input.GetKeyDown("r"))
+    {
+      StartCoroutine(Reload());
     }
   }
 }
