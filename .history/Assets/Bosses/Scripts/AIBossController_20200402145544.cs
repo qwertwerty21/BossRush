@@ -112,11 +112,16 @@ public abstract class AIBossController : MonoBehaviour
   {
     if (otherCollider.gameObject.tag == "Ground")
     {
-      NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
+      NavMeshAgent navMeshAgent = m_Player.GetComponent<NavMeshAgent>();
       if (!navMeshAgent.enabled)
       {
 
         navMeshAgent.enabled = true;
+      }
+      if (!m_Animator.enabled)
+      {
+
+        m_Animator.enabled = true;
       }
     }
   }

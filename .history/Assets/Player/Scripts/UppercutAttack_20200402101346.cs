@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class UppercutAttack : MonoBehaviour
 {
@@ -53,15 +52,12 @@ public class UppercutAttack : MonoBehaviour
     {
       Rigidbody enemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
       Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
-      NavMeshAgent enemyNavMeshAgent = otherCollider.gameObject.GetComponent<NavMeshAgent>();
-      Animator enemyAnimator = otherCollider.gameObject.GetComponent<Animator>();
       // BaseHitBox hitbox = otherCollider.gameObject.GetComponent<BaseHitBox>();
       Vector3 direction = m_BaseHitBox.GetDirection(enemyRigidBody);
-      float force = m_Damage.m_KnockbackForce;
-      direction.y = 5;
+      float force = m_Damage.m_KnockbackForce * 100;
+      direction.y = 1000f;
       // Vector3 fuck = Vector3.forward * force;
       // fuck.y = 1000f;
-      enemyNavMeshAgent.enabled = false;
       Debug.Log("fuckfasdkfdsak;lkl;" + enemyRigidBody);
       enemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
       enemyTarget.TakeDamage(m_Damage);

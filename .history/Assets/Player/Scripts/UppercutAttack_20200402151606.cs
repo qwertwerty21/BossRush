@@ -62,6 +62,7 @@ public class UppercutAttack : MonoBehaviour
       // Vector3 fuck = Vector3.forward * force;
       // fuck.y = 1000f;
       enemyNavMeshAgent.enabled = false;
+      // enemyAnimator.enabled = false;
       Debug.Log("fuckfasdkfdsak;lkl;" + enemyRigidBody);
       enemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
       enemyTarget.TakeDamage(m_Damage);

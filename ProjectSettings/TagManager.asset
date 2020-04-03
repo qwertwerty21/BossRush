@@ -8,6 +8,7 @@ TagManager:
   - EnemyHitBox
   - UI
   - Crosshair
+  - Ground
   layers:
   - Default
   - TransparentFX

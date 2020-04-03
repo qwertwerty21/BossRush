@@ -54,11 +54,10 @@ public class UppercutAttack : MonoBehaviour
       Rigidbody enemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
       Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
       NavMeshAgent enemyNavMeshAgent = otherCollider.gameObject.GetComponent<NavMeshAgent>();
-      Animator enemyAnimator = otherCollider.gameObject.GetComponent<Animator>();
       // BaseHitBox hitbox = otherCollider.gameObject.GetComponent<BaseHitBox>();
       Vector3 direction = m_BaseHitBox.GetDirection(enemyRigidBody);
       float force = m_Damage.m_KnockbackForce;
-      direction.y = 5;
+      direction.y = 100f;
       // Vector3 fuck = Vector3.forward * force;
       // fuck.y = 1000f;
       enemyNavMeshAgent.enabled = false;

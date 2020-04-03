@@ -118,6 +118,11 @@ public abstract class AIBossController : MonoBehaviour
 
         navMeshAgent.enabled = true;
       }
+      if (!m_Animator.enabled)
+      {
+
+        m_Animator.enabled = true;
+      }
     }
   }
 

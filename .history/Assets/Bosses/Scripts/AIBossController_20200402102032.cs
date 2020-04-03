@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public abstract class AIBossController : MonoBehaviour
 {
@@ -102,23 +101,18 @@ public abstract class AIBossController : MonoBehaviour
     }
   }
 
+  public void AddImpact(Vector3 direction, float force)
+  {
+    direction.Normalize();
+    if (direction.y < 0) direction.y = -direction.y; // reflect down force on the ground
+    m_Impact += direction.normalized * force / m_RigidBody.mass;
+    Debug.Log("adding impact force" + m_Impact);
+  }
+
   void Awake()
   {
     m_Animator = GetComponent<Animator>();
     m_RigidBody = GetComponent<Rigidbody>();
-  }
-
-  void OnCollisionEnter(Collision otherCollider)
-  {
-    if (otherCollider.gameObject.tag == "Ground")
-    {
-      NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
-      if (!navMeshAgent.enabled)
-      {
-
-        navMeshAgent.enabled = true;
-      }
-    }
   }
 
   // void Update()

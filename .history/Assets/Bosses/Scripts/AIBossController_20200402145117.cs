@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public abstract class AIBossController : MonoBehaviour
 {
@@ -108,16 +107,12 @@ public abstract class AIBossController : MonoBehaviour
     m_RigidBody = GetComponent<Rigidbody>();
   }
 
-  void OnCollisionEnter(Collision otherCollider)
+  OnCollisionEnter(Collider otherCollider)
   {
     if (otherCollider.gameObject.tag == "Ground")
     {
-      NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
-      if (!navMeshAgent.enabled)
-      {
-
-        navMeshAgent.enabled = true;
-      }
+      m_Agent.enabled = true;
+      m_Animator = true;
     }
   }
 

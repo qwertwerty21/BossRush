@@ -16,7 +16,7 @@ public class Chase : BaseBossStateMachineBehaviour
   {
     base.OnStateUpdate(animator, stateInfo, layerIndex);
     // Debug.Log("player position" + m_Player.transform.position);
-    if (m_Agent.enabled)
+    if (m_Agent != null)
     {
 
       m_Agent.SetDestination(m_Player.transform.position);
