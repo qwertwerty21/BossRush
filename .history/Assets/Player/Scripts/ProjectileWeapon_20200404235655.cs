@@ -135,6 +135,7 @@ public class ProjectileWeapon : MonoBehaviour
   {
     if (Input.GetButton("Fire1") && m_CanShoot)
     {
+      m_PlayerController.ToggleHitboxColliders("UppercutAttack", false);
       if (m_ShotsLeft > 0)
       {
         m_Animator.SetBool("isShooting", true);

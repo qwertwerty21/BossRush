@@ -19,6 +19,8 @@ public class UppercutAttack : MonoBehaviour
 
   private PlayerController m_PlayerController;
 
+  private List<GameObject> m_CurrentCollisions = new List<GameObject>();
+
   private float m_OriginalFixedDeltaTime;
 
   IEnumerator EndUppercutAttack()
@@ -86,6 +88,7 @@ public class UppercutAttack : MonoBehaviour
     Debug.Log("YO YOU HIT SOMETHING WITH UPPERCUT ATTACK" + otherCollider);
     if (otherCollider.gameObject.tag == "Enemy")
     {
+      m_CurrentCollisions.Add(otherCollider.gameObject);
       Rigidbody enemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
       Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
       NavMeshAgent enemyNavMeshAgent = otherCollider.gameObject.GetComponent<NavMeshAgent>();
@@ -102,6 +105,18 @@ public class UppercutAttack : MonoBehaviour
       Debug.Log("fuckfasdkfdsak;lkl;" + enemyRigidBody);
       enemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
       enemyTarget.TakeDamage(m_Damage);
+    }
+  }
+
+  private void OnTriggerExit(Collider otherCollider)
+  {
+    Debug.Log("REMOVING COLLIDER" + otherCollider.gameObject);
+    Debug.Log("REMOVING CURRENTCOLLIDIONS" + m_CurrentCollisions);
+
+    if (m_CurrentCollisions.Contains(otherCollider.gameObject))
+    {
+      Debug.Log("removing biych");
+      m_CurrentCollisions.Remove(otherCollider.gameObject);
     }
   }
 }

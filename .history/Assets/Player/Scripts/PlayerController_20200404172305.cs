@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
   [SerializeField] private float m_DoubleTapDelay = 0.2f;
   [SerializeField] private float m_DashThrust = 40f;
   [SerializeField] private float m_DashHeight = 1f;
+
   [SerializeField] private float m_JumpSpeed;
   [SerializeField] private float m_MaxJumps = 2;
   [SerializeField] private float m_StickToGroundForce;
@@ -148,7 +149,7 @@ public class PlayerController : MonoBehaviour
       Debug.Log("dash" + m_MoveDir);
       m_Animator.SetTrigger("dash");
       m_MoveDir.x = m_MoveDir.x * m_DashThrust;
-      m_MoveDir.y = m_DashHeight;
+      m_MoveDir.y = 10f;
       m_MoveDir.z = m_MoveDir.z * m_DashThrust;
 
       AddImpact(m_MoveDir, m_DashThrust);

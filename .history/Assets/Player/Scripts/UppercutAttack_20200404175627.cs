@@ -7,11 +7,9 @@ public class UppercutAttack : MonoBehaviour
 {
   [SerializeField] private Damage m_Damage;
 
-  [SerializeField] private float m_MaxChargeDuration = 5f;
+  [SerializeField] private float m_MaxChargeTime = 5f;
 
-  [SerializeField] private float m_HitTimeScaleSlowdownDuration = 1f;
-
-  private float m_CurrentChargeDuration;
+  private float m_CurrentChargeTime;
   private Animator m_Animator;
   private MeshRenderer m_MeshRenderer;
 
@@ -19,29 +17,14 @@ public class UppercutAttack : MonoBehaviour
 
   private PlayerController m_PlayerController;
 
-  private float m_OriginalFixedDeltaTime;
-
-  IEnumerator EndUppercutAttack()
+  public void EndUppercutAttack()
   {
-    yield return new WaitForSecondsRealtime(0.5f);
     if (m_MeshRenderer.enabled)
     {
 
       m_MeshRenderer.enabled = false;
     }
     m_PlayerController.ToggleHitboxColliders("UppercutAttack", false);
-    m_CurrentChargeDuration = 0f;
-
-  }
-
-  IEnumerator ResetTimeScale()
-  {
-    yield return new WaitForSecondsRealtime(m_HitTimeScaleSlowdownDuration);
-    // if (Time.timeScale < 1f)
-    // {
-    // Time.fixedDeltaTime = m_OriginalFixedDeltaTime;
-    Time.timeScale = 1f;
-    // }
   }
 
   // Start is called before the first frame update
@@ -58,7 +41,6 @@ public class UppercutAttack : MonoBehaviour
   {
     if (Input.GetButton("Fire2"))
     {
-      m_PlayerController.ToggleHitboxColliders("UppercutAttack", false);
       if (!m_MeshRenderer.enabled)
       {
 
@@ -66,18 +48,15 @@ public class UppercutAttack : MonoBehaviour
       }
       if (!m_Animator.GetBool("isChargingUppercutAttack"))
       {
+        m_CurrentChargeTime += Time.deltaTime;
         m_Animator.SetBool("isChargingUppercutAttack", true);
       }
-      m_CurrentChargeDuration += Time.deltaTime;
-      Debug.Log("CURRENTCHARGET" + m_CurrentChargeDuration);
     }
-    if (Input.GetButtonUp("Fire2") || m_CurrentChargeDuration >= m_MaxChargeDuration)
+    if (Input.GetButtonUp("Fire2") || m_CurrentChargeTime >= m_MaxChargeTime)
     {
       m_Animator.SetBool("isChargingUppercutAttack", false);
       m_Animator.SetTrigger("uppercutAttack");
       m_PlayerController.ToggleHitboxColliders("UppercutAttack", true);
-      StartCoroutine(EndUppercutAttack());
-
     }
   }
 
@@ -94,11 +73,9 @@ public class UppercutAttack : MonoBehaviour
       Vector3 direction = m_BaseHitBox.GetDirection(enemyRigidBody);
       float force = m_Damage.m_KnockbackForce;
       direction.y = 5;
+      // Vector3 fuck = Vector3.forward * force;
+      // fuck.y = 1000f;
       enemyNavMeshAgent.enabled = false;
-      Time.timeScale = .4f;
-      m_OriginalFixedDeltaTime = Time.fixedDeltaTime;
-      // Time.fixedDeltaTime = Time.timeScale * .02f;
-      StartCoroutine(ResetTimeScale());
       Debug.Log("fuckfasdkfdsak;lkl;" + enemyRigidBody);
       enemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
       enemyTarget.TakeDamage(m_Damage);

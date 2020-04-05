@@ -15,7 +15,7 @@ public class ProjectileWeapon : MonoBehaviour
   [SerializeField] GameObject m_MissEffect;
   [SerializeField] string m_CrosshairName;
 
-  private PlayerController m_PlayerController;
+
   private MeshRenderer m_MeshRenderer;
   private float m_ShotsLeft;
   private Animator m_Animator;
@@ -121,7 +121,6 @@ public class ProjectileWeapon : MonoBehaviour
 
   private void Awake()
   {
-    m_PlayerController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerController>();
     Debug.Log("ransformparet fuck" + GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>());
     m_Animator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
     m_Damage = GetComponent<Damage>();

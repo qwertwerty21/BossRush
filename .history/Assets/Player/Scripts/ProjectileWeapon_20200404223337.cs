@@ -15,7 +15,7 @@ public class ProjectileWeapon : MonoBehaviour
   [SerializeField] GameObject m_MissEffect;
   [SerializeField] string m_CrosshairName;
 
-  private PlayerController m_PlayerController;
+
   private MeshRenderer m_MeshRenderer;
   private float m_ShotsLeft;
   private Animator m_Animator;
@@ -45,13 +45,13 @@ public class ProjectileWeapon : MonoBehaviour
     {
       m_MeshRenderer.enabled = true;
     }
-
+    m_Animator.SetBool("isShooting", true);
     m_CanShoot = false;
     PlayMuzzleFlash();
     ProcessRaycast();
     yield return new WaitForSeconds(m_TimeBetweenShots);
     m_CanShoot = true;
-
+    m_Animator.SetBool("isShooting", false);
     if (m_MeshRenderer.enabled)
     {
 
@@ -121,7 +121,6 @@ public class ProjectileWeapon : MonoBehaviour
 
   private void Awake()
   {
-    m_PlayerController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerController>();
     Debug.Log("ransformparet fuck" + GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>());
     m_Animator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
     m_Damage = GetComponent<Damage>();
@@ -137,18 +136,12 @@ public class ProjectileWeapon : MonoBehaviour
     {
       if (m_ShotsLeft > 0)
       {
-        m_Animator.SetBool("isShooting", true);
         StartCoroutine(Shoot());
       }
       else
       {
-        m_Animator.SetBool("isShooting", false);
         StartCoroutine(Reload());
       }
-    }
-    if (Input.GetButtonUp("Fire1"))
-    {
-      m_Animator.SetBool("isShooting", false);
     }
     if (Input.GetKeyDown("r"))
     {

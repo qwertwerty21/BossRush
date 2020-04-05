@@ -19,11 +19,10 @@ public class UppercutAttack : MonoBehaviour
 
   private PlayerController m_PlayerController;
 
-  private float m_OriginalFixedDeltaTime;
+  private List<GameObject> m_CurrentCollisions = new List<GameObject>();
 
-  IEnumerator EndUppercutAttack()
+  public void EndUppercutAttack()
   {
-    yield return new WaitForSecondsRealtime(0.5f);
     if (m_MeshRenderer.enabled)
     {
 
@@ -37,11 +36,11 @@ public class UppercutAttack : MonoBehaviour
   IEnumerator ResetTimeScale()
   {
     yield return new WaitForSecondsRealtime(m_HitTimeScaleSlowdownDuration);
-    // if (Time.timeScale < 1f)
-    // {
-    // Time.fixedDeltaTime = m_OriginalFixedDeltaTime;
-    Time.timeScale = 1f;
-    // }
+    if (Time.timeScale < 1f)
+    {
+      Time.fixedDeltaTime = Time.timeScale / .02f;
+      Time.timeScale = 1f;
+    }
   }
 
   // Start is called before the first frame update
@@ -58,7 +57,6 @@ public class UppercutAttack : MonoBehaviour
   {
     if (Input.GetButton("Fire2"))
     {
-      m_PlayerController.ToggleHitboxColliders("UppercutAttack", false);
       if (!m_MeshRenderer.enabled)
       {
 
@@ -76,7 +74,6 @@ public class UppercutAttack : MonoBehaviour
       m_Animator.SetBool("isChargingUppercutAttack", false);
       m_Animator.SetTrigger("uppercutAttack");
       m_PlayerController.ToggleHitboxColliders("UppercutAttack", true);
-      StartCoroutine(EndUppercutAttack());
 
     }
   }
@@ -84,7 +81,7 @@ public class UppercutAttack : MonoBehaviour
   private void OnTriggerEnter(Collider otherCollider)
   {
     Debug.Log("YO YOU HIT SOMETHING WITH UPPERCUT ATTACK" + otherCollider);
-    if (otherCollider.gameObject.tag == "Enemy")
+    if (otherCollider.gameObject.tag == "Enemy" && !m_CurrentCollisions.Contains(otherCollider.gameObject))
     {
       Rigidbody enemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
       Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
@@ -94,14 +91,24 @@ public class UppercutAttack : MonoBehaviour
       Vector3 direction = m_BaseHitBox.GetDirection(enemyRigidBody);
       float force = m_Damage.m_KnockbackForce;
       direction.y = 5;
+      // Vector3 fuck = Vector3.forward * force;
+      // fuck.y = 1000f;
       enemyNavMeshAgent.enabled = false;
-      Time.timeScale = .4f;
-      m_OriginalFixedDeltaTime = Time.fixedDeltaTime;
-      // Time.fixedDeltaTime = Time.timeScale * .02f;
-      StartCoroutine(ResetTimeScale());
+      Time.timeScale = .05f;
+      Time.fixedDeltaTime = Time.timeScale * .02f;
       Debug.Log("fuckfasdkfdsak;lkl;" + enemyRigidBody);
       enemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
       enemyTarget.TakeDamage(m_Damage);
+      StartCoroutine(ResetTimeScale());
+    }
+  }
+
+  private void OnTriggerExit(Collider otherCollider)
+  {
+    if (m_CurrentCollisions.Contains(otherCollider.gameObject))
+    {
+
+      m_CurrentCollisions.Remove(otherCollider.gameObject);
     }
   }
 }
