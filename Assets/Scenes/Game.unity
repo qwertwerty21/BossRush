@@ -1533,17 +1533,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: b1205366ab485434f9c9e21d24e00b8e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.792
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b1205366ab485434f9c9e21d24e00b8e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.056
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b1205366ab485434f9c9e21d24e00b8e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.008
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b1205366ab485434f9c9e21d24e00b8e,
         type: 3}
@@ -3668,6 +3668,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_MouseLook.MaximumX
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731429358307243237, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_DashHeight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6731429359236783020, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
