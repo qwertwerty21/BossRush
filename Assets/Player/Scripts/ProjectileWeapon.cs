@@ -41,10 +41,10 @@ public class ProjectileWeapon : MonoBehaviour
   {
     m_ShotsLeft--;
     Debug.Log("gameObject" + gameObject);
-    if (!m_MeshRenderer.enabled)
-    {
-      m_MeshRenderer.enabled = true;
-    }
+    // if (!m_MeshRenderer.enabled)
+    // {
+    //   m_MeshRenderer.enabled = true;
+    // }
 
     m_CanShoot = false;
     PlayMuzzleFlash();
@@ -52,11 +52,11 @@ public class ProjectileWeapon : MonoBehaviour
     yield return new WaitForSeconds(m_TimeBetweenShots);
     m_CanShoot = true;
 
-    if (m_MeshRenderer.enabled)
-    {
+    // if (m_MeshRenderer.enabled)
+    // {
 
-      m_MeshRenderer.enabled = false;
-    }
+    //   m_MeshRenderer.enabled = false;
+    // }
   }
 
 
@@ -101,18 +101,18 @@ public class ProjectileWeapon : MonoBehaviour
 
   IEnumerator Reload()
   {
-    if (!m_MeshRenderer.enabled)
-    {
+    // if (!m_MeshRenderer.enabled)
+    // {
 
-      m_MeshRenderer.enabled = true;
-    }
+    //   m_MeshRenderer.enabled = true;
+    // }
     m_Animator.SetBool("isReloading", true);
     m_CanShoot = false;
     yield return new WaitForSeconds(m_ReloadTime);
-    if (m_MeshRenderer.enabled)
-    {
-      m_MeshRenderer.enabled = false;
-    }
+    // if (m_MeshRenderer.enabled)
+    // {
+    //   m_MeshRenderer.enabled = false;
+    // }
     m_ShotsLeft = m_ShotsPerRound;
     m_Animator.SetBool("isReloading", false);
     m_CanShoot = true;

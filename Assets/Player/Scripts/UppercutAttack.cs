@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public class UppercutAttack : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class UppercutAttack : MonoBehaviour
 
   [SerializeField] private float m_HitTimeScaleSlowdownDuration = 1f;
 
+  [SerializeField] private float m_YKnockbackForceOverride = 3f;
+
+  [SerializeField] private float m_TimeScaleSlowdown = .4f;
+
   private float m_CurrentChargeDuration;
   private Animator m_Animator;
   private MeshRenderer m_MeshRenderer;
@@ -19,16 +24,14 @@ public class UppercutAttack : MonoBehaviour
 
   private PlayerController m_PlayerController;
 
-  private float m_OriginalFixedDeltaTime;
-
   IEnumerator EndUppercutAttack()
   {
     yield return new WaitForSecondsRealtime(0.5f);
-    if (m_MeshRenderer.enabled)
-    {
+    // if (m_MeshRenderer.enabled)
+    // {
 
-      m_MeshRenderer.enabled = false;
-    }
+    //   m_MeshRenderer.enabled = false;
+    // }
     m_PlayerController.ToggleHitboxColliders("UppercutAttack", false);
     m_CurrentChargeDuration = 0f;
 
@@ -37,11 +40,10 @@ public class UppercutAttack : MonoBehaviour
   IEnumerator ResetTimeScale()
   {
     yield return new WaitForSecondsRealtime(m_HitTimeScaleSlowdownDuration);
-    // if (Time.timeScale < 1f)
-    // {
-    // Time.fixedDeltaTime = m_OriginalFixedDeltaTime;
-    Time.timeScale = 1f;
-    // }
+    if (Time.timeScale < 1f)
+    {
+      Time.timeScale = 1f;
+    }
   }
 
   // Start is called before the first frame update
@@ -59,11 +61,11 @@ public class UppercutAttack : MonoBehaviour
     if (Input.GetButton("Fire2"))
     {
       m_PlayerController.ToggleHitboxColliders("UppercutAttack", false);
-      if (!m_MeshRenderer.enabled)
-      {
+      // if (!m_MeshRenderer.enabled)
+      // {
 
-        m_MeshRenderer.enabled = true;
-      }
+      //   m_MeshRenderer.enabled = true;
+      // }
       if (!m_Animator.GetBool("isChargingUppercutAttack"))
       {
         m_Animator.SetBool("isChargingUppercutAttack", true);
@@ -90,18 +92,23 @@ public class UppercutAttack : MonoBehaviour
       Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
       NavMeshAgent enemyNavMeshAgent = otherCollider.gameObject.GetComponent<NavMeshAgent>();
       Animator enemyAnimator = otherCollider.gameObject.GetComponent<Animator>();
-      // BaseHitBox hitbox = otherCollider.gameObject.GetComponent<BaseHitBox>();
+
       Vector3 direction = m_BaseHitBox.GetDirection(enemyRigidBody);
       float force = m_Damage.m_KnockbackForce;
-      direction.y = 5;
+      direction.y = Mathf.Floor(m_YKnockbackForceOverride * m_CurrentChargeDuration);
+
       enemyNavMeshAgent.enabled = false;
-      Time.timeScale = .4f;
-      m_OriginalFixedDeltaTime = Time.fixedDeltaTime;
-      // Time.fixedDeltaTime = Time.timeScale * .02f;
+
+      Time.timeScale = Mathf.Clamp(1 / (m_TimeScaleSlowdown * m_CurrentChargeDuration), .4f, 1);
+      Debug.Log("TIMESCALE" + Time.timeScale);
+
       StartCoroutine(ResetTimeScale());
-      Debug.Log("fuckfasdkfdsak;lkl;" + enemyRigidBody);
+
       enemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
+      var originalDamageAmount = m_Damage.m_DamageAmount;
+      m_Damage.m_DamageAmount *= m_CurrentChargeDuration;
       enemyTarget.TakeDamage(m_Damage);
+      m_Damage.m_DamageAmount = originalDamageAmount;
     }
   }
 }

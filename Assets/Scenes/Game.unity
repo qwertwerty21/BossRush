@@ -2747,8 +2747,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damage: {fileID: 1871331998}
-  m_MaxChargeDuration: 5
-  m_HitTimeScaleSlowdownDuration: 1
+  m_MaxChargeDuration: 3
+  m_HitTimeScaleSlowdownDuration: 0.5
+  m_YKnockbackForceOverride: 2
+  m_TimeScaleSlowdown: 1
 --- !u!135 &1871332005
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3243,7 +3245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a115615523e4630a05493622d8d6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Health: 20
+  m_Health: 100
   m_DamageMaterial: {fileID: 2100000, guid: a130b110589f5429ab1824109764dd40, type: 2}
 --- !u!4 &128434880739227154 stripped
 Transform:
@@ -3490,7 +3492,7 @@ PrefabInstance:
     - target: {fileID: 6731429358042412008, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358044605736, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
