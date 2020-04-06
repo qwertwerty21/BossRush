@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
@@ -65,7 +64,6 @@ public class PlayerController : MonoBehaviour
   {
     RotateView();
 
-
     // apply the impact force:
     if (m_Impact.magnitude > 0.2) m_CharacterController.Move(m_Impact * Time.deltaTime);
     // consumes the m_Impact energy each cycle:
@@ -112,19 +110,11 @@ public class PlayerController : MonoBehaviour
         m_MoveDir.x = m_MoveDir.x * m_DashThrust;
         m_MoveDir.y = m_DashHeight;
         m_MoveDir.z = m_MoveDir.z * m_DashThrust;
-
-        // rotates player just for proper dash roll animation direction
-        if (m_CharacterController.isGrounded)
-        {
-          m_Animator.transform.rotation = Quaternion.LookRotation(m_MoveDir, Vector3.up);
-          // resets player rotation to forward after set time
-          StartCoroutine(ResetDashRotation());
-        }
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMove), Time.deltaTime * 360f);
 
         AddImpact(m_MoveDir, m_DashThrust);
       }
       m_DoubleTapLastTapped = Time.time;
-
     }
 
     // the jump state needs to read here to make sure it is not missed
@@ -160,12 +150,6 @@ public class PlayerController : MonoBehaviour
     m_Animator.SetBool("isGrounded", m_CharacterController.isGrounded);
 
     m_PreviouslyGrounded = m_CharacterController.isGrounded;
-  }
-
-  IEnumerator ResetDashRotation()
-  {
-    yield return new WaitForSeconds(.8f);
-    m_Animator.transform.rotation = Quaternion.LookRotation(m_Camera.transform.forward, Vector3.up);
   }
 
   private void PlayLandingSound()

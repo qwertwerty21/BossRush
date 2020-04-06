@@ -112,20 +112,17 @@ public class PlayerController : MonoBehaviour
         m_MoveDir.x = m_MoveDir.x * m_DashThrust;
         m_MoveDir.y = m_DashHeight;
         m_MoveDir.z = m_MoveDir.z * m_DashThrust;
-
-        // rotates player just for proper dash roll animation direction
-        if (m_CharacterController.isGrounded)
-        {
-          m_Animator.transform.rotation = Quaternion.LookRotation(m_MoveDir, Vector3.up);
-          // resets player rotation to forward after set time
-          StartCoroutine(ResetDashRotation());
-        }
+        m_Animator.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_MoveDir, Vector3.up), 1f);
 
         AddImpact(m_MoveDir, m_DashThrust);
       }
       m_DoubleTapLastTapped = Time.time;
-
     }
+    // if (m_Animator.transform.rotation != Quaternion.LookRotation(m_MoveDir, Vector3.up))
+    // {
+    StartCoroutine(ResetRotation());
+
+    // }
 
     // the jump state needs to read here to make sure it is not missed
     Boolean canJump = CrossPlatformInputManager.GetButtonDown("Jump") && m_CurrentJumpCount < m_MaxJumps;
@@ -162,10 +159,10 @@ public class PlayerController : MonoBehaviour
     m_PreviouslyGrounded = m_CharacterController.isGrounded;
   }
 
-  IEnumerator ResetDashRotation()
+  IEnumerator ResetRotation()
   {
-    yield return new WaitForSeconds(.8f);
-    m_Animator.transform.rotation = Quaternion.LookRotation(m_Camera.transform.forward, Vector3.up);
+    yield return new WaitForSeconds(1f);
+    m_Animator.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_Camera.transform.forward, Vector3.up), .05f);
   }
 
   private void PlayLandingSound()

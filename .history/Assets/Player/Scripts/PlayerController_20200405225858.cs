@@ -117,14 +117,14 @@ public class PlayerController : MonoBehaviour
         if (m_CharacterController.isGrounded)
         {
           m_Animator.transform.rotation = Quaternion.LookRotation(m_MoveDir, Vector3.up);
-          // resets player rotation to forward after set time
-          StartCoroutine(ResetDashRotation());
+
         }
 
         AddImpact(m_MoveDir, m_DashThrust);
       }
       m_DoubleTapLastTapped = Time.time;
-
+      // resets player rotation to forward after set time
+      StartCoroutine(ResetDashRotation());
     }
 
     // the jump state needs to read here to make sure it is not missed
