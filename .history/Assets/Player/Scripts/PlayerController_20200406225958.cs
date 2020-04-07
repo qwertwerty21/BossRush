@@ -66,6 +66,12 @@ public class PlayerController : MonoBehaviour
   {
     RotateView();
 
+
+    // apply the impact force:
+    if (m_Impact.magnitude > 0.2) m_CharacterController.Move(m_Impact * Time.deltaTime);
+    // consumes the m_Impact energy each cycle:
+    m_Impact = Vector3.Lerp(m_Impact, Vector3.zero, 5 * Time.deltaTime);
+
     // reset jump if grounded
     if (m_CharacterController.isGrounded)
     {
@@ -75,38 +81,6 @@ public class PlayerController : MonoBehaviour
     // the jump state needs to read here to make sure it is not missed
     m_CanJump = CrossPlatformInputManager.GetButtonDown("Jump") && m_CurrentJumpCount < m_MaxJumps;
 
-    // dash
-    if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
-    {
-
-      if ((Time.time - m_DoubleTapLastTapped) < m_DoubleTapDelay)
-      {
-        m_CanDash = true;
-      }
-      m_DoubleTapLastTapped = Time.time;
-
-    }
-
-    // landed
-    if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
-    {
-      PlayLandingSound();
-      m_MoveDir.y = 0f;
-      m_IsJumping = false;
-    }
-    m_Animator.SetBool("isGrounded", m_CharacterController.isGrounded);
-    m_PreviouslyGrounded = m_CharacterController.isGrounded;
-  }
-
-  private void FixedUpdate()
-  {
-
-    // apply the impact force:
-    if (m_Impact.magnitude > 0.2) m_CharacterController.Move(m_Impact * Time.deltaTime);
-    // consumes the m_Impact energy each cycle:
-    m_Impact = Vector3.Lerp(m_Impact, Vector3.zero, 5 * Time.deltaTime);
-
-    // movement
     float speed;
     SetLocomotionInput(out speed);
     // always move along the camera forward as it is the direction that it being aimed at
@@ -130,10 +104,21 @@ public class PlayerController : MonoBehaviour
       m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
     }
 
-    // jump
-    // the jump state needs to read here AGAIN to make sure it is not missed
-    m_CanJump = m_CanJump || CrossPlatformInputManager.GetButtonDown("Jump") && m_CurrentJumpCount < m_MaxJumps;
-    if (m_CanJump)
+    // dash
+    if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
+    {
+
+      if ((Time.time - m_DoubleTapLastTapped) < m_DoubleTapDelay)
+      {
+        m_CanDash = true;
+      }
+      m_DoubleTapLastTapped = Time.time;
+
+    }
+
+    // the jump state needs to read here to make sure it is not missed
+    Boolean canJump = CrossPlatformInputManager.GetButtonDown("Jump") && m_CurrentJumpCount < m_MaxJumps;
+    if (canJump)
     {
       Debug.Log("jumping");
       m_CurrentJumpCount++;
@@ -147,27 +132,23 @@ public class PlayerController : MonoBehaviour
       m_IsJumping = true;
     }
 
-    // dash
-    if (m_CanDash)
-    {
-
-      Debug.Log("dash" + m_MoveDir);
-      m_Animator.SetTrigger("dash");
-
-      m_MoveDir.x = m_MoveDir.x * m_DashThrust;
-      m_MoveDir.y = m_DashHeight;
-      m_MoveDir.z = m_MoveDir.z * m_DashThrust;
-
-      AddImpact(m_MoveDir, m_DashThrust);
-
-      m_CanDash = false;
-    }
-
     m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
 
     ProgressStepCycle(speed);
 
     m_MouseLook.UpdateCursorLock();
+
+    // landed
+    if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
+    {
+      PlayLandingSound();
+      m_MoveDir.y = 0f;
+      m_IsJumping = false;
+    }
+
+    m_Animator.SetBool("isGrounded", m_CharacterController.isGrounded);
+
+    m_PreviouslyGrounded = m_CharacterController.isGrounded;
   }
 
   private void PlayLandingSound()

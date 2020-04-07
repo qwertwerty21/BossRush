@@ -66,6 +66,9 @@ public class PlayerController : MonoBehaviour
   {
     RotateView();
 
+
+
+
     // reset jump if grounded
     if (m_CharacterController.isGrounded)
     {
@@ -74,6 +77,8 @@ public class PlayerController : MonoBehaviour
 
     // the jump state needs to read here to make sure it is not missed
     m_CanJump = CrossPlatformInputManager.GetButtonDown("Jump") && m_CurrentJumpCount < m_MaxJumps;
+
+
 
     // dash
     if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
@@ -87,6 +92,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
+
+
+
     // landed
     if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
     {
@@ -94,7 +102,9 @@ public class PlayerController : MonoBehaviour
       m_MoveDir.y = 0f;
       m_IsJumping = false;
     }
+
     m_Animator.SetBool("isGrounded", m_CharacterController.isGrounded);
+
     m_PreviouslyGrounded = m_CharacterController.isGrounded;
   }
 
@@ -106,7 +116,6 @@ public class PlayerController : MonoBehaviour
     // consumes the m_Impact energy each cycle:
     m_Impact = Vector3.Lerp(m_Impact, Vector3.zero, 5 * Time.deltaTime);
 
-    // movement
     float speed;
     SetLocomotionInput(out speed);
     // always move along the camera forward as it is the direction that it being aimed at
@@ -130,9 +139,6 @@ public class PlayerController : MonoBehaviour
       m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
     }
 
-    // jump
-    // the jump state needs to read here AGAIN to make sure it is not missed
-    m_CanJump = m_CanJump || CrossPlatformInputManager.GetButtonDown("Jump") && m_CurrentJumpCount < m_MaxJumps;
     if (m_CanJump)
     {
       Debug.Log("jumping");
@@ -147,7 +153,6 @@ public class PlayerController : MonoBehaviour
       m_IsJumping = true;
     }
 
-    // dash
     if (m_CanDash)
     {
 
@@ -159,9 +164,10 @@ public class PlayerController : MonoBehaviour
       m_MoveDir.z = m_MoveDir.z * m_DashThrust;
 
       AddImpact(m_MoveDir, m_DashThrust);
-
-      m_CanDash = false;
     }
+
+
+
 
     m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
 

@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // jump
-    // the jump state needs to read here AGAIN to make sure it is not missed
+    // the jump state needs to read here to make sure it is not missed
     m_CanJump = m_CanJump || CrossPlatformInputManager.GetButtonDown("Jump") && m_CurrentJumpCount < m_MaxJumps;
     if (m_CanJump)
     {

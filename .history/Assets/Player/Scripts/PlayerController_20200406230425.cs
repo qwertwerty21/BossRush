@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
     // the jump state needs to read here to make sure it is not missed
     m_CanJump = CrossPlatformInputManager.GetButtonDown("Jump") && m_CurrentJumpCount < m_MaxJumps;
 
+
     // dash
     if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
     {
@@ -131,8 +132,6 @@ public class PlayerController : MonoBehaviour
     }
 
     // jump
-    // the jump state needs to read here AGAIN to make sure it is not missed
-    m_CanJump = m_CanJump || CrossPlatformInputManager.GetButtonDown("Jump") && m_CurrentJumpCount < m_MaxJumps;
     if (m_CanJump)
     {
       Debug.Log("jumping");
@@ -159,8 +158,6 @@ public class PlayerController : MonoBehaviour
       m_MoveDir.z = m_MoveDir.z * m_DashThrust;
 
       AddImpact(m_MoveDir, m_DashThrust);
-
-      m_CanDash = false;
     }
 
     m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);

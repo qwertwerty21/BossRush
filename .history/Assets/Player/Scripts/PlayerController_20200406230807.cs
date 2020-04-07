@@ -135,6 +135,7 @@ public class PlayerController : MonoBehaviour
     m_CanJump = m_CanJump || CrossPlatformInputManager.GetButtonDown("Jump") && m_CurrentJumpCount < m_MaxJumps;
     if (m_CanJump)
     {
+      m_MaxJumps++;
       Debug.Log("jumping");
       m_CurrentJumpCount++;
       m_Animator.SetTrigger("jump");
