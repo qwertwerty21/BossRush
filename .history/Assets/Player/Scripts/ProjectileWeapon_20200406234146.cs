@@ -41,6 +41,10 @@ public class ProjectileWeapon : MonoBehaviour
   {
     m_ShotsLeft--;
     Debug.Log("gameObject" + gameObject);
+    if (!m_Animator.GetBool("isGrounded"))
+    {
+      m_PlayerController.m_GravityMultiplier = .1f;
+    }
 
     m_CanShoot = false;
     PlayMuzzleFlash();
@@ -129,26 +133,19 @@ public class ProjectileWeapon : MonoBehaviour
       {
         m_Animator.SetBool("isShooting", true);
         StartCoroutine(Shoot());
-        if (!m_Animator.GetBool("isGrounded"))
-        {
-          m_PlayerController.m_GravityMultiplier = .3f;
-        }
       }
       else
       {
         m_Animator.SetBool("isShooting", false);
         StartCoroutine(Reload());
-        m_PlayerController.m_GravityMultiplier = 1f;
       }
     }
     if (Input.GetButtonUp("Fire1"))
     {
-      m_PlayerController.m_GravityMultiplier = 1f;
       m_Animator.SetBool("isShooting", false);
     }
     if (Input.GetKeyDown("r"))
     {
-      m_PlayerController.m_GravityMultiplier = 1f;
       StartCoroutine(Reload());
     }
   }

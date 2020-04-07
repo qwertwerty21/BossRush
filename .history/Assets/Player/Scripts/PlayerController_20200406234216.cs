@@ -10,7 +10,6 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour
 {
-  [SerializeField] public float m_GravityMultiplier;
   [SerializeField] private float m_Health;
   [SerializeField] private bool m_IsWalking;
   [SerializeField] private float m_WalkSpeed;
@@ -22,6 +21,7 @@ public class PlayerController : MonoBehaviour
   [SerializeField] private float m_JumpSpeed;
   [SerializeField] private float m_MaxJumps = 2;
   [SerializeField] private float m_StickToGroundForce;
+  [SerializeField] public float m_GravityMultiplier;
   [SerializeField] private MouseLook m_MouseLook;
   [SerializeField] private float m_StepInterval;
   [SerializeField] private AudioClip[] m_FootstepSounds; // an array of footstep sounds that will be randomly selected from.
@@ -72,22 +72,8 @@ public class PlayerController : MonoBehaviour
       m_CurrentJumpCount = 0;
     }
 
-    // jump
-    // we want jump to be in update vs fixedupdate because it keeps getting missed in fixedupdate
+    // the jump state needs to read here to make sure it is not missed
     m_CanJump = CrossPlatformInputManager.GetButtonDown("Jump") && m_CurrentJumpCount < m_MaxJumps;
-    if (m_CanJump)
-    {
-      Debug.Log("jumping");
-      m_CurrentJumpCount++;
-      m_Animator.SetTrigger("jump");
-
-      m_MoveDir.y = m_JumpSpeed;
-
-      AddImpact(m_MoveDir, m_JumpSpeed);
-
-      PlayJumpSound();
-      m_IsJumping = true;
-    }
 
     // dash
     if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
@@ -142,6 +128,21 @@ public class PlayerController : MonoBehaviour
     else
     {
       m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
+    }
+
+    // jump
+    if (m_CanJump)
+    {
+      Debug.Log("jumping");
+      m_CurrentJumpCount++;
+      m_Animator.SetTrigger("jump");
+
+      m_MoveDir.y = m_JumpSpeed;
+
+      AddImpact(m_MoveDir, m_JumpSpeed);
+
+      PlayJumpSound();
+      m_IsJumping = true;
     }
 
     // dash

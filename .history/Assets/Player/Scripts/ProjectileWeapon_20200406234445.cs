@@ -131,7 +131,7 @@ public class ProjectileWeapon : MonoBehaviour
         StartCoroutine(Shoot());
         if (!m_Animator.GetBool("isGrounded"))
         {
-          m_PlayerController.m_GravityMultiplier = .3f;
+          m_PlayerController.m_GravityMultiplier = .1f;
         }
       }
       else

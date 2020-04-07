@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // jump
-    // we want jump to be in update vs fixedupdate because it keeps getting missed in fixedupdate
+    // the jump state needs to read here to make sure it is not missed
     m_CanJump = CrossPlatformInputManager.GetButtonDown("Jump") && m_CurrentJumpCount < m_MaxJumps;
     if (m_CanJump)
     {
@@ -143,6 +143,8 @@ public class PlayerController : MonoBehaviour
     {
       m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
     }
+
+
 
     // dash
     if (m_CanDash)
