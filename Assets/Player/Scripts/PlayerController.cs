@@ -113,14 +113,6 @@ public class PlayerController : MonoBehaviour
         m_MoveDir.y = m_DashHeight;
         m_MoveDir.z = m_MoveDir.z * m_DashThrust;
 
-        // rotates player just for proper dash roll animation direction
-        if (m_CharacterController.isGrounded)
-        {
-          m_Animator.transform.rotation = Quaternion.LookRotation(m_MoveDir, Vector3.up);
-          // resets player rotation to forward after set time
-          StartCoroutine(ResetDashRotation());
-        }
-
         AddImpact(m_MoveDir, m_DashThrust);
       }
       m_DoubleTapLastTapped = Time.time;
@@ -160,12 +152,6 @@ public class PlayerController : MonoBehaviour
     m_Animator.SetBool("isGrounded", m_CharacterController.isGrounded);
 
     m_PreviouslyGrounded = m_CharacterController.isGrounded;
-  }
-
-  IEnumerator ResetDashRotation()
-  {
-    yield return new WaitForSeconds(.8f);
-    m_Animator.transform.rotation = Quaternion.LookRotation(m_Camera.transform.forward, Vector3.up);
   }
 
   private void PlayLandingSound()
