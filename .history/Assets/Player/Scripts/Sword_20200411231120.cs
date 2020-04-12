@@ -42,11 +42,11 @@ public class Sword : MonoBehaviour
 
     if (Input.GetButtonDown("Fire1"))
     {
-      // needed so we can attack in mid-air
-      m_Animator.SetTrigger("isInterruptingJump");
+
+
       m_Animator.SetTrigger("lightSwordAttack");
 
-      m_PlayerController.ToggleHitboxColliders("LightSwordCombo", true);
+      m_PlayerController.ToggleHitboxColliders("LightSwordCombo", false);
 
       // if (!m_Animator.GetBool("isChargingUppercutAttack"))
       // {

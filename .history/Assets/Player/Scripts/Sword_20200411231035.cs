@@ -42,11 +42,11 @@ public class Sword : MonoBehaviour
 
     if (Input.GetButtonDown("Fire1"))
     {
-      // needed so we can attack in mid-air
-      m_Animator.SetTrigger("isInterruptingJump");
+
+
       m_Animator.SetTrigger("lightSwordAttack");
 
-      m_PlayerController.ToggleHitboxColliders("LightSwordCombo", true);
+      m_PlayerController.ToggleHitboxColliders("LightSwordCombo", false);
 
       // if (!m_Animator.GetBool("isChargingUppercutAttack"))
       // {
@@ -70,13 +70,13 @@ public class Sword : MonoBehaviour
     Debug.Log("YO YOU HIT SOMETHING WITH SWORD ATTACK" + otherCollider);
     if (otherCollider.gameObject.tag == "Enemy")
     {
-      Rigidbody enemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
-      Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
-      NavMeshAgent enemyNavMeshAgent = otherCollider.gameObject.GetComponent<NavMeshAgent>();
-      Animator enemyAnimator = otherCollider.gameObject.GetComponent<Animator>();
+      // Rigidbody enemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
+      // Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
+      // NavMeshAgent enemyNavMeshAgent = otherCollider.gameObject.GetComponent<NavMeshAgent>();
+      // Animator enemyAnimator = otherCollider.gameObject.GetComponent<Animator>();
 
-      Vector3 direction = m_BaseHitBox.GetDirection(enemyRigidBody);
-      float force = m_Damage.m_KnockbackForce;
+      // Vector3 direction = m_BaseHitBox.GetDirection(enemyRigidBody);
+      // float force = m_Damage.m_KnockbackForce;
       // direction.y = Mathf.Floor(m_YKnockbackForceOverride * m_CurrentChargeDuration);
 
       // enemyNavMeshAgent.enabled = false;
@@ -86,10 +86,10 @@ public class Sword : MonoBehaviour
 
       // StartCoroutine(ResetTimeScale());
 
-      enemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
+      // enemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
       // var originalDamageAmount = m_Damage.m_DamageAmount;
       // m_Damage.m_DamageAmount *= m_CurrentChargeDuration;
-      enemyTarget.TakeDamage(m_Damage);
+      // enemyTarget.TakeDamage(m_Damage);
       // m_Damage.m_DamageAmount = originalDamageAmount;
     }
   }
