@@ -28,7 +28,10 @@ public class Sword : MonoBehaviour
     // m_Animator.SetBool("isAttacking", false);
   }
 
-
+  public void ToggleSwordHitboxCollider(bool isEnabled)
+  {
+    m_PlayerController.ToggleHitboxColliders("LightSwordCombo", isEnabled);
+  }
 
   // Start is called before the first frame update
   private void Awake()
@@ -48,7 +51,7 @@ public class Sword : MonoBehaviour
       m_Animator.SetTrigger("isInterruptingJump");
       m_Animator.SetTrigger("lightSwordAttack");
 
-      // m_PlayerController.ToggleHitboxColliders("LightSwordCombo", true);
+
 
       // if (!m_Animator.GetBool("isChargingUppercutAttack"))
       // {

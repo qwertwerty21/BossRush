@@ -96,8 +96,8 @@ public class ProjectileWeapon : MonoBehaviour
     yield return new WaitForSeconds(m_ReloadTime);
     m_ShotsLeft = m_ShotsPerRound;
     m_Animator.SetBool("isReloading", false);
-    m_CanShoot = true;
     m_Animator.SetBool("canSwitchWeapon", true);
+    m_CanShoot = true;
   }
 
   private void Awake()
@@ -140,7 +140,6 @@ public class ProjectileWeapon : MonoBehaviour
       m_CrosshairImage.color = Color.white;
       m_PlayerController.m_GravityMultiplier = 1f;
       m_Animator.SetBool("isShooting", false);
-      m_Animator.SetBool("canSwitchWeapon", true);
     }
     if (Input.GetKeyDown("r"))
     {

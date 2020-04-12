@@ -91,13 +91,11 @@ public class ProjectileWeapon : MonoBehaviour
     m_CrosshairImage.color = Color.white;
     m_Animator.SetTrigger("isInterruptingJump");
     m_Animator.SetBool("isReloading", true);
-    m_Animator.SetBool("canSwitchWeapon", false);
     m_CanShoot = false;
     yield return new WaitForSeconds(m_ReloadTime);
     m_ShotsLeft = m_ShotsPerRound;
     m_Animator.SetBool("isReloading", false);
     m_CanShoot = true;
-    m_Animator.SetBool("canSwitchWeapon", true);
   }
 
   private void Awake()
@@ -120,7 +118,6 @@ public class ProjectileWeapon : MonoBehaviour
       {
         m_Animator.SetTrigger("isInterruptingJump");
         m_Animator.SetBool("isShooting", true);
-        m_Animator.SetBool("canSwitchWeapon", false);
         StartCoroutine(Shoot());
         if (!m_Animator.GetBool("isGrounded"))
         {
@@ -130,7 +127,6 @@ public class ProjectileWeapon : MonoBehaviour
       else
       {
         m_Animator.SetBool("isShooting", false);
-        m_Animator.SetBool("canSwitchWeapon", true);
         StartCoroutine(Reload());
         m_PlayerController.m_GravityMultiplier = 1f;
       }
@@ -140,7 +136,6 @@ public class ProjectileWeapon : MonoBehaviour
       m_CrosshairImage.color = Color.white;
       m_PlayerController.m_GravityMultiplier = 1f;
       m_Animator.SetBool("isShooting", false);
-      m_Animator.SetBool("canSwitchWeapon", true);
     }
     if (Input.GetKeyDown("r"))
     {

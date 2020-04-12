@@ -48,7 +48,7 @@ public class Sword : MonoBehaviour
       m_Animator.SetTrigger("isInterruptingJump");
       m_Animator.SetTrigger("lightSwordAttack");
 
-      // m_PlayerController.ToggleHitboxColliders("LightSwordCombo", true);
+      m_PlayerController.ToggleHitboxColliders("LightSwordCombo", true);
 
       // if (!m_Animator.GetBool("isChargingUppercutAttack"))
       // {

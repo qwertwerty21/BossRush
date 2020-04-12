@@ -56,7 +56,10 @@ public class WeaponSwitcher : MonoBehaviour
       }
     }
 
-    if (m_SelectedWeaponIndex != previousSelectedWeaponIndex && m_Animator.GetBool("canSwitchWeapon"))
+    // cant switch if youre reloading
+    bool canSwitchWeapons = !m_Animator.GetBool("isReloading") && !m_Animator.GetBool("isShooting");
+
+    if (m_SelectedWeaponIndex != previousSelectedWeaponIndex && canSwitchWeapons)
     {
       SelectWeapon();
     }

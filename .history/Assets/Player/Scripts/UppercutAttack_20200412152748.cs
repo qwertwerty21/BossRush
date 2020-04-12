@@ -57,7 +57,6 @@ public class UppercutAttack : MonoBehaviour
 
       if (!m_Animator.GetBool("isChargingUppercutAttack"))
       {
-        m_Animator.SetBool("canSwitchWeapon", false);
         m_Animator.SetBool("isChargingUppercutAttack", true);
       }
       m_CurrentChargeDuration += Time.deltaTime;
@@ -67,7 +66,6 @@ public class UppercutAttack : MonoBehaviour
     {
       m_Animator.SetBool("isChargingUppercutAttack", false);
       m_Animator.SetTrigger("uppercutAttack");
-      m_Animator.SetBool("canSwitchWeapon", true);
       m_CurrentChargeDuration = 0f;
       // m_PlayerController.ToggleHitboxColliders("UppercutAttack", true);
       // StartCoroutine(EndUppercutAttack());
