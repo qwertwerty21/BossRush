@@ -18,7 +18,6 @@ public class UppercutAttack : MonoBehaviour
 
   private float m_CurrentChargeDuration;
   private Animator m_Animator;
-  private MeshRenderer m_MeshRenderer;
 
   private BaseHitBox m_BaseHitBox;
 
@@ -27,11 +26,6 @@ public class UppercutAttack : MonoBehaviour
   IEnumerator EndUppercutAttack()
   {
     yield return new WaitForSecondsRealtime(0.5f);
-    // if (m_MeshRenderer.enabled)
-    // {
-
-    //   m_MeshRenderer.enabled = false;
-    // }
     m_PlayerController.ToggleHitboxColliders("UppercutAttack", false);
     m_CurrentChargeDuration = 0f;
 
@@ -51,7 +45,6 @@ public class UppercutAttack : MonoBehaviour
   {
     m_PlayerController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerController>();
     m_Animator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
-    m_MeshRenderer = gameObject.GetComponent<MeshRenderer>();
     m_BaseHitBox = gameObject.GetComponent<BaseHitBox>();
   }
 
@@ -61,11 +54,7 @@ public class UppercutAttack : MonoBehaviour
     if (Input.GetButton("Fire2"))
     {
       m_PlayerController.ToggleHitboxColliders("UppercutAttack", false);
-      // if (!m_MeshRenderer.enabled)
-      // {
 
-      //   m_MeshRenderer.enabled = true;
-      // }
       if (!m_Animator.GetBool("isChargingUppercutAttack"))
       {
         m_Animator.SetBool("isChargingUppercutAttack", true);
