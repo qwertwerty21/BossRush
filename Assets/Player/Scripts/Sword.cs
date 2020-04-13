@@ -14,6 +14,9 @@ public class Sword : MonoBehaviour
 
   private float m_CurrentChargeDuration;
   private Animator m_Animator;
+
+  private CharacterController m_CharacterController;
+  private Camera m_Camera;
   private BaseHitBox m_BaseHitBox;
 
   private PlayerController m_PlayerController;
@@ -28,11 +31,16 @@ public class Sword : MonoBehaviour
     // m_Animator.SetBool("isAttacking", false);
   }
 
-
+  public void DisableSwordHitboxCollider()
+  {
+    m_PlayerController.ToggleHitboxColliders("LightSwordCombo", true);
+  }
 
   // Start is called before the first frame update
   private void Awake()
   {
+    m_Camera = Camera.main;
+    m_CharacterController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CharacterController>();
     m_PlayerController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerController>();
     m_Animator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
     m_BaseHitBox = gameObject.GetComponent<BaseHitBox>();
@@ -47,8 +55,9 @@ public class Sword : MonoBehaviour
       // needed so we can attack in mid-air
       m_Animator.SetTrigger("isInterruptingJump");
       m_Animator.SetTrigger("lightSwordAttack");
+      // var moveDir = new Vector3(m_Camera.transform.position.x, 0, m_Camera.transform.position.z);
+      // m_CharacterController.Move();
 
-      // m_PlayerController.ToggleHitboxColliders("LightSwordCombo", true);
 
       // if (!m_Animator.GetBool("isChargingUppercutAttack"))
       // {

@@ -285,10 +285,21 @@ public class PlayerController : MonoBehaviour
     }
   }
 
+  public void DisableHitboxColliders()
+  {
+    BaseHitBox[] hitboxes = GetComponentsInChildren<BaseHitBox>();
+    Debug.Log("toggle swipe hitboxes IN PLAYERCONTROLLEr" + hitboxes);
+    for (int i = 0; i < hitboxes.Length; i++)
+    {
+      hitboxes[i].m_Collider.enabled = false;
+    }
+  }
+
   private void OnTriggerEnter(Collider otherCollider)
   {
     Debug.Log("Set IsHurt trigger here and take damage");
-    if (otherCollider.gameObject.tag == "EnemyHitBox")
+    bool isGuarding = m_Animator.GetBool("isGuarding");
+    if (otherCollider.gameObject.tag == "EnemyHitBox" && !isGuarding)
     {
       BaseHitBox enemyHitbox = otherCollider.gameObject.GetComponent<BaseHitBox>();
       Vector3 direction = enemyHitbox.GetDirection(m_RigidBody);
@@ -300,7 +311,8 @@ public class PlayerController : MonoBehaviour
   private void OnParticleCollision(GameObject other)
   {
     Debug.Log("Particle Collission" + other);
-    if (other.tag == "EnemyHitBox")
+    bool isGuarding = m_Animator.GetBool("isGuarding");
+    if (other.tag == "EnemyHitBox" && !isGuarding)
     {
       BaseHitBox enemyHitbox = other.GetComponent<BaseHitBox>();
       Vector3 direction = enemyHitbox.GetDirection(m_RigidBody);

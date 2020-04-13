@@ -20,7 +20,7 @@ public class ToothySwipe : BaseBossStateMachineBehaviour
   override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
   {
     base.OnStateUpdate(animator, stateInfo, layerIndex);
-    m_ToothyAIBossController.RotateTowards(m_Player.transform);
+    // m_ToothyAIBossController.RotateTowards(m_Player.transform);
     // m_ToothyAIBossController.transform.LookAt(m_Player.transform);
   }
 

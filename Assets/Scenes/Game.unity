@@ -2463,6 +2463,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DamageAmount: 5
   m_KnockbackForce: 30
+--- !u!114 &1630583245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630583239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b719d3eadb40d4ad4a8454ba71f40ce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Damage: {fileID: 0}
+  m_MaxChargeDuration: 5
+  m_HitTimeScaleSlowdownDuration: 1
+  m_YKnockbackForceOverride: 3
+  m_TimeScaleSlowdown: 0.4
 --- !u!1001 &1644950945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3755,6 +3772,16 @@ PrefabInstance:
       propertyPath: m_DashHeight
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6731429358314861765, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731429358314861765, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6731429359236783020, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_ReloadTime
@@ -4103,17 +4130,17 @@ PrefabInstance:
     - target: {fileID: 9062710089018593474, guid: 836419a8a04134c42a3f1646f2f46877,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9062710089018593474, guid: 836419a8a04134c42a3f1646f2f46877,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9062710089018593474, guid: 836419a8a04134c42a3f1646f2f46877,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9062710089027927904, guid: 836419a8a04134c42a3f1646f2f46877,
         type: 3}

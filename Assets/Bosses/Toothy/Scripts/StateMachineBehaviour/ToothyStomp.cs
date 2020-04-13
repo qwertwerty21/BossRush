@@ -12,13 +12,15 @@ public class ToothyStomp : BaseBossStateMachineBehaviour
     base.OnStateEnter(animator, stateInfo, layerIndex);
     m_ToothyAIBossController = m_AIBossController.GetComponent<ToothyAIBossController>();
     m_ToothyAIBossController.ToggleHitboxColliders("ToothyStomp", true);
+    // m_ToothyAIBossController.RotateTowards(m_Player.transform);
+    // m_ToothyAIBossController.transform.LookAt(m_Player.transform);
   }
 
   // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
   override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
   {
     base.OnStateUpdate(animator, stateInfo, layerIndex);
-    m_ToothyAIBossController.RotateTowards(m_Player.transform);
+    // m_ToothyAIBossController.RotateTowards(m_Player.transform);
   }
 
   // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

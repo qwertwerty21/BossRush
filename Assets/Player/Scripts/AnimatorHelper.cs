@@ -7,10 +7,13 @@ public class AnimatorHelper : MonoBehaviour
 {
 
   private PlayerController m_PlayerController;
+  private Animator m_Animator;
+
 
   void Awake()
   {
     m_PlayerController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerController>();
+    m_Animator = GetComponent<Animator>();
   }
   public void EnableHitboxCollider(string hitboxName)
   {
@@ -20,5 +23,25 @@ public class AnimatorHelper : MonoBehaviour
   public void DisableHitboxCollider(string hitboxName)
   {
     m_PlayerController.ToggleHitboxColliders(hitboxName, false);
+  }
+
+  public void ToggleAnimatorParameter(string paramName, bool isEnabled)
+  {
+    m_Animator.SetBool(paramName, isEnabled);
+  }
+
+  public void EnableAnimatorParameter(string paramName)
+  {
+    m_Animator.SetBool(paramName, true);
+  }
+
+  public void DisableAnimatorParameter(string paramName)
+  {
+    m_Animator.SetBool(paramName, false);
+  }
+
+  public void SetIsGuarding()
+  {
+    ToggleAnimatorParameter("isGuarding", Input.GetButton("Fire2"));
   }
 }
