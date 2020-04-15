@@ -42,6 +42,6 @@ public class AnimatorHelper : MonoBehaviour
 
   public void SetIsGuarding()
   {
-    ToggleAnimatorParameter("isGuarding", Input.GetButton("Fire2"));
+    ToggleAnimatorParameter("isGuarding", Input.GetKey(KeyCode.LeftShift));
   }
 }

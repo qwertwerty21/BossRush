@@ -90,6 +90,7 @@ public class ProjectileWeapon : MonoBehaviour
   {
     m_CrosshairImage.color = Color.white;
     m_Animator.SetTrigger("isInterruptingJump");
+    m_Animator.ResetTrigger("jump");
     m_Animator.SetBool("isReloading", true);
     m_Animator.SetBool("canSwitchWeapon", false);
     m_CanShoot = false;
@@ -119,6 +120,7 @@ public class ProjectileWeapon : MonoBehaviour
       if (m_ShotsLeft > 0)
       {
         m_Animator.SetTrigger("isInterruptingJump");
+        m_Animator.ResetTrigger("jump");
         m_Animator.SetBool("isShooting", true);
         m_Animator.SetBool("canSwitchWeapon", false);
         StartCoroutine(Shoot());

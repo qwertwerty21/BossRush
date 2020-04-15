@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
   [SerializeField] private float m_Health;
   [SerializeField] private bool m_IsWalking;
   [SerializeField] private float m_WalkSpeed;
-  [SerializeField] private float m_RunSpeed;
+  // [SerializeField] private float m_RunSpeed; // no running for now
   [SerializeField] [Range(0f, 1f)] private float m_RunStepLengthen;
   [SerializeField] private float m_DoubleTapDelay = 0.2f;
   [SerializeField] private float m_DashThrust = 40f;
@@ -120,21 +120,7 @@ public class PlayerController : MonoBehaviour
     // consumes the m_Impact energy each cycle:
     m_Impact = Vector3.Lerp(m_Impact, Vector3.zero, 5 * Time.deltaTime);
 
-    // movement
-    float speed;
-    SetLocomotionInput(out speed);
-    // always move along the camera forward as it is the direction that it being aimed at
-    Vector3 desiredMove = transform.forward * m_LocomotionInput.y + transform.right * m_LocomotionInput.x;
-
-    // get a normal for the surface that is being touched to move along it
-    RaycastHit hitInfo;
-    Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
-      m_CharacterController.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
-    desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
-
-    m_MoveDir.x = desiredMove.x * speed;
-    m_MoveDir.z = desiredMove.z * speed;
-
+    // apply gravity forces
     if (m_CharacterController.isGrounded)
     {
       m_MoveDir.y = -m_StickToGroundForce;
@@ -144,25 +130,53 @@ public class PlayerController : MonoBehaviour
       m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
     }
 
-    // dash
-    if (m_CanDash)
+    // movement
+    bool canMove = true; // you can be changed later
+    if (canMove)
     {
+      float speed;
+      SetLocomotionInput(out speed);
+      // always move along the camera forward as it is the direction that it being aimed at
+      Vector3 desiredMove = transform.forward * m_LocomotionInput.y + transform.right * m_LocomotionInput.x;
 
-      Debug.Log("dash" + m_MoveDir);
-      m_Animator.SetTrigger("dash");
+      // get a normal for the surface that is being touched to move along it
+      RaycastHit hitInfo;
+      Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
+        m_CharacterController.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
+      desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
 
-      m_MoveDir.x = m_MoveDir.x * m_DashThrust;
-      m_MoveDir.y = m_DashHeight;
-      m_MoveDir.z = m_MoveDir.z * m_DashThrust;
+      m_MoveDir.x = desiredMove.x * speed;
+      m_MoveDir.z = desiredMove.z * speed;
 
-      AddImpact(m_MoveDir, m_DashThrust);
 
-      m_CanDash = false;
+
+      // dash
+      if (m_CanDash)
+      {
+
+        Debug.Log("dash" + m_MoveDir);
+        m_Animator.SetTrigger("dash");
+
+        m_MoveDir.x = m_MoveDir.x * m_DashThrust;
+        m_MoveDir.y = m_DashHeight;
+        m_MoveDir.z = m_MoveDir.z * m_DashThrust;
+
+        AddImpact(m_MoveDir, m_DashThrust);
+
+        m_CanDash = false;
+      }
+
+
+      ProgressStepCycle(speed);
+    }
+    else
+    {
+      // if guarding make sure they cant move
+      m_MoveDir.x = 0f;
+      m_MoveDir.z = 0f;
     }
 
     m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
-
-    ProgressStepCycle(speed);
 
     m_MouseLook.UpdateCursorLock();
   }
@@ -231,11 +245,12 @@ public class PlayerController : MonoBehaviour
 #if !MOBILE_INPUT
     // On standalone builds, walk/run speed is modified by a key press.
     // keep track of whether or not the character is walking or running
-    m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+    // m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
 #endif
 
     // set the desired speed to be walking or running
-    speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
+    // speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
+    speed = m_WalkSpeed;
     m_LocomotionInput = new Vector2(horizontal, vertical);
 
     m_Animator.SetFloat("horizontal", horizontal);

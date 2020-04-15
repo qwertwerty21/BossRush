@@ -54,9 +54,12 @@ public class Sword : MonoBehaviour
     {
       // needed so we can attack in mid-air
       m_Animator.SetTrigger("isInterruptingJump");
+      m_Animator.ResetTrigger("jump");
       m_Animator.SetTrigger("lightSwordAttack");
+      // var direction = new Vector3(Vector3.forward, 0f, m_Camera.transform.position.z);
+      // m_PlayerController.AddImpact(Vector3.forward, 5f);
       // var moveDir = new Vector3(m_Camera.transform.position.x, 0, m_Camera.transform.position.z);
-      // m_CharacterController.Move();
+      // m_CharacterController.Move(Vector3.forward * 10f * Time.deltaTime);
 
 
       // if (!m_Animator.GetBool("isChargingUppercutAttack"))

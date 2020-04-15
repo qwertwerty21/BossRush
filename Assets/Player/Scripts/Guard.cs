@@ -43,7 +43,7 @@ public class Guard : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (Input.GetButtonDown("Fire2"))
+    if (Input.GetKeyDown(KeyCode.LeftShift))
     {
 
       m_Animator.SetBool("canSwitchWeapon", false);
@@ -52,7 +52,7 @@ public class Guard : MonoBehaviour
       m_PlayerController.DisableHitboxColliders();
 
     }
-    if (Input.GetButtonUp("Fire2") || m_CurrentChargeDuration >= m_MaxChargeDuration)
+    if (Input.GetKeyUp(KeyCode.LeftShift) || m_CurrentChargeDuration >= m_MaxChargeDuration)
     {
       // StartCoroutine(StopGuarding());
       m_Animator.SetBool("isGuarding", false);
