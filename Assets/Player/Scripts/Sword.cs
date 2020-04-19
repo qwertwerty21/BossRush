@@ -56,6 +56,14 @@ public class Sword : MonoBehaviour
       m_Animator.SetTrigger("isInterruptingJump");
       m_Animator.ResetTrigger("jump");
       m_Animator.SetTrigger("lightSwordAttack");
+      // if (!m_Animator.GetBool("isGrounded"))
+      // {
+      //   m_PlayerController.m_GravityMultiplier = .3f;
+      // }
+      // else
+      // {
+      //   m_PlayerController.m_GravityMultiplier = 1f;
+      // }
       // var direction = new Vector3(Vector3.forward, 0f, m_Camera.transform.position.z);
       // m_PlayerController.AddImpact(Vector3.forward, 5f);
       // var moveDir = new Vector3(m_Camera.transform.position.x, 0, m_Camera.transform.position.z);
@@ -69,14 +77,27 @@ public class Sword : MonoBehaviour
       // m_CurrentChargeDuration += Time.deltaTime;
       // Debug.Log("CURRENTCHARGET" + m_CurrentChargeDuration);
     }
-    // if (Input.GetButtonUp("Fire2") || m_CurrentChargeDuration >= m_MaxChargeDuration)
-    // {
-    //   m_Animator.SetBool("isChargingUppercutAttack", false);
-    //   m_Animator.SetTrigger("uppercutAttack");
-    //   m_PlayerController.ToggleHitboxColliders("UppercutAttack", true);
-    //   StartCoroutine(EndUppercutAttack());
 
-    // }
+    if (Input.GetButton("Fire2"))
+    {
+      if (!m_Animator.GetBool("isChargingHeavySwordAttack"))
+      {
+        m_Animator.SetBool("canSwitchWeapon", false);
+        m_Animator.SetBool("isChargingHeavySwordAttack", true);
+      }
+      m_CurrentChargeDuration += Time.deltaTime;
+    }
+
+    if (Input.GetButtonUp("Fire2") || m_CurrentChargeDuration >= m_MaxChargeDuration)
+    {
+      m_Animator.SetBool("isChargingHeavySwordAttack", false);
+      m_Animator.SetTrigger("heavySwordAttack");
+      m_Animator.SetBool("canSwitchWeapon", true);
+      m_CurrentChargeDuration = 0f;
+      // m_PlayerController.ToggleHitboxColliders("UppercutAttack", true);
+      // StartCoroutine(EndUppercutAttack());
+
+    }
   }
 
   private void OnTriggerEnter(Collider otherCollider)

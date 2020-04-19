@@ -17,7 +17,12 @@ public class BaseHitBox : MonoBehaviour
 
   private void Awake()
   {
-    m_Damage = GetComponent<Damage>();
+    // Debug.Log("HITBOXNAME" + m_HitBoxName);
+    // Debug.Log("DAMAGE" + m_Damage.m_DamageAmount);
+    if (m_Damage == null)
+    {
+      m_Damage = GetComponent<Damage>();
+    }
   }
 
 

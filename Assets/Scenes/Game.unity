@@ -2476,7 +2476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HitBoxName: LightSwordCombo
-  m_Damage: {fileID: 0}
+  m_Damage: {fileID: 1630583244}
   m_Collider: {fileID: 1630583241}
 --- !u!114 &1630583243
 MonoBehaviour:
@@ -2524,6 +2524,35 @@ MonoBehaviour:
   m_HitTimeScaleSlowdownDuration: 1
   m_YKnockbackForceOverride: 3
   m_TimeScaleSlowdown: 0.4
+--- !u!114 &1630583246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630583239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a499734704ff4063b92cf3e5b063c98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DamageAmount: 10
+  m_KnockbackForce: 50
+--- !u!114 &1630583247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630583239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c485bf71842fa4abb9f5742da4b0dfcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HitBoxName: HeavySwordCombo
+  m_Damage: {fileID: 1630583246}
+  m_Collider: {fileID: 1630583241}
 --- !u!1001 &1644950945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3324,7 +3353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2055879927
 Transform:
   m_ObjectHideFlags: 0
@@ -3631,6 +3660,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1319291970}
     m_Modifications:
+    - target: {fileID: 6731429357433844199, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_FollowOffset.x
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 6731429358042412008, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_Enabled
@@ -3789,12 +3823,12 @@ PrefabInstance:
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.39999983
+      value: 0.5999998
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.000000011175871
+      value: 0.000000006519258
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
@@ -3805,6 +3839,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MouseyPlayerController
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731429358302036773, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: field of view
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731429358302036773, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_projectionMatrixMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731429358302036773, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_FocalLength
+      value: 17.137775
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358305960549, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
@@ -3950,6 +3999,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key3.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731429359374016369, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c99eeb7c63e2b4db59f523c0930592e9, type: 3}
