@@ -46,8 +46,6 @@ public class PlayerController : MonoBehaviour
   private AudioSource m_AudioSource;
   private float m_DoubleTapLastTapped = -0.1f;
   private Vector3 m_Impact = Vector3.zero;
-  public bool m_IsLockedOn = false;
-  public Transform m_LockOnTarget;
 
   // Use this for initialization
   private void Awake()
@@ -66,7 +64,6 @@ public class PlayerController : MonoBehaviour
   // Update is called once per frame
   private void Update()
   {
-
     RotateView();
 
     // reset jump if grounded
@@ -192,7 +189,7 @@ public class PlayerController : MonoBehaviour
   }
 
   // call this function to add an impact force:
-  public void AddImpact(Vector3 direction, float force)
+  private void AddImpact(Vector3 direction, float force)
   {
     direction.Normalize();
     if (direction.y < 0) direction.y = -direction.y; // reflect down force on the ground
@@ -269,19 +266,12 @@ public class PlayerController : MonoBehaviour
 
   private void RotateView()
   {
-    Debug.Log("ROATTEVIEW" + m_IsLockedOn);
-    if (m_IsLockedOn && m_LockOnTarget)
-    {
-      m_MouseLook.LockedLookRotation(transform, m_LockOnTarget.transform, m_Camera.transform);
-    }
-    else
-    {
-      m_MouseLook.LookRotation(transform, m_Camera.transform);
-    }
+    m_MouseLook.LookRotation(transform, m_Camera.transform);
   }
 
   private void OnControllerColliderHit(ControllerColliderHit hit)
   {
+    // Debug.Log("hit by " + hit.collider.name);
     Rigidbody body = hit.collider.attachedRigidbody;
     //dont move the rigidbody if the character is on top of it
     if (m_CollisionFlags == CollisionFlags.Below)

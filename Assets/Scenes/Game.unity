@@ -1299,6 +1299,64 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 136478721}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &785993717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 785993718}
+  - component: {fileID: 785993720}
+  - component: {fileID: 785993719}
+  m_Layer: 0
+  m_Name: RejectBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &785993718
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785993717}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.947, z: 0}
+  m_LocalScale: {x: 0.6330041, y: 0.3750483, z: 0.74571}
+  m_Children: []
+  m_Father: {fileID: 128434880739227154}
+  m_RootOrder: 67
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &785993719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785993717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdfddc4053db4f998bcd34215508db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Force: 5
+--- !u!65 &785993720
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785993717}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &806465588 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6731429358300659975, guid: c99eeb7c63e2b4db59f523c0930592e9,
@@ -2553,6 +2611,19 @@ MonoBehaviour:
   m_HitBoxName: HeavySwordCombo
   m_Damage: {fileID: 1630583246}
   m_Collider: {fileID: 1630583241}
+--- !u!114 &1630583248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630583239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f27bfc3d6114b6fbfc16601fdcfe6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Range: 100
 --- !u!1001 &1644950945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3416,7 +3487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a115615523e4630a05493622d8d6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Health: 100
+  m_Health: 1000
   m_DamageMaterial: {fileID: 2100000, guid: a130b110589f5429ab1824109764dd40, type: 2}
 --- !u!4 &128434880739227154 stripped
 Transform:
@@ -3885,6 +3956,16 @@ PrefabInstance:
       propertyPath: m_DashHeight
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6731429358307243237, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_LockOnTarget
+      value: 
+      objectReference: {fileID: 128434880739227154}
+    - target: {fileID: 6731429358307243237, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_IsLockedOn
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6731429358314861765, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_Radius
@@ -4020,7 +4101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477601851, guid: 836419a8a04134c42a3f1646f2f46877, type: 3}
       propertyPath: m_Speed
-      value: 5
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 477601851, guid: 836419a8a04134c42a3f1646f2f46877, type: 3}
       propertyPath: m_StoppingDistance

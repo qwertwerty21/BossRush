@@ -269,8 +269,7 @@ public class PlayerController : MonoBehaviour
 
   private void RotateView()
   {
-    Debug.Log("ROATTEVIEW" + m_IsLockedOn);
-    if (m_IsLockedOn && m_LockOnTarget)
+    if (m_IsLockedOn)
     {
       m_MouseLook.LockedLookRotation(transform, m_LockOnTarget.transform, m_Camera.transform);
     }

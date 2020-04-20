@@ -56,15 +56,33 @@ public class MouseLook
 
   public void LockedLookRotation(Transform character, Transform target, Transform camera)
   {
-    if (target == null)
-    {
-      return;
-    }
+    // float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
+    // float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
 
-    Vector3 cameraPosition = new Vector3(target.position.x, .4f, target.position.z);
+    // m_CharacterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
+    // m_CameraTargetRot *= Quaternion.Euler(-xRot, 0f, 0f);
 
-    character.LookAt(target);
-    camera.LookAt(cameraPosition);
+    // if (clampVerticalRotation)
+    //   m_CameraTargetRot = ClampRotationAroundXAxis(m_CameraTargetRot);
+
+    // if (smooth)
+    // {
+    //   character.localRotation = Quaternion.Slerp(character.localRotation, m_CharacterTargetRot,
+    //       smoothTime * Time.deltaTime);
+    //   camera.localRotation = Quaternion.Slerp(camera.localRotation, m_CameraTargetRot,
+    //       smoothTime * Time.deltaTime);
+    // }
+    // else
+    // {
+    //   character.localRotation = m_CharacterTargetRot;
+    //   camera.localRotation = m_CameraTargetRot;
+    // }
+    // var height = target.position.y + target.position.y;
+    Vector3 characterPosition = new Vector3(target.position.x, 0f, target.position.z);
+    Vector3 cameraPosition = new Vector3(target.position.x, target.localScale.y, target.position.z);
+
+    character.LookAt(targetPosition);
+    camera.LookAt(targetPosition);
 
     UpdateCursorLock();
   }

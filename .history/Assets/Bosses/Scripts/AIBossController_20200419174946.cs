@@ -121,16 +121,14 @@ public abstract class AIBossController : MonoBehaviour
     }
   }
 
-  // void OnControllerColliderHit(ControllerColliderHit hit)
-  // {
-  //   var hitNormal = hit.normal;
-  //   var controller = hit.collider.GetComponent<CharacterController>();
-  //   if (controller != null)
-  //   {
-  //     Debug.Log("MOVE BITCH GET OUT TH EWYA ");
-  //     controller.SimpleMove((new Vector3(100f * Time.deltaTime, 0, 100f * Time.deltaTime)));
-  //   }
-  // }
+  void OnTriggerStay(Collider otherCollider)
+  {
+    var controller = other.GetComponent(CharacterController);
+    if (controller != null)
+    {
+      controller.SimpleMove(forward * slideSpeed);
+    }
+  }
 
   // void Update()
   // {

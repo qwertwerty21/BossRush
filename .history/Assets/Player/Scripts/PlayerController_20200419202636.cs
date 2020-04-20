@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
   private float m_DoubleTapLastTapped = -0.1f;
   private Vector3 m_Impact = Vector3.zero;
   public bool m_IsLockedOn = false;
-  public Transform m_LockOnTarget;
+  private Transform m_LockOnTarget;
 
   // Use this for initialization
   private void Awake()
@@ -270,7 +270,7 @@ public class PlayerController : MonoBehaviour
   private void RotateView()
   {
     Debug.Log("ROATTEVIEW" + m_IsLockedOn);
-    if (m_IsLockedOn && m_LockOnTarget)
+    if (m_IsLockedOn)
     {
       m_MouseLook.LockedLookRotation(transform, m_LockOnTarget.transform, m_Camera.transform);
     }

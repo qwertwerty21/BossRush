@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
   private AudioSource m_AudioSource;
   private float m_DoubleTapLastTapped = -0.1f;
   private Vector3 m_Impact = Vector3.zero;
-  public bool m_IsLockedOn = false;
+  private bool m_IsLockedOn = true;
   public Transform m_LockOnTarget;
 
   // Use this for initialization
@@ -192,7 +192,7 @@ public class PlayerController : MonoBehaviour
   }
 
   // call this function to add an impact force:
-  public void AddImpact(Vector3 direction, float force)
+  private void AddImpact(Vector3 direction, float force)
   {
     direction.Normalize();
     if (direction.y < 0) direction.y = -direction.y; // reflect down force on the ground
@@ -269,8 +269,7 @@ public class PlayerController : MonoBehaviour
 
   private void RotateView()
   {
-    Debug.Log("ROATTEVIEW" + m_IsLockedOn);
-    if (m_IsLockedOn && m_LockOnTarget)
+    if (m_IsLockedOn)
     {
       m_MouseLook.LockedLookRotation(transform, m_LockOnTarget.transform, m_Camera.transform);
     }
