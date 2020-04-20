@@ -102,7 +102,7 @@ public class UppercutAttack : MonoBehaviour
       Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
       Animator enemyAnimator = otherCollider.gameObject.GetComponent<Animator>();
 
-      Vector3 direction = m_BaseHitBox.GetDirection(m_EnemyRigidBody);
+      Vector3 direction = m_BaseHitBox.GetDirection(enemyRigidBody);
       float force = m_Damage.m_KnockbackForce;
       direction.y = Mathf.Floor(m_YKnockbackForceOverride * m_CurrentChargeDuration);
 
@@ -111,12 +111,11 @@ public class UppercutAttack : MonoBehaviour
       Time.timeScale = Mathf.Clamp(1 / (m_TimeScaleSlowdown * m_CurrentChargeDuration), .4f, 1);
       Debug.Log("TIMESCALE" + Time.timeScale);
 
-      m_EnemyRigidBody.isKinematic = false;
-      m_EnemyNavMeshAgent.enabled = false;
       StartCoroutine(ResetTimeScale());
-      StartCoroutine(ResetEnemy());
+      enemyRigidBody.isKinematic = false;
+      enemyNavMeshAgent.enabled = false;
 
-      m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
+      enemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
 
       var originalDamageAmount = m_Damage.m_DamageAmount;
       m_Damage.m_DamageAmount *= m_CurrentChargeDuration;

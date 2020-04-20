@@ -61,7 +61,7 @@ public class MouseLook
       return;
     }
 
-    Vector3 characterPosition = new Vector3(target.position.x, target.position.y, target.position.z);
+    Vector3 characterPosition = new Vector3(character.position.x, target.position.y, target.position.z);
     Vector3 cameraPosition = new Vector3(target.position.x, .4f, target.position.z);
 
     character.LookAt(characterPosition);

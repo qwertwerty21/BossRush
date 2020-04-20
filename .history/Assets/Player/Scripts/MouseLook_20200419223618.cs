@@ -64,7 +64,9 @@ public class MouseLook
     Vector3 characterPosition = new Vector3(target.position.x, target.position.y, target.position.z);
     Vector3 cameraPosition = new Vector3(target.position.x, .4f, target.position.z);
 
-    character.LookAt(characterPosition);
+    // character.LookAt(characterPosition);
+    character.rotation = Quaternion.LookRotation(target.transform.position - character.position, Vector3.up);
+    // character.eulerAngles = characterPosition;
     camera.LookAt(cameraPosition);
 
     UpdateCursorLock();

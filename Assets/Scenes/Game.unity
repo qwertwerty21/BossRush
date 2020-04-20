@@ -1343,7 +1343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccdfddc4053db4f998bcd34215508db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Force: 5
+  m_Force: 10
 --- !u!65 &785993720
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3834,22 +3834,22 @@ PrefabInstance:
     - target: {fileID: 6731429358300437797, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.006438531
+      value: -0.006448905
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437797, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0043271654
+      value: -0.004363277
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437797, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0030200132
+      value: -0.00002813921
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437797, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99996537
+      value: 0.9999697
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437797, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
@@ -3864,47 +3864,47 @@ PrefabInstance:
     - target: {fileID: 6731429358300437797, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -0.49400002
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437797, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -0.34300002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.006438531
+      value: 0.0064384867
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0043271654
+      value: 0.0043271245
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0030200132
+      value: 0.0030198714
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99996537
+      value: 0.9999654
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5999998
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.000000006519258
+      value: -0.0000000055879354
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -0.99999994
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300659973, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
@@ -3946,6 +3946,11 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
+    - target: {fileID: 6731429358305960549, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6731429358307243237, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_MouseLook.MaximumX
@@ -3960,7 +3965,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LockOnTarget
       value: 
-      objectReference: {fileID: 128434880739227154}
+      objectReference: {fileID: 0}
     - target: {fileID: 6731429358307243237, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_IsLockedOn
@@ -3969,17 +3974,32 @@ PrefabInstance:
     - target: {fileID: 6731429358314861765, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_Radius
-      value: 0.25
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358314861765, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_Center.y
-      value: 0
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358314861765, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_MinMoveDistance
       value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731429358314861765, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_SlopeLimit
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731429358314861765, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_StepOffset
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731429358314861765, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_Height
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358468296241, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
@@ -4142,11 +4162,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477601853, guid: 836419a8a04134c42a3f1646f2f46877, type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 477601853, guid: 836419a8a04134c42a3f1646f2f46877, type: 3}
       propertyPath: m_Mass
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 477601853, guid: 836419a8a04134c42a3f1646f2f46877, type: 3}
       propertyPath: m_Drag

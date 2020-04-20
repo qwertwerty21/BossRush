@@ -110,19 +110,19 @@ public abstract class AIBossController : MonoBehaviour
 
   void OnCollisionEnter(Collision otherCollider)
   {
-    // if (otherCollider.gameObject.tag == "Ground")
-    // {
-    //   NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
-    //   if (!navMeshAgent.enabled)
-    //   {
+    if (otherCollider.gameObject.tag == "Ground")
+    {
+      NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
+      if (!navMeshAgent.enabled)
+      {
 
-    //     navMeshAgent.enabled = true;
-    //   }
-    //   // if (!m_RigidBody.isKinematic)
-    //   // {
-    //   //   m_RigidBody.isKinematic = true;
-    //   // }
-    // }
+        navMeshAgent.enabled = true;
+      }
+      // if (!m_RigidBody.isKinematic)
+      // {
+      //   m_RigidBody.isKinematic = true;
+      // }
+    }
   }
 
   // void OnControllerColliderHit(ControllerColliderHit hit)

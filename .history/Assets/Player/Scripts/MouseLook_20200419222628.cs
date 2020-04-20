@@ -61,10 +61,12 @@ public class MouseLook
       return;
     }
 
-    Vector3 characterPosition = new Vector3(target.position.x, target.position.y, target.position.z);
+    // Vector3 characterPosition = new Vector3(target.position.x, target.position.y, target.position.z);
     Vector3 cameraPosition = new Vector3(target.position.x, .4f, target.position.z);
 
-    character.LookAt(characterPosition);
+    // character.LookAt(characterPosition);
+    character.rotation = Quaternion.LookRotation(target.transform.position - character.position, Vector3.up);
+    character.Rotate(0, character.rotation.y, 0);
     camera.LookAt(cameraPosition);
 
     UpdateCursorLock();

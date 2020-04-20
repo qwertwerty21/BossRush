@@ -23,9 +23,6 @@ public class UppercutAttack : MonoBehaviour
 
   private PlayerController m_PlayerController;
 
-  private NavMeshAgent m_EnemyNavMeshAgent;
-  private Rigidbody m_EnemyRigidBody;
-
   IEnumerator EndUppercutAttack()
   {
     yield return new WaitForSecondsRealtime(0.5f);
@@ -43,17 +40,12 @@ public class UppercutAttack : MonoBehaviour
     }
   }
 
-  IEnumerator ResetEnemy()
+  IEnumerator ResetTimeScale()
   {
     yield return new WaitForSecondsRealtime(m_HitTimeScaleSlowdownDuration);
-    if (!m_EnemyNavMeshAgent.enabled)
+    if (Time.timeScale < 1f)
     {
-
-      m_EnemyNavMeshAgent.enabled = true;
-    }
-    if (!m_EnemyRigidBody.isKinematic)
-    {
-      m_EnemyRigidBody.isKinematic = true;
+      Time.timeScale = 1f;
     }
   }
 
@@ -97,12 +89,12 @@ public class UppercutAttack : MonoBehaviour
     Debug.Log("YO YOU HIT SOMETHING WITH UPPERCUT ATTACK" + otherCollider);
     if (otherCollider.gameObject.tag == "Enemy")
     {
-      m_EnemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
-      m_EnemyNavMeshAgent = otherCollider.gameObject.GetComponent<NavMeshAgent>();
+      Rigidbody enemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
       Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
+      NavMeshAgent enemyNavMeshAgent = otherCollider.gameObject.GetComponent<NavMeshAgent>();
       Animator enemyAnimator = otherCollider.gameObject.GetComponent<Animator>();
 
-      Vector3 direction = m_BaseHitBox.GetDirection(m_EnemyRigidBody);
+      Vector3 direction = m_BaseHitBox.GetDirection(enemyRigidBody);
       float force = m_Damage.m_KnockbackForce;
       direction.y = Mathf.Floor(m_YKnockbackForceOverride * m_CurrentChargeDuration);
 
@@ -111,12 +103,11 @@ public class UppercutAttack : MonoBehaviour
       Time.timeScale = Mathf.Clamp(1 / (m_TimeScaleSlowdown * m_CurrentChargeDuration), .4f, 1);
       Debug.Log("TIMESCALE" + Time.timeScale);
 
-      m_EnemyRigidBody.isKinematic = false;
-      m_EnemyNavMeshAgent.enabled = false;
       StartCoroutine(ResetTimeScale());
-      StartCoroutine(ResetEnemy());
+      enemyRigidBody.isKinematic = false;
+      enemyNavMeshAgent.enabled = false;
 
-      m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
+      enemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
 
       var originalDamageAmount = m_Damage.m_DamageAmount;
       m_Damage.m_DamageAmount *= m_CurrentChargeDuration;
