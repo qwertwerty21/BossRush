@@ -12,7 +12,9 @@ public class Sword : MonoBehaviour
 
   [SerializeField] private float m_MaxChargeDuration = 5f;
 
-  private CustomCrosshair m_CustomCrosshair;
+  [SerializeField] CustomCrosshair m_CustomCrosshair;
+
+
   private float m_CurrentChargeDuration;
   private Animator m_Animator;
 
@@ -58,8 +60,10 @@ public class Sword : MonoBehaviour
   void Update()
   {
 
+
     if (Input.GetButtonDown("Fire1"))
     {
+      m_CustomCrosshair.SetCrosshairColor(Color.red);
       // needed so we can attack in mid-air
       m_Animator.SetTrigger("isInterruptingJump");
       m_Animator.ResetTrigger("jump");
@@ -88,6 +92,7 @@ public class Sword : MonoBehaviour
 
     if (Input.GetButton("Fire2"))
     {
+      m_CustomCrosshair.SetCrosshairColor(Color.white);
       if (!m_Animator.GetBool("isChargingHeavySwordAttack"))
       {
         m_Animator.SetBool("canSwitchWeapon", false);
@@ -98,6 +103,7 @@ public class Sword : MonoBehaviour
 
     if (Input.GetButtonUp("Fire2") || m_CurrentChargeDuration >= m_MaxChargeDuration)
     {
+      m_CustomCrosshair.SetCrosshairColor(Color.red);
       m_Animator.SetBool("isChargingHeavySwordAttack", false);
       m_Animator.SetTrigger("heavySwordAttack");
       m_Animator.SetBool("canSwitchWeapon", true);

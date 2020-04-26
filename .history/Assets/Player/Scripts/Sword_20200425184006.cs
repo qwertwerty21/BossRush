@@ -13,6 +13,8 @@ public class Sword : MonoBehaviour
   [SerializeField] private float m_MaxChargeDuration = 5f;
 
   private CustomCrosshair m_CustomCrosshair;
+
+
   private float m_CurrentChargeDuration;
   private Animator m_Animator;
 

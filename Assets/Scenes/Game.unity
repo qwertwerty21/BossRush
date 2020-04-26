@@ -1561,7 +1561,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c03c72978d15ecb4d91060d3a10d14f0, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1728,7 +1728,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: b1205366ab485434f9c9e21d24e00b8e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1401006494575068746, guid: b1205366ab485434f9c9e21d24e00b8e,
         type: 3}
@@ -2624,6 +2624,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Range: 100
+--- !u!114 &1630583249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630583239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f3a946f6dfb4a3e8992beb6bce4e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CrosshairName: Crosshairs/21
 --- !u!1001 &1644950945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3021,6 +3034,19 @@ MonoBehaviour:
   m_HitBoxName: UppercutAttack
   m_Damage: {fileID: 0}
   m_Collider: {fileID: 1871332005}
+--- !u!114 &1871332007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871331996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f3a946f6dfb4a3e8992beb6bce4e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CrosshairName: Crosshairs/12
 --- !u!4 &1904743902 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400022, guid: b592d2faa93e6ad46a6d520adf8f123e,
@@ -3647,6 +3673,11 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2314716930485488046, guid: ae5a2f40057ad4620a51627b9c958bae,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae5a2f40057ad4620a51627b9c958bae, type: 3}
 --- !u!1001 &2958947692513196715
@@ -3744,7 +3775,7 @@ PrefabInstance:
     - target: {fileID: 6731429358044605736, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358044605736, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
@@ -3874,17 +3905,17 @@ PrefabInstance:
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0064384867
+      value: 0.006436086
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0043271245
+      value: 0.004327501
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0030198714
+      value: 0.003016387
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}

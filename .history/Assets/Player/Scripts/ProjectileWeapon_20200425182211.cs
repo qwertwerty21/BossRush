@@ -13,7 +13,8 @@ public class ProjectileWeapon : MonoBehaviour
   [SerializeField] ParticleSystem m_MuzzleFlash;
   [SerializeField] GameObject m_HitEffect;
   [SerializeField] GameObject m_MissEffect;
-  private CustomCrosshair m_CustomCrosshair;
+  [SerializeField] CustomCrosshair m_CustomCrosshair;
+
   private PlayerController m_PlayerController;
   private float m_ShotsLeft;
   private Animator m_Animator;

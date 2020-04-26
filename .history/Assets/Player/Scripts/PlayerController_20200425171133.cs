@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // movement
-    bool canMove = !m_Animator.GetBool("isGuarding"); // you can be changed later
+    bool canMove = !m_Animator.GetBool("isBlocking"); // you can be changed later
     if (canMove)
     {
       float speed;

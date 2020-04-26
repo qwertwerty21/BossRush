@@ -13,17 +13,27 @@ public class ProjectileWeapon : MonoBehaviour
   [SerializeField] ParticleSystem m_MuzzleFlash;
   [SerializeField] GameObject m_HitEffect;
   [SerializeField] GameObject m_MissEffect;
-  private CustomCrosshair m_CustomCrosshair;
+  // [SerializeField] string m_CrosshairName;
+
   private PlayerController m_PlayerController;
   private float m_ShotsLeft;
   private Animator m_Animator;
   private bool m_CanShoot = true;
   private Damage m_Damage;
+  // private Sprite m_CrosshairSprite;
+  // private Image m_CrosshairImage;
   // Layer 8 is the Player Layer
   // Bit shift the index of the layer (8) to get a bit mask
   // This would cast rays only against colliders in layer 8.
   // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
   private int m_LayerMask = ~(1 << 8);
+
+  private void SetCrosshair()
+  {
+    m_CrosshairSprite = Resources.Load<Sprite>(m_CrosshairName) as Sprite;
+    GameObject CrosshairGameObject = GameObject.FindGameObjectWithTag("Crosshair");
+    m_CrosshairImage = CrosshairGameObject.GetComponent<Image>();
+  }
 
   IEnumerator Shoot()
   {
@@ -51,7 +61,7 @@ public class ProjectileWeapon : MonoBehaviour
       Debug.Log("hit collider gameobject " + hit.collider.gameObject);
       if (hit.transform.tag == "Enemy")
       {
-        m_CustomCrosshair.SetCrosshairColor(Color.red);
+        m_CrosshairImage.color = Color.red;
         Debug.Log("HIT " + hit);
         CreateHitImpact(m_HitEffect, hit);
         Target target = hit.transform.GetComponent<Target>();
@@ -59,7 +69,7 @@ public class ProjectileWeapon : MonoBehaviour
       }
       else
       {
-        m_CustomCrosshair.SetCrosshairColor(Color.white);
+        m_CrosshairImage.color = Color.white;
         CreateHitImpact(m_MissEffect, hit);
       }
     }
@@ -77,7 +87,7 @@ public class ProjectileWeapon : MonoBehaviour
 
   IEnumerator Reload()
   {
-    m_CustomCrosshair.SetCrosshairColor(Color.white);
+    m_CrosshairImage.color = Color.white;
     m_Animator.SetTrigger("isInterruptingJump");
     m_Animator.ResetTrigger("jump");
     m_Animator.SetBool("isReloading", true);
@@ -90,17 +100,13 @@ public class ProjectileWeapon : MonoBehaviour
     m_Animator.SetBool("canSwitchWeapon", true);
   }
 
-
-
   private void Awake()
   {
     m_PlayerController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerController>();
     m_Animator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
-    m_CustomCrosshair = GetComponent<CustomCrosshair>();
     m_Damage = GetComponent<Damage>();
     m_ShotsLeft = m_ShotsPerRound;
-
-    // SetCrosshair();
+    SetCrosshair();
   }
 
   // Update is called once per frame
@@ -130,7 +136,7 @@ public class ProjectileWeapon : MonoBehaviour
     }
     if (Input.GetButtonUp("Fire1"))
     {
-      m_CustomCrosshair.SetCrosshairColor(Color.white);
+      m_CrosshairImage.color = Color.white;
       m_PlayerController.m_GravityMultiplier = 1f;
       m_Animator.SetBool("isShooting", false);
       m_Animator.SetBool("canSwitchWeapon", true);

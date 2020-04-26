@@ -47,7 +47,7 @@ public class LockOn : MonoBehaviour
       ProcessRaycast();
       m_PlayerController.m_IsLockedOn = !m_PlayerController.m_IsLockedOn;
 
-      m_Animator.SetBool("canSwitchWeapon", !m_PlayerController.m_IsLockedOn);
+      m_Animator.SetBool("canSwitchWeapon", m_PlayerController.m_IsLockedOn);
     }
 
     // if (Input.GetKeyUp(KeyCode.Q))

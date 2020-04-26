@@ -12,7 +12,9 @@ public class Sword : MonoBehaviour
 
   [SerializeField] private float m_MaxChargeDuration = 5f;
 
-  private CustomCrosshair m_CustomCrosshair;
+  [SerializeField] CustomCrosshair m_CustomCrosshair;
+
+
   private float m_CurrentChargeDuration;
   private Animator m_Animator;
 
@@ -37,10 +39,15 @@ public class Sword : MonoBehaviour
     m_PlayerController.ToggleHitboxColliders("LightSwordCombo", true);
   }
 
-  // private void OnEnable()
-  // {
-  //   m_CustomCrosshair.EnableCrosshair();
-  // }
+  private void OnEnable()
+  {
+    m_CustomCrosshair.EnableCrosshair();
+  }
+
+  private void OnDisable()
+  {
+    m_CustomCrosshair.DisableCrosshair();
+  }
 
   // Start is called before the first frame update
   private void Awake()
