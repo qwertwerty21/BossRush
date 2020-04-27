@@ -124,8 +124,7 @@ public class ProjectileWeapon : MonoBehaviour
       else
       {
         m_Animator.SetBool("isShooting", false);
-        m_Animator.SetBool("canSwitchWeapon", !m_PlayerController.m_IsLockedOn);
-
+        m_Animator.SetBool("canSwitchWeapon", true);
         StartCoroutine(Reload());
         m_PlayerController.m_GravityMultiplier = 1f;
       }
@@ -135,8 +134,7 @@ public class ProjectileWeapon : MonoBehaviour
       m_CustomCrosshair.SetCrosshairColor(Color.white);
       m_PlayerController.m_GravityMultiplier = 1f;
       m_Animator.SetBool("isShooting", false);
-      m_Animator.SetBool("canSwitchWeapon", !m_PlayerController.m_IsLockedOn);
-
+      m_Animator.SetBool("canSwitchWeapon", true);
     }
     if (Input.GetKeyDown("r"))
     {

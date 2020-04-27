@@ -120,6 +120,7 @@ public class Sword : MonoBehaviour
       m_Animator.SetTrigger("heavySwordAttack");
       m_CurrentComboType = SwordComboType.HeavySwordCombo;
       m_Animator.SetBool("canSwitchWeapon", !m_PlayerController.m_IsLockedOn);
+
       m_CurrentChargeDuration = 0f;
       // m_PlayerController.ToggleHitboxColliders("UppercutAttack", true);
       // StartCoroutine(EndUppercutAttack());
