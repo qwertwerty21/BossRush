@@ -6,10 +6,10 @@ public class BaseHitBox : MonoBehaviour
 {
 
   [SerializeField] public string m_HitBoxName;
-  [SerializeField] public Collider m_Collider;
 
-  [HideInInspector] public Damage[] m_Damages;
-  [HideInInspector] public Dictionary<string, Damage> m_DamageHash = new Dictionary<string, Damage>();
+  [SerializeField] public Damage[] m_Damages;
+  [SerializeField] public Dictionary<string, Damage> m_DamageHash = new Dictionary<string, Damage>();
+  [SerializeField] public Collider m_Collider;
 
   virtual public Vector3 GetDirection(Rigidbody otherRigidBody)
   {

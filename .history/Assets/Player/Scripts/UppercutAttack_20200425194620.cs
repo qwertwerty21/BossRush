@@ -6,6 +6,7 @@ using System;
 
 public class UppercutAttack : MonoBehaviour
 {
+  [SerializeField] private Damage m_Damage;
 
   [SerializeField] private float m_MaxChargeDuration = 5f;
 
@@ -99,10 +100,10 @@ public class UppercutAttack : MonoBehaviour
       m_EnemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
       m_EnemyNavMeshAgent = otherCollider.gameObject.GetComponent<NavMeshAgent>();
       Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
+      Animator enemyAnimator = otherCollider.gameObject.GetComponent<Animator>();
 
       Vector3 direction = m_BaseHitBox.GetDirection(m_EnemyRigidBody);
-      Damage damage = m_BaseHitBox.m_Damages[0];
-      float force = damage.m_KnockbackForce;
+      float force = m_Damage.m_KnockbackForce;
       direction.y = Mathf.Floor(m_YKnockbackForceOverride * m_CurrentChargeDuration);
 
 
@@ -117,10 +118,10 @@ public class UppercutAttack : MonoBehaviour
 
       m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
 
-      var originalDamageAmount = damage.m_DamageAmount;
-      damage.m_DamageAmount *= m_CurrentChargeDuration;
-      enemyTarget.TakeDamage(damage);
-      damage.m_DamageAmount = originalDamageAmount;
+      var originalDamageAmount = m_Damage.m_DamageAmount;
+      m_Damage.m_DamageAmount *= m_CurrentChargeDuration;
+      enemyTarget.TakeDamage(m_Damage);
+      m_Damage.m_DamageAmount = originalDamageAmount;
     }
   }
 }

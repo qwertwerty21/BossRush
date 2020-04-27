@@ -36,7 +36,7 @@ public class Sword : MonoBehaviour
   {
     yield return new WaitForSecondsRealtime(m_HitSuspensionDuration);
     m_CustomCrosshair.SetCrosshairColor(Color.white);
-    m_EnemyRigidBody.transform.position = new Vector3(m_EnemyRigidBody.transform.position.x, 0f, m_EnemyRigidBody.transform.position.z);
+    m_EnemyRigidBody.transform.position.y = 0f;
 
     if (!m_EnemyNavMeshAgent.enabled)
     {

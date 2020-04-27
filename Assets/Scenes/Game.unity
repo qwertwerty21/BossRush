@@ -633,8 +633,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HitBoxName: ToothyPlasmaExplosionHitBox
-  m_Damage: {fileID: 0}
   m_Collider: {fileID: 0}
+  m_Damages: []
 --- !u!114 &266113988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,6 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a499734704ff4063b92cf3e5b063c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Name: Damage
   m_DamageAmount: 10
   m_KnockbackForce: 40
 --- !u!1001 &316504685
@@ -921,8 +922,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HitBoxName: ToothySwipeBallHitBox
-  m_Damage: {fileID: 0}
   m_Collider: {fileID: 0}
+  m_Damages: []
 --- !u!114 &542528796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,6 +936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a499734704ff4063b92cf3e5b063c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Name: Damage
   m_DamageAmount: 10
   m_KnockbackForce: 1
 --- !u!1001 &550985647
@@ -1778,8 +1780,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HitBoxName: ToothySwipe
-  m_Damage: {fileID: 0}
   m_Collider: {fileID: 960238153}
+  m_Damages: []
 --- !u!135 &960238153 stripped
 SphereCollider:
   m_CorrespondingSourceObject: {fileID: 2522144497576025117, guid: 836419a8a04134c42a3f1646f2f46877,
@@ -1798,6 +1800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a499734704ff4063b92cf3e5b063c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Name: Damage
   m_DamageAmount: 10
   m_KnockbackForce: 3
 --- !u!1001 &963126387
@@ -2065,8 +2068,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HitBoxName: ToothyStomp
-  m_Damage: {fileID: 0}
   m_Collider: {fileID: 1142487215}
+  m_Damages: []
 --- !u!135 &1142487215 stripped
 SphereCollider:
   m_CorrespondingSourceObject: {fileID: 8528335869183478792, guid: 836419a8a04134c42a3f1646f2f46877,
@@ -2085,6 +2088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a499734704ff4063b92cf3e5b063c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Name: Damage
   m_DamageAmount: 10
   m_KnockbackForce: 5
 --- !u!4 &1221190586 stripped
@@ -2533,9 +2537,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c485bf71842fa4abb9f5742da4b0dfcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HitBoxName: LightSwordCombo
-  m_Damage: {fileID: 1630583244}
+  m_HitBoxName: SwordCombo
   m_Collider: {fileID: 1630583241}
+  m_Damages: []
 --- !u!114 &1630583243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2548,8 +2552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4deb0b8d2523d4c60bc2a3e66b42f38a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Damage: {fileID: 1630583244}
-  m_AttackDelay: 0.2
+  m_HitSuspensionDuration: 1
   m_MaxChargeDuration: 5
 --- !u!114 &1630583244
 MonoBehaviour:
@@ -2563,8 +2566,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a499734704ff4063b92cf3e5b063c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Name: LightSwordCombo
   m_DamageAmount: 5
-  m_KnockbackForce: 30
+  m_KnockbackForce: 1
 --- !u!114 &1630583245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2577,11 +2581,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b719d3eadb40d4ad4a8454ba71f40ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Damage: {fileID: 0}
-  m_MaxChargeDuration: 5
-  m_HitTimeScaleSlowdownDuration: 1
-  m_YKnockbackForceOverride: 3
-  m_TimeScaleSlowdown: 0.4
 --- !u!114 &1630583246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2594,23 +2593,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a499734704ff4063b92cf3e5b063c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Name: HeavySwordCombo
   m_DamageAmount: 10
-  m_KnockbackForce: 50
---- !u!114 &1630583247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630583239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c485bf71842fa4abb9f5742da4b0dfcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HitBoxName: HeavySwordCombo
-  m_Damage: {fileID: 1630583246}
-  m_Collider: {fileID: 1630583241}
+  m_KnockbackForce: 10
 --- !u!114 &1630583248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2623,7 +2608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f27bfc3d6114b6fbfc16601fdcfe6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Range: 100
+  m_Range: 10
 --- !u!114 &1630583249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2977,18 +2962,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6731429358835189601}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1871331998 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6731429359236783027, guid: c99eeb7c63e2b4db59f523c0930592e9,
-    type: 3}
-  m_PrefabInstance: {fileID: 6731429358835189601}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1871331996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a499734704ff4063b92cf3e5b063c98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1871332004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3001,7 +2974,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12707a50e6bcb49d19340def50456784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Damage: {fileID: 1871331998}
   m_MaxChargeDuration: 3
   m_HitTimeScaleSlowdownDuration: 0.5
   m_YKnockbackForceOverride: 2
@@ -3032,8 +3004,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HitBoxName: UppercutAttack
-  m_Damage: {fileID: 0}
   m_Collider: {fileID: 1871332005}
+  m_Damages: []
 --- !u!114 &1871332007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3500,7 +3472,7 @@ MonoBehaviour:
   m_MovingTurnSpeed: 360
   m_StationaryTurnSpeed: 180
   m_initialHealth: 100
-  m_AttackRange: 5
+  m_AttackRange: 2
 --- !u!114 &2085194501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3905,22 +3877,22 @@ PrefabInstance:
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.006436086
+      value: 0.006448905
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.004327501
+      value: 0.004363277
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.003016387
+      value: 0.00002813921
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9999654
+      value: 0.9999697
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358300437799, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}

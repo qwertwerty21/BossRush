@@ -27,6 +27,7 @@ public class Guard : MonoBehaviour
       m_Animator.SetBool("canSwitchWeapon", false);
       m_Animator.SetTrigger("block");
       m_Animator.SetBool("isGuarding", true);
+      m_Animator.SetTrigger("isInterruptingSwordCombo");
       m_PlayerController.DisableHitboxColliders();
 
     }

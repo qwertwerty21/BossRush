@@ -35,9 +35,6 @@ public class Sword : MonoBehaviour
   IEnumerator ResetEnemy()
   {
     yield return new WaitForSecondsRealtime(m_HitSuspensionDuration);
-    m_CustomCrosshair.SetCrosshairColor(Color.white);
-    m_EnemyRigidBody.transform.position = new Vector3(m_EnemyRigidBody.transform.position.x, 0f, m_EnemyRigidBody.transform.position.z);
-
     if (!m_EnemyNavMeshAgent.enabled)
     {
 
@@ -131,7 +128,6 @@ public class Sword : MonoBehaviour
   {
     if (otherCollider.gameObject.tag == "Enemy")
     {
-      m_CustomCrosshair.SetCrosshairColor(Color.red);
       m_EnemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
       m_EnemyNavMeshAgent = otherCollider.gameObject.GetComponent<NavMeshAgent>();
       Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
@@ -146,7 +142,6 @@ public class Sword : MonoBehaviour
 
       m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
       enemyTarget.TakeDamage(damage);
-
     }
   }
 }

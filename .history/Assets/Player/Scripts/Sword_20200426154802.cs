@@ -6,6 +6,9 @@ using System;
 
 public class Sword : MonoBehaviour
 {
+  [SerializeField] private Damage m_Damage;
+  [SerializeField] private Damage m_DamageLight;
+  [SerializeField] private Damage m_DamageHeavy;
   [SerializeField] private float m_HitSuspensionDuration = 1f;
   [SerializeField] private float m_MaxChargeDuration = 5f;
 
@@ -24,20 +27,9 @@ public class Sword : MonoBehaviour
   private NavMeshAgent m_EnemyNavMeshAgent;
   private Rigidbody m_EnemyRigidBody;
 
-  private SwordComboType m_CurrentComboType;
-
-  private enum SwordComboType
-  {
-    LightSwordCombo,
-    HeavySwordCombo
-  }
-
   IEnumerator ResetEnemy()
   {
     yield return new WaitForSecondsRealtime(m_HitSuspensionDuration);
-    m_CustomCrosshair.SetCrosshairColor(Color.white);
-    m_EnemyRigidBody.transform.position = new Vector3(m_EnemyRigidBody.transform.position.x, 0f, m_EnemyRigidBody.transform.position.z);
-
     if (!m_EnemyNavMeshAgent.enabled)
     {
 
@@ -81,7 +73,6 @@ public class Sword : MonoBehaviour
       m_Animator.SetTrigger("isInterruptingJump");
       m_Animator.ResetTrigger("jump");
       m_Animator.SetTrigger("lightSwordAttack");
-      m_CurrentComboType = SwordComboType.LightSwordCombo;
       // if (!m_Animator.GetBool("isGrounded"))
       // {
       //   m_PlayerController.m_GravityMultiplier = .3f;
@@ -118,7 +109,6 @@ public class Sword : MonoBehaviour
     {
       m_Animator.SetBool("isChargingHeavySwordAttack", false);
       m_Animator.SetTrigger("heavySwordAttack");
-      m_CurrentComboType = SwordComboType.HeavySwordCombo;
       m_Animator.SetBool("canSwitchWeapon", true);
       m_CurrentChargeDuration = 0f;
       // m_PlayerController.ToggleHitboxColliders("UppercutAttack", true);
@@ -129,24 +119,23 @@ public class Sword : MonoBehaviour
 
   private void OnTriggerEnter(Collider otherCollider)
   {
+    Debug.Log("YO YOU HIT SOMETHING WITH SWORD ATTACK" + otherCollider);
+    Debug.Log("FUCK DAMAGE" + m_Damage.m_KnockbackForce);
     if (otherCollider.gameObject.tag == "Enemy")
     {
-      m_CustomCrosshair.SetCrosshairColor(Color.red);
       m_EnemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
       m_EnemyNavMeshAgent = otherCollider.gameObject.GetComponent<NavMeshAgent>();
       Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
 
       Vector3 direction = m_BaseHitBox.GetDirection(m_EnemyRigidBody);
-      Damage damage = m_BaseHitBox.m_DamageHash[m_CurrentComboType.ToString()];
-      float force = damage.m_KnockbackForce;
+      float force = m_Damage.m_KnockbackForce;
 
       m_EnemyRigidBody.isKinematic = false;
       m_EnemyNavMeshAgent.enabled = false;
       StartCoroutine(ResetEnemy());
 
       m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
-      enemyTarget.TakeDamage(damage);
-
+      enemyTarget.TakeDamage(m_Damage);
     }
   }
 }

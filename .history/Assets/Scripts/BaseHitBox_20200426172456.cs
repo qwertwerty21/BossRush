@@ -6,10 +6,8 @@ public class BaseHitBox : MonoBehaviour
 {
 
   [SerializeField] public string m_HitBoxName;
+  [SerializeField] public Dictionary<string, Damage> m_DamageHash = new Dictionary<string, Damage>();
   [SerializeField] public Collider m_Collider;
-
-  [HideInInspector] public Damage[] m_Damages;
-  [HideInInspector] public Dictionary<string, Damage> m_DamageHash = new Dictionary<string, Damage>();
 
   virtual public Vector3 GetDirection(Rigidbody otherRigidBody)
   {
@@ -19,13 +17,16 @@ public class BaseHitBox : MonoBehaviour
 
   private void Awake()
   {
-
-    m_Damages = GetComponents<Damage>();
-    foreach (Damage damage in m_Damages)
+    // Debug.Log("HITBOXNAME" + m_HitBoxName);
+    // Debug.Log("DAMAGE" + m_Damage.m_DamageAmount);
+    // if (m_Damage == null)
+    // {
+    Damage[] damages = GetComponents<Damage>();
+    foreach (Damage damage in damages)
     {
       m_DamageHash.Add(damage.m_Name, damage);
     }
-
+    // }
   }
 
 

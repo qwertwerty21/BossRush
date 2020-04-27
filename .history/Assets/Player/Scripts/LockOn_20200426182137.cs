@@ -4,7 +4,7 @@ using UnityEngine;
 public class LockOn : MonoBehaviour
 {
 
-  [SerializeField] float m_Range = 10f;
+  [SerializeField] float m_Range = 100f;
   private PlayerController m_PlayerController;
 
   private Animator m_Animator;
@@ -50,18 +50,7 @@ public class LockOn : MonoBehaviour
       m_Animator.SetBool("canSwitchWeapon", !m_PlayerController.m_IsLockedOn);
     }
 
-    if (m_PlayerController.m_IsLockedOn && m_PlayerController.m_LockOnTarget)
-    {
-
-      float distance = Vector3.Distance(m_PlayerController.transform.position, m_PlayerController.m_LockOnTarget.transform.position);
-      if (distance > m_Range)
-      {
-        m_PlayerController.m_IsLockedOn = false;
-
-        m_Animator.SetBool("canSwitchWeapon", true);
-      }
-    }
-
+    if () { }
 
     // if (Input.GetKeyUp(KeyCode.Q))
     // {

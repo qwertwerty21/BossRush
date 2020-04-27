@@ -4,7 +4,7 @@ using UnityEngine;
 public class LockOn : MonoBehaviour
 {
 
-  [SerializeField] float m_Range = 10f;
+  [SerializeField] float m_Range = 100f;
   private PlayerController m_PlayerController;
 
   private Animator m_Animator;

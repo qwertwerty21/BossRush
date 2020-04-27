@@ -23,7 +23,7 @@ public class ToothyAIBossController : AIBossController
       Debug.Log("attack " + m_State["Combat"]);
 
       // attack
-      m_Animator.SetInteger("state", m_State["Combat"]);
+      // m_Animator.SetInteger("state", m_State["Combat"]);
     }
     else
     {

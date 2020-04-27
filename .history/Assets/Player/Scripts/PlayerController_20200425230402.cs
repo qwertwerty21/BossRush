@@ -327,7 +327,7 @@ public class PlayerController : MonoBehaviour
     {
       BaseHitBox enemyHitbox = otherCollider.gameObject.GetComponent<BaseHitBox>();
       Vector3 direction = enemyHitbox.GetDirection(m_RigidBody);
-      float force = enemyHitbox.m_Damages[0].m_KnockbackForce;
+      float force = enemyHitbox.m_Damage.m_KnockbackForce;
       AddImpact(direction, force);
     }
   }
@@ -340,7 +340,7 @@ public class PlayerController : MonoBehaviour
     {
       BaseHitBox enemyHitbox = other.GetComponent<BaseHitBox>();
       Vector3 direction = enemyHitbox.GetDirection(m_RigidBody);
-      float force = enemyHitbox.m_Damages[0].m_KnockbackForce;
+      float force = enemyHitbox.m_Damage.m_KnockbackForce;
       AddImpact(direction, force);
     }
   }

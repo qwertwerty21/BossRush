@@ -99,14 +99,14 @@ ModelImporter:
       events:
       - time: 0.32967034
         functionName: EnableHitboxCollider
-        data: HeavySwordCombo
+        data: SwordCombo
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.8772614
         functionName: DisableHitboxCollider
-        data: HeavySwordCombo
+        data: SwordCombo
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
@@ -171,14 +171,14 @@ ModelImporter:
       events:
       - time: 0.049504925
         functionName: EnableHitboxCollider
-        data: HeavySwordCombo
+        data: SwordCombo
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.4183169
         functionName: DisableHitboxCollider
-        data: HeavySwordCombo
+        data: SwordCombo
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0

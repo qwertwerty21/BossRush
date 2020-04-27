@@ -35,9 +35,6 @@ public class Sword : MonoBehaviour
   IEnumerator ResetEnemy()
   {
     yield return new WaitForSecondsRealtime(m_HitSuspensionDuration);
-    m_CustomCrosshair.SetCrosshairColor(Color.white);
-    m_EnemyRigidBody.transform.position = new Vector3(m_EnemyRigidBody.transform.position.x, 0f, m_EnemyRigidBody.transform.position.z);
-
     if (!m_EnemyNavMeshAgent.enabled)
     {
 
@@ -146,7 +143,6 @@ public class Sword : MonoBehaviour
 
       m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
       enemyTarget.TakeDamage(damage);
-
     }
   }
 }
