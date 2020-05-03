@@ -320,12 +320,6 @@ public class PlayerController : MonoBehaviour
     }
   }
 
-  IEnumerator RecoverFromKnockdown()
-  {
-    yield return new WaitForSeconds(1f);
-    m_Animator.SetBool("isKnockdowned", false);
-  }
-
   private void OnTriggerEnter(Collider otherCollider)
   {
     Debug.Log("Set IsHurt trigger here and take damage");
@@ -336,13 +330,10 @@ public class PlayerController : MonoBehaviour
       Vector3 direction = enemyHitbox.GetDirection(m_RigidBody);
       float force = enemyHitbox.m_Damages[0].m_KnockbackForce;
       float damageAmount = enemyHitbox.m_Damages[0].m_DamageAmount;
-
       AddImpact(direction, force);
-
       if (damageAmount > m_KnockdownThreshold)
       {
-        m_Animator.SetBool("isKnockdowned", true);
-        StartCoroutine(RecoverFromKnockdown());
+        m_Animator.SetBool("isKnockdowned");
       }
       else
       {
@@ -360,19 +351,8 @@ public class PlayerController : MonoBehaviour
       BaseHitBox enemyHitbox = other.GetComponent<BaseHitBox>();
       Vector3 direction = enemyHitbox.GetDirection(m_RigidBody);
       float force = enemyHitbox.m_Damages[0].m_KnockbackForce;
-      float damageAmount = enemyHitbox.m_Damages[0].m_DamageAmount;
-
       AddImpact(direction, force);
-
-      if (damageAmount > m_KnockdownThreshold)
-      {
-        m_Animator.SetBool("isKnockdowned", true);
-        StartCoroutine(RecoverFromKnockdown());
-      }
-      else
-      {
-        m_Animator.SetTrigger("stagger");
-      }
+      m_Animator.SetTrigger("stagger");
 
     }
   }

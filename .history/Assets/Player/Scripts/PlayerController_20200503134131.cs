@@ -336,9 +336,7 @@ public class PlayerController : MonoBehaviour
       Vector3 direction = enemyHitbox.GetDirection(m_RigidBody);
       float force = enemyHitbox.m_Damages[0].m_KnockbackForce;
       float damageAmount = enemyHitbox.m_Damages[0].m_DamageAmount;
-
       AddImpact(direction, force);
-
       if (damageAmount > m_KnockdownThreshold)
       {
         m_Animator.SetBool("isKnockdowned", true);
@@ -360,10 +358,7 @@ public class PlayerController : MonoBehaviour
       BaseHitBox enemyHitbox = other.GetComponent<BaseHitBox>();
       Vector3 direction = enemyHitbox.GetDirection(m_RigidBody);
       float force = enemyHitbox.m_Damages[0].m_KnockbackForce;
-      float damageAmount = enemyHitbox.m_Damages[0].m_DamageAmount;
-
       AddImpact(direction, force);
-
       if (damageAmount > m_KnockdownThreshold)
       {
         m_Animator.SetBool("isKnockdowned", true);
