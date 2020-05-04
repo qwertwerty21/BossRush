@@ -25,6 +25,9 @@ public class LockOn : MonoBehaviour
       if (hit.transform.tag == "Enemy")
       {
         m_PlayerController.m_LockOnTarget = hit.transform;
+      }
+      if (m_PlayerController.m_LockOnTarget != null)
+      {
         break;
       }
     }

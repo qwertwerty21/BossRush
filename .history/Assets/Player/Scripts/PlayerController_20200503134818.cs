@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour
   [SerializeField] private float m_JumpSpeed;
   [SerializeField] private float m_MaxJumps = 2;
   [SerializeField] private float m_KnockdownThreshold = 10f;
-  [SerializeField] private float m_KnockdownDuration = 3f;
+
+  [SerializeField] private float m_KnockdownDuration = 1f;
   [SerializeField] private float m_StickToGroundForce;
   [SerializeField] private MouseLook m_MouseLook;
   [SerializeField] private float m_StepInterval;
@@ -323,7 +324,7 @@ public class PlayerController : MonoBehaviour
 
   IEnumerator RecoverFromKnockdown()
   {
-    yield return new WaitForSeconds(m_KnockdownDuration);
+    yield return new WaitForSeconds(1f);
     m_Animator.SetBool("isKnockdowned", false);
   }
 
@@ -348,11 +349,6 @@ public class PlayerController : MonoBehaviour
       else
       {
         m_Animator.SetTrigger("stagger");
-      }
-
-      if (enemyHitbox.m_ShouldDestroyOnCollide)
-      {
-        Destroy(enemyHitbox.transform.gameObject);
       }
     }
   }

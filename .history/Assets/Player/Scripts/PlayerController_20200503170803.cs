@@ -349,11 +349,6 @@ public class PlayerController : MonoBehaviour
       {
         m_Animator.SetTrigger("stagger");
       }
-
-      if (enemyHitbox.m_ShouldDestroyOnCollide)
-      {
-        Destroy(enemyHitbox.transform.gameObject);
-      }
     }
   }
 

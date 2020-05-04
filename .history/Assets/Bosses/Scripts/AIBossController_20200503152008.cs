@@ -8,7 +8,9 @@ public abstract class AIBossController : MonoBehaviour
   [SerializeField] private GameObject m_Player;
   [SerializeField] float m_MovingTurnSpeed = 360;
   [SerializeField] float m_StationaryTurnSpeed = 180;
-  [SerializeField] public GameObject[] m_Prefabs;
+  [SerializeField] float m_initialHealth = 100;
+
+  [SerializeField] Transform[] m_Prefabs;
   private float m_TurnAmount;
   private float m_ForwardAmount;
   protected Animator m_Animator;
@@ -91,13 +93,7 @@ public abstract class AIBossController : MonoBehaviour
 
   public void InstantiatePrefab(string name)
   {
-    foreach (GameObject prefab in m_Prefabs)
-    {
-      if (prefab.name == name)
-      {
-        Instantiate(prefab, transform);
-      }
-    }
+
   }
 
   public void PlayParticleSystemEffect(string name)

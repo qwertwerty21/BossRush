@@ -18,15 +18,19 @@ public class LockOn : MonoBehaviour
 
   private void ProcessSpherecast()
   {
-    RaycastHit[] hits = Physics.SphereCastAll(m_Camera.transform.position, m_Radius, m_Camera.transform.forward, m_Range, m_LayerMask);
+    RaycastHit hit;
 
-    foreach (RaycastHit hit in hits)
+    if (Physics.SphereCastAll(m_Camera.transform.position, m_Radius, m_Camera.transform.forward, out hit, m_Range, m_LayerMask))
     {
+      Debug.Log("SPHERECAST " + hit.collider.gameObject);
       if (hit.transform.tag == "Enemy")
       {
         m_PlayerController.m_LockOnTarget = hit.transform;
-        break;
       }
+    }
+    else
+    {
+      return;
     }
   }
   private void Awake()

@@ -91,7 +91,7 @@ public abstract class AIBossController : MonoBehaviour
 
   public void InstantiatePrefab(string name)
   {
-    foreach (GameObject prefab in m_Prefabs)
+    foreach (Transform prefab in m_Prefabs)
     {
       if (prefab.name == name)
       {

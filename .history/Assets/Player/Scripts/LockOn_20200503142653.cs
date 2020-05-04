@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class LockOn : MonoBehaviour
 {
-  [SerializeField] float m_Radius = 10f;
-  [SerializeField] float m_Range = 10f;
+  [SerializeField] float m_Radius = 100f;
+  [SerializeField] float m_Range = 100f;
   private PlayerController m_PlayerController;
 
   private Animator m_Animator;
@@ -18,15 +18,20 @@ public class LockOn : MonoBehaviour
 
   private void ProcessSpherecast()
   {
-    RaycastHit[] hits = Physics.SphereCastAll(m_Camera.transform.position, m_Radius, m_Camera.transform.forward, m_Range, m_LayerMask);
+    RaycastHit hit;
+    Debug.DrawRay(m_Camera.transform.position, m_Camera.transform.forward, Color.green, 10, false);
 
-    foreach (RaycastHit hit in hits)
+    if (Physics.SphereCast(m_Camera.transform.position, m_Radius, m_Camera.transform.forward, out hit, m_Range, m_LayerMask))
     {
+      Debug.Log("SPHERECAST " + hit.collider.gameObject);
       if (hit.transform.tag == "Enemy")
       {
         m_PlayerController.m_LockOnTarget = hit.transform;
-        break;
       }
+    }
+    else
+    {
+      return;
     }
   }
   private void Awake()
@@ -56,11 +61,6 @@ public class LockOn : MonoBehaviour
 
         m_Animator.SetBool("canSwitchWeapon", true);
       }
-    }
-
-    if (!m_PlayerController.m_IsLockedOn)
-    {
-      m_PlayerController.m_LockOnTarget = null;
     }
 
 

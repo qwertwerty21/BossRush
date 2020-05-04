@@ -352,7 +352,7 @@ public class PlayerController : MonoBehaviour
 
       if (enemyHitbox.m_ShouldDestroyOnCollide)
       {
-        Destroy(enemyHitbox.transform.gameObject);
+        Destroy((GameObject)enemyHitbox.transform.gameObject);
       }
     }
   }

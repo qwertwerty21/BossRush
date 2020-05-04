@@ -25,9 +25,20 @@ public class LockOn : MonoBehaviour
       if (hit.transform.tag == "Enemy")
       {
         m_PlayerController.m_LockOnTarget = hit.transform;
-        break;
       }
     }
+    // if (Physics.SphereCastAll(m_Camera.transform.position, m_Radius, m_Camera.transform.forward, out hit, m_Range, m_LayerMask))
+    // {
+    //   Debug.Log("SPHERECAST " + hit.collider.gameObject);
+    //   if (hit.transform.tag == "Enemy")
+    //   {
+    //     m_PlayerController.m_LockOnTarget = hit.transform;
+    //   }
+    // }
+    // else
+    // {
+    //   return;
+    // }
   }
   private void Awake()
   {
