@@ -95,7 +95,7 @@ public abstract class AIBossController : MonoBehaviour
     {
       if (prefab.name == name)
       {
-        Instantiate(prefab, transform.position, transform.rotation);
+        Instantiate(prefab, , false);
       }
     }
   }

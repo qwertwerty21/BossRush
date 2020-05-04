@@ -207,7 +207,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AvailableAttacks:
   - toothySwipe
-  - toothyStomp
 --- !u!114 &114488970134407416
 MonoBehaviour:
   m_ObjectHideFlags: 3

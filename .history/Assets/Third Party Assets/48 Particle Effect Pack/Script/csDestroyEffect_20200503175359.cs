@@ -4,7 +4,7 @@ using System.Collections;
 public class csDestroyEffect : MonoBehaviour
 {
 
-  [SerializeField] private float m_DurationToLive = 3f;
+  [SerializeField] private float m_DurationToLive = 5f;
 
   private float m_CurrentLiveDuration = 0f;
 
