@@ -16,7 +16,7 @@ public class BaseHitBox : MonoBehaviour
   virtual public Vector3 GetDirection(Rigidbody otherRigidBody)
   {
     Vector3 direction = otherRigidBody.transform.position - transform.position;
-    return direction;
+    return direction.normalized;
   }
 
   private void Awake()

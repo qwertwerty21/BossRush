@@ -3094,7 +3094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MaxChargeDuration: 3
   m_HitTimeScaleSlowdownDuration: 0.5
-  m_YKnockbackForceOverride: 2
+  m_YKnockbackForceOverride: 7
   m_TimeScaleSlowdown: 1
 --- !u!135 &1871332005
 SphereCollider:
@@ -3582,26 +3582,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsNavMeshAgentUpdating: 1
+  m_NavMeshAgentUpdateThreshold: 0.5
   m_Player: {fileID: 1612990052}
   m_MovingTurnSpeed: 360
   m_StationaryTurnSpeed: 180
   m_Prefabs:
   - {fileID: 100000, guid: 2c557f8333c64984790ab0461bed7113, type: 3}
   m_AttackRange: 2.5
---- !u!114 &2085194501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 837540367846360848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55a115615523e4630a05493622d8d6b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Health: 1000
-  m_DamageMaterial: {fileID: 2100000, guid: a130b110589f5429ab1824109764dd40, type: 2}
 --- !u!4 &128434880739227136
 Transform:
   m_ObjectHideFlags: 0
@@ -5660,7 +5647,7 @@ GameObject:
   - component: {fileID: 8528335869129862094}
   - component: {fileID: 8528335869129862089}
   - component: {fileID: 2085194496}
-  - component: {fileID: 2085194501}
+  - component: {fileID: 837540367846360849}
   m_Layer: 0
   m_Name: Toothy
   m_TagString: Enemy
@@ -5668,6 +5655,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &837540367846360849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837540367846360848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c1c28a414d74a26ac7da8211382ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Health: 1000
+  m_DamageMaterial: {fileID: 2100000, guid: a130b110589f5429ab1824109764dd40, type: 2}
 --- !u!1 &837540367846360854
 GameObject:
   m_ObjectHideFlags: 0
@@ -6406,6 +6407,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key3.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731429359236783027, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_KnockbackForce
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6731429359374016369, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}

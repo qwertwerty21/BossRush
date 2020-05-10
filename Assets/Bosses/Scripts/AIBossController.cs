@@ -5,7 +5,9 @@ using UnityEngine.AI;
 
 public abstract class AIBossController : MonoBehaviour
 {
+
   public bool m_IsNavMeshAgentUpdating = true;
+  [SerializeField] private float m_NavMeshAgentUpdateThreshold = .5f;
   [SerializeField] private GameObject m_Player;
   [SerializeField] float m_MovingTurnSpeed = 360;
   [SerializeField] float m_StationaryTurnSpeed = 180;
@@ -16,6 +18,7 @@ public abstract class AIBossController : MonoBehaviour
 
   protected NavMeshAgent m_NavMeshAgent;
   protected Rigidbody m_RigidBody;
+
 
   private Vector3 m_Impact = Vector3.zero;
 
@@ -115,39 +118,25 @@ public abstract class AIBossController : MonoBehaviour
     }
   }
 
-  void Awake()
+  public void ResetNavMeshAgentUpdate()
+  {
+    m_IsNavMeshAgentUpdating = true;
+  }
+
+  virtual protected void Awake()
   {
     m_NavMeshAgent = GetComponent<NavMeshAgent>();
     m_Animator = GetComponent<Animator>();
     m_RigidBody = GetComponent<Rigidbody>();
+
   }
 
-  virtual protected void Update()
+  virtual protected void FixedUpdate()
   {
-    Debug.Log("isNavMesh" + m_IsNavMeshAgentUpdating);
     m_RigidBody.isKinematic = m_IsNavMeshAgentUpdating;
     m_NavMeshAgent.updatePosition = m_IsNavMeshAgentUpdating;
     m_NavMeshAgent.nextPosition = transform.position;
-    // if(!m_IsNavMeshAgentUpdating){
 
-    // }
-  }
-
-  void OnCollisionEnter(Collision otherCollider)
-  {
-    // if (otherCollider.gameObject.tag == "Ground")
-    // {
-    //   NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
-    //   if (!navMeshAgent.enabled)
-    //   {
-
-    //     navMeshAgent.enabled = true;
-    //   }
-    //   // if (!m_RigidBody.isKinematic)
-    //   // {
-    //   //   m_RigidBody.isKinematic = true;
-    //   // }
-    // }
   }
 
   // void OnControllerColliderHit(ControllerColliderHit hit)

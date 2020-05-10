@@ -21,7 +21,6 @@ public class Sword : MonoBehaviour
 
   private float m_AttackLastTapped = -0.1f;
 
-  private NavMeshAgent m_EnemyNavMeshAgent;
   private Rigidbody m_EnemyRigidBody;
 
   private AIBossController m_EnemyAIBossController;
@@ -38,17 +37,7 @@ public class Sword : MonoBehaviour
   {
     yield return new WaitForSecondsRealtime(m_HitSuspensionDuration);
     m_CustomCrosshair.SetCrosshairColor(Color.white);
-    m_EnemyAIBossController.m_IsNavMeshAgentUpdating = true;
-    // m_EnemyRigidBody.transform.position = new Vector3(m_EnemyRigidBody.transform.position.x, 0f, m_EnemyRigidBody.transform.position.z);
-    // if (!m_EnemyRigidBody.isKinematic)
-    // {
-    //   m_EnemyRigidBody.isKinematic = true;
-    // }
-    // if (!m_EnemyNavMeshAgent.updatePosition)
-    // {
-    //   m_EnemyNavMeshAgent.nextPosition = m_EnemyRigidBody.gameObject.transform.position;
-    //   m_EnemyNavMeshAgent.updatePosition = true;
-    // }
+    // m_EnemyAIBossController.m_IsNavMeshAgentUpdating = true;
 
   }
 
@@ -137,15 +126,12 @@ public class Sword : MonoBehaviour
       m_CustomCrosshair.SetCrosshairColor(Color.red);
       m_EnemyAIBossController = otherCollider.gameObject.GetComponent<AIBossController>();
       m_EnemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
-      // m_EnemyNavMeshAgent = otherCollider.gameObject.GetComponent<NavMeshAgent>();
       Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
 
       Vector3 direction = m_BaseHitBox.GetDirection(m_EnemyRigidBody);
       Damage damage = m_BaseHitBox.m_DamageHash[m_CurrentComboType.ToString()];
       float force = damage.m_KnockbackForce;
 
-      // m_EnemyRigidBody.isKinematic = false;
-      // m_EnemyNavMeshAgent.updatePosition = false;
       m_EnemyAIBossController.m_IsNavMeshAgentUpdating = false;
 
       m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);

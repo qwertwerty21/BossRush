@@ -47,7 +47,7 @@ public class UppercutAttack : MonoBehaviour
   IEnumerator ResetEnemy()
   {
     yield return new WaitForSecondsRealtime(m_HitTimeScaleSlowdownDuration);
-    m_EnemyAIBossController.m_IsNavMeshAgentUpdating = true;
+    // m_EnemyAIBossController.m_IsNavMeshAgentUpdating = true;
 
   }
 
@@ -103,7 +103,7 @@ public class UppercutAttack : MonoBehaviour
 
 
 
-      Time.timeScale = Mathf.Clamp(1 / (m_TimeScaleSlowdown * m_CurrentChargeDuration), .4f, 1);
+      Time.timeScale = Mathf.Clamp(1 / (m_TimeScaleSlowdown * m_CurrentChargeDuration), .1f, 1);
       Debug.Log("TIMESCALE" + Time.timeScale);
 
       m_EnemyAIBossController.m_IsNavMeshAgentUpdating = false;

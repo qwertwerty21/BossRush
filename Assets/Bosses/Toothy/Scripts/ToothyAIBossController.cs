@@ -12,10 +12,14 @@ public class ToothyAIBossController : AIBossController
     { "Combat", 3 },
   };
 
+  // override protected void Awake(){
+  //   base.Awake();
+  // }
+
   // Update is called once per frame
-  override protected void Update()
+  void Update()
   {
-    base.Update();
+    // base.Update();
     var distanceFromPlayer = GetDistanceFromPlayer();
     // Debug.Log("Distance " + m_AttackRange);
 
@@ -33,5 +37,7 @@ public class ToothyAIBossController : AIBossController
       m_Animator.SetInteger("state", m_State["Chase"]);
     }
   }
+
+
 
 }

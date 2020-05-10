@@ -11,13 +11,11 @@ public class Target : MonoBehaviour
   private Material m_OriginalMaterial;
   private SkinnedMeshRenderer m_SkinnedMeshRenderer;
 
-  public void TakeDamage(Damage damage)
+  virtual public void TakeDamage(Damage damage)
   {
     Debug.Log("TAKing DAMAGE");
     m_Health -= damage.m_DamageAmount;
     StartCoroutine(HighlightMaterials());
-
-
 
     if (m_Health <= 0f)
     {
@@ -38,7 +36,7 @@ public class Target : MonoBehaviour
     Destroy(gameObject);
   }
 
-  private void Awake()
+  virtual protected void Awake()
   {
     m_SkinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
     m_OriginalMaterial = m_SkinnedMeshRenderer.material;
