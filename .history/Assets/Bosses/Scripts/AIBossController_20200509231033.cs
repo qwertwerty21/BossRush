@@ -122,12 +122,12 @@ public abstract class AIBossController : MonoBehaviour
     m_RigidBody = GetComponent<Rigidbody>();
   }
 
-  virtual protected void Update()
+  void Update()
   {
     Debug.Log("isNavMesh" + m_IsNavMeshAgentUpdating);
     m_RigidBody.isKinematic = m_IsNavMeshAgentUpdating;
     m_NavMeshAgent.updatePosition = m_IsNavMeshAgentUpdating;
-    m_NavMeshAgent.nextPosition = transform.position;
+    // m_NavMeshAgent.nextPosition = transform.position;
     // if(!m_IsNavMeshAgentUpdating){
 
     // }

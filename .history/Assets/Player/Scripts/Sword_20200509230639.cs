@@ -147,9 +147,9 @@ public class Sword : MonoBehaviour
       // m_EnemyRigidBody.isKinematic = false;
       // m_EnemyNavMeshAgent.updatePosition = false;
       m_EnemyAIBossController.m_IsNavMeshAgentUpdating = false;
+      StartCoroutine(ResetEnemy());
 
       m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
-      StartCoroutine(ResetEnemy());
       enemyTarget.TakeDamage(damage);
 
     }

@@ -13,9 +13,9 @@ public class ToothyAIBossController : AIBossController
   };
 
   // Update is called once per frame
-  override protected void Update()
+  virtual private void Update()
   {
-    base.Update();
+    // base.Update();
     var distanceFromPlayer = GetDistanceFromPlayer();
     // Debug.Log("Distance " + m_AttackRange);
 

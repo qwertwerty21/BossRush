@@ -92,8 +92,7 @@ public class UppercutAttack : MonoBehaviour
     if (otherCollider.gameObject.tag == "Enemy")
     {
       m_EnemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
-      m_EnemyAIBossController = otherCollider.gameObject.GetComponent<AIBossController>();
-
+      m_EnemyNavMeshAgent = otherCollider.gameObject.GetComponent<NavMeshAgent>();
       Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
 
       Vector3 direction = m_BaseHitBox.GetDirection(m_EnemyRigidBody);
@@ -106,8 +105,8 @@ public class UppercutAttack : MonoBehaviour
       Time.timeScale = Mathf.Clamp(1 / (m_TimeScaleSlowdown * m_CurrentChargeDuration), .4f, 1);
       Debug.Log("TIMESCALE" + Time.timeScale);
 
-      m_EnemyAIBossController.m_IsNavMeshAgentUpdating = false;
-
+      m_EnemyRigidBody.isKinematic = false;
+      m_EnemyNavMeshAgent.updatePosition = false;
       StartCoroutine(ResetTimeScale());
       StartCoroutine(ResetEnemy());
 

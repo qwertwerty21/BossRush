@@ -38,7 +38,6 @@ public class Sword : MonoBehaviour
   {
     yield return new WaitForSecondsRealtime(m_HitSuspensionDuration);
     m_CustomCrosshair.SetCrosshairColor(Color.white);
-    m_EnemyAIBossController.m_IsNavMeshAgentUpdating = true;
     // m_EnemyRigidBody.transform.position = new Vector3(m_EnemyRigidBody.transform.position.x, 0f, m_EnemyRigidBody.transform.position.z);
     // if (!m_EnemyRigidBody.isKinematic)
     // {
@@ -147,9 +146,9 @@ public class Sword : MonoBehaviour
       // m_EnemyRigidBody.isKinematic = false;
       // m_EnemyNavMeshAgent.updatePosition = false;
       m_EnemyAIBossController.m_IsNavMeshAgentUpdating = false;
+      StartCoroutine(ResetEnemy());
 
       m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
-      StartCoroutine(ResetEnemy());
       enemyTarget.TakeDamage(damage);
 
     }

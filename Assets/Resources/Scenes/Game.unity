@@ -2712,7 +2712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Name: HeavySwordCombo
   m_DamageAmount: 10
-  m_KnockbackForce: 10
+  m_KnockbackForce: 15
 --- !u!114 &1630583248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3581,6 +3581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4bc3a8cc601b4b35871e02bedbcc237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_IsNavMeshAgentUpdating: 1
   m_Player: {fileID: 1612990052}
   m_MovingTurnSpeed: 360
   m_StationaryTurnSpeed: 180
