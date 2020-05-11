@@ -3080,6 +3080,33 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6731429358835189601}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1871331997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871331996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a499734704ff4063b92cf3e5b063c98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: UppercutAttack
+  m_DamageAmount: 3
+  m_KnockbackForce: 5
+--- !u!114 &1871331998 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6731429359236783027, guid: c99eeb7c63e2b4db59f523c0930592e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 6731429358835189601}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871331996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a499734704ff4063b92cf3e5b063c98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1871332004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6323,6 +6350,11 @@ PrefabInstance:
       propertyPath: m_ShotsPerRound
       value: 24
       objectReference: {fileID: 0}
+    - target: {fileID: 6731429359236783020, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_Damage
+      value: 
+      objectReference: {fileID: 1871331998}
     - target: {fileID: 6731429359236783024, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.r
@@ -6411,7 +6443,12 @@ PrefabInstance:
     - target: {fileID: 6731429359236783027, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_KnockbackForce
-      value: 10
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731429359236783027, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_Name
+      value: Pistol Shot
       objectReference: {fileID: 0}
     - target: {fileID: 6731429359374016369, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}

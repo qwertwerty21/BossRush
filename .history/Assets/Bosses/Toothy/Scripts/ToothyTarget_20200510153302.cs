@@ -9,8 +9,9 @@ public class ToothyTarget : Target
   override public void TakeDamage(Damage damage)
   {
     base.TakeDamage(damage);
-    if (damage.m_KnockbackForce > 0f)
+    if (damage.m_DamageAmount > 10f)
     {
+
       m_Animator.SetTrigger("stagger");
     }
   }

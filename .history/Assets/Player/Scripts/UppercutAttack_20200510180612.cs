@@ -97,7 +97,7 @@ public class UppercutAttack : MonoBehaviour
       Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
 
       Vector3 direction = m_BaseHitBox.GetDirection(m_EnemyRigidBody);
-      Damage damage = m_BaseHitBox.m_DamageHash["UppercutAttack"];
+      Damage damage = m_BaseHitBox.m_DamageHash.UppercutAttacks;
       float force = damage.m_KnockbackForce;
       direction.y = Mathf.Floor(m_YKnockbackForceOverride * m_CurrentChargeDuration);
 
