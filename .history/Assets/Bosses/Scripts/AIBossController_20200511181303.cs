@@ -22,8 +22,6 @@ public abstract class AIBossController : MonoBehaviour
 
   private Vector3 m_Impact = Vector3.zero;
 
-  private bool m_TryToUpdateNavMesh = false;
-
   public GameObject GetPlayer()
   {
     return m_Player;
@@ -122,7 +120,11 @@ public abstract class AIBossController : MonoBehaviour
 
   public void ResetNavMeshAgentUpdate()
   {
-    m_TryToUpdateNavMesh = true;
+    if (Mathf.Approximately(m_RigidBody.velocity.magnitude, 0f))
+    {
+
+      m_IsNavMeshAgentUpdating = true;
+    }
   }
 
   virtual protected void Awake()
@@ -138,12 +140,8 @@ public abstract class AIBossController : MonoBehaviour
     m_RigidBody.isKinematic = m_IsNavMeshAgentUpdating;
     m_NavMeshAgent.updatePosition = m_IsNavMeshAgentUpdating;
     m_NavMeshAgent.nextPosition = transform.position;
-    // Debug.Log("magnitude" + m_RigidBody.velocity.magnitude);
-    if (m_TryToUpdateNavMesh && m_RigidBody.velocity.magnitude < 2f)
-    {
-      m_IsNavMeshAgentUpdating = true;
-      m_TryToUpdateNavMesh = false;
-    }
+    ResetNavMeshAgentUpdate();
+    Debug.Log("magnitude" + m_RigidBody.velocity.magnitude);
   }
 
   // void OnControllerColliderHit(ControllerColliderHit hit)

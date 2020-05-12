@@ -642,6 +642,7 @@ MonoBehaviour:
   m_Collider: {fileID: 0}
   m_ShouldDestroyOnCollide: 0
   m_Damages: []
+  m_RegisteredHitTargets: []
 --- !u!114 &266113988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -938,6 +939,7 @@ MonoBehaviour:
   m_Collider: {fileID: 0}
   m_ShouldDestroyOnCollide: 0
   m_Damages: []
+  m_RegisteredHitTargets: []
 --- !u!114 &542528796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1897,6 +1899,7 @@ MonoBehaviour:
   m_Collider: {fileID: 960238153}
   m_ShouldDestroyOnCollide: 0
   m_Damages: []
+  m_RegisteredHitTargets: []
 --- !u!135 &960238153 stripped
 SphereCollider:
   m_CorrespondingSourceObject: {fileID: 3355957787034395694, guid: 1f8c51d25dccd47759d16014440641dc,
@@ -2192,6 +2195,7 @@ MonoBehaviour:
   m_Collider: {fileID: 1142487215}
   m_ShouldDestroyOnCollide: 0
   m_Damages: []
+  m_RegisteredHitTargets: []
 --- !u!135 &1142487215 stripped
 SphereCollider:
   m_CorrespondingSourceObject: {fileID: 9028538514115109444, guid: ba641a40265894a1bbfdce277fac007b,
@@ -2657,6 +2661,7 @@ MonoBehaviour:
   m_Collider: {fileID: 1630583241}
   m_ShouldDestroyOnCollide: 0
   m_Damages: []
+  m_RegisteredHitTargets: []
 --- !u!114 &1630583243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2712,7 +2717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Name: HeavySwordCombo
   m_DamageAmount: 10
-  m_KnockbackForce: 15
+  m_KnockbackForce: 10
 --- !u!114 &1630583248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3105,7 +3110,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a499734704ff4063b92cf3e5b063c98, type: 3}
-  m_Name: 
+  m_Name: Pistol Shot
   m_EditorClassIdentifier: 
 --- !u!114 &1871332004
 MonoBehaviour:
@@ -3152,6 +3157,7 @@ MonoBehaviour:
   m_Collider: {fileID: 1871332005}
   m_ShouldDestroyOnCollide: 0
   m_Damages: []
+  m_RegisteredHitTargets: []
 --- !u!114 &1871332007
 MonoBehaviour:
   m_ObjectHideFlags: 0
