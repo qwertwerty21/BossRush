@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Name: Damage
   m_DamageAmount: 10
-  m_KnockbackForce: 100
+  m_KnockbackForce: 10
 --- !u!135 &6466504608537261832
 SphereCollider:
   m_ObjectHideFlags: 0

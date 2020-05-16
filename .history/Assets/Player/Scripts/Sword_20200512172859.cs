@@ -33,7 +33,7 @@ public class Sword : MonoBehaviour
     HeavySwordCombo
   }
 
-  IEnumerator ResetCursor()
+  IEnumerator ResetEnemy()
   {
     yield return new WaitForSecondsRealtime(m_HitSuspensionDuration);
     m_CustomCrosshair.SetCrosshairColor(Color.white);
@@ -135,11 +135,12 @@ public class Sword : MonoBehaviour
       if (force > 0f)
       {
         m_EnemyAIBossController.m_IsNavMeshAgentUpdating = false;
-        m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
+
       }
+      m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
 
 
-      StartCoroutine(ResetCursor());
+      StartCoroutine(ResetEnemy());
       enemyTarget.TakeDamage(damage);
 
     }

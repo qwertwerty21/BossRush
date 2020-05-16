@@ -38,9 +38,9 @@ public class UppercutAttack : MonoBehaviour
   IEnumerator ResetTimeScale()
   {
     yield return new WaitForSecondsRealtime(m_HitTimeScaleSlowdownDuration);
-    if (Time.timeScale < 1f)
+    if (Time.timeScale < 1.5f)
     {
-      Time.timeScale = 1f;
+      Time.timeScale = 1.5f;
     }
   }
 

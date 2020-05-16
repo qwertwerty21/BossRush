@@ -99,7 +99,7 @@ public class UppercutAttack : MonoBehaviour
       Vector3 direction = m_BaseHitBox.GetDirection(m_EnemyRigidBody);
       Damage damage = m_BaseHitBox.m_DamageHash["UppercutAttack"];
       float force = damage.m_KnockbackForce;
-      direction.y = m_YKnockbackForceOverride;
+      // direction.y = Mathf.Floor(m_YKnockbackForceOverride * m_CurrentChargeDuration);
 
 
 
@@ -107,11 +107,11 @@ public class UppercutAttack : MonoBehaviour
       Debug.Log("TIMESCALE" + Time.timeScale);
 
       m_EnemyAIBossController.m_IsNavMeshAgentUpdating = false;
-      m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
 
       StartCoroutine(ResetTimeScale());
       StartCoroutine(ResetEnemy());
 
+      m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
 
       var originalDamageAmount = damage.m_DamageAmount;
       damage.m_DamageAmount *= m_CurrentChargeDuration;

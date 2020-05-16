@@ -33,7 +33,7 @@ public class Sword : MonoBehaviour
     HeavySwordCombo
   }
 
-  IEnumerator ResetCursor()
+  IEnumerator ResetEnemy()
   {
     yield return new WaitForSecondsRealtime(m_HitSuspensionDuration);
     m_CustomCrosshair.SetCrosshairColor(Color.white);
@@ -139,7 +139,7 @@ public class Sword : MonoBehaviour
       }
 
 
-      StartCoroutine(ResetCursor());
+      StartCoroutine(ResetEnemy());
       enemyTarget.TakeDamage(damage);
 
     }

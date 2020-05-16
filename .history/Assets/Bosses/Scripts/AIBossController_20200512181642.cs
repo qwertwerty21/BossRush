@@ -139,7 +139,7 @@ public abstract class AIBossController : MonoBehaviour
     m_NavMeshAgent.updatePosition = m_IsNavMeshAgentUpdating;
     m_NavMeshAgent.nextPosition = transform.position;
     // Debug.Log("magnitude" + m_RigidBody.velocity.magnitude);
-    if (m_TryToUpdateNavMesh && Mathf.Approximately(transform.position.y, 0f))
+    if (m_TryToUpdateNavMesh && transform.position.y < 1f)
     {
       m_IsNavMeshAgentUpdating = true;
       m_TryToUpdateNavMesh = false;

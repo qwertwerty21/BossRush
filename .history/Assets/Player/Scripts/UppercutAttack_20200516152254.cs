@@ -40,7 +40,7 @@ public class UppercutAttack : MonoBehaviour
     yield return new WaitForSecondsRealtime(m_HitTimeScaleSlowdownDuration);
     if (Time.timeScale < 1f)
     {
-      Time.timeScale = 1f;
+      Time.timeScale = 2f;
     }
   }
 
