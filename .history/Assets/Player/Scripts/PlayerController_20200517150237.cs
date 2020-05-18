@@ -31,8 +31,6 @@ public class PlayerController : MonoBehaviour
   [SerializeField] private AudioClip m_LandSound; // the sound played when character touches back on ground.
   [SerializeField] private float m_AutoTargetingRadius = 10f;
   [SerializeField] private float m_AutoTargetingForce = 5f;
-
-  [SerializeField] private float m_AutoTargetingStoppingDistance = 1f;
   private Animator m_Animator;
   private Rigidbody m_RigidBody;
   private Camera m_Camera;
@@ -221,30 +219,21 @@ public class PlayerController : MonoBehaviour
 
   public void MoveTowardsClosestTarget()
   {
-    if (m_ClosestTargetTransform && CrossPlatformInputManager.GetAxis("Vertical") >= 0f)
+    if (m_ClosestTargetTransform)
     {
       Debug.Log("MoveTowardsClosestTarget");
       Vector3 direction = (m_ClosestTargetTransform.position - transform.position).normalized;
       m_IsOverridingMouseLook = true;
-      // // // rotate to look at
-      float distance = Vector3.Distance(m_ClosestTargetTransform.position, transform.position);
+      // // rotate to look at
+      // Vector3 characterPosition = new Vector3(m_ClosestTargetTransform.position.x, m_ClosestTargetTransform.position.y, m_ClosestTargetTransform.position.z);
+      // Vector3 cameraPosition = new Vector3(m_ClosestTargetTransform.position.x, Mathf.Clamp(m_Camera.transform.position.y, .4f, .6f), m_ClosestTargetTransform.position.z);
 
-      if (distance > m_AutoTargetingStoppingDistance)
-      {
-        AddImpact(direction, m_AutoTargetingForce);
-      }
+      // transform.LookAt(characterPosition);
+      // m_Camera.transform.LookAt(cameraPosition);
 
-      StartCoroutine(ResetCameraLook());
-
+      AddImpact(direction, m_AutoTargetingForce);
       // m_IsOverridingMouseLook = false;
     }
-  }
-
-  IEnumerator ResetCameraLook()
-  {
-    yield return new WaitForSeconds(1f);
-
-    m_IsOverridingMouseLook = false;
   }
 
   private void PlayLandingSound()
@@ -332,17 +321,18 @@ public class PlayerController : MonoBehaviour
 
   private void RotateView()
   {
-    if (m_IsLockedOn && m_LockOnTarget)
+    if (m_IsOverridingMouseLook)
     {
       m_MouseLook.LockedLookRotation(transform, m_LockOnTarget.transform, m_Camera.transform);
+      m_IsOverridingMouseLook = false;
     }
     else
     {
-      // if (!m_IsOverridingMouseLook)
-      // {
+      if (!m_IsOverridingMouseLook)
+      {
 
-      m_MouseLook.LookRotation(transform, m_Camera.transform, m_IsOverridingMouseLook, m_ClosestTargetTransform);
-      // }
+        m_MouseLook.LookRotation(transform, m_Camera.transform);
+      }
     }
   }
 

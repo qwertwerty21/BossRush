@@ -32,18 +32,17 @@ public class MouseLook
     Debug.Log("MOUSEROTATIONY" + CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity);
     Debug.Log("MOUSEROTATIONX" + CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity);
 
-    if (isLockedToClosestTarget)
-    {
-      Vector3 characterPosition = new Vector3(target.position.x, 0.5f, target.position.z);
-      Vector3 cameraPosition = new Vector3(target.position.x, Mathf.Clamp(camera.position.y, .4f, .6f), target.position.z);
+    // if (isLockedToClosestTarget)
+    // {
+    //   Vector3 characterPosition = new Vector3(target.position.x, 0.5f, target.position.z);
+    //   Vector3 cameraPosition = new Vector3(target.position.x, Mathf.Clamp(camera.position.y, .4f, .6f), target.position.z);
 
-      character.LookAt(characterPosition);
-      character.transform.eulerAngles = new Vector3(0f, character.transform.eulerAngles.y, 0f);
-      // camera.LookAt(cameraPosition);
-      m_CharacterTargetRot = character.localRotation;
-      // m_CameraTargetRot = camera.localRotation;
-      // Debug.Log("FUCKINFSIFNDSI");
-    }
+    //   character.LookAt(characterPosition);
+    //   camera.LookAt(cameraPosition);
+    //   m_CharacterTargetRot = character.localRotation;
+    //   m_CameraTargetRot = camera.localRotation;
+    //   // Debug.Log("FUCKINFSIFNDSI");
+    // }
 
 
     float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;

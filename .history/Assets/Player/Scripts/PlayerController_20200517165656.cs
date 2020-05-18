@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
   [SerializeField] private float m_AutoTargetingRadius = 10f;
   [SerializeField] private float m_AutoTargetingForce = 5f;
 
-  [SerializeField] private float m_AutoTargetingStoppingDistance = 1f;
+  [SerializeField] private float m_AutoTargetingStoppingDistance = 2f;
   private Animator m_Animator;
   private Rigidbody m_RigidBody;
   private Camera m_Camera;
@@ -226,7 +226,12 @@ public class PlayerController : MonoBehaviour
       Debug.Log("MoveTowardsClosestTarget");
       Vector3 direction = (m_ClosestTargetTransform.position - transform.position).normalized;
       m_IsOverridingMouseLook = true;
-      // // // rotate to look at
+      // // rotate to look at
+      Vector3 characterPosition = new Vector3(m_ClosestTargetTransform.position.x, m_ClosestTargetTransform.position.y, m_ClosestTargetTransform.position.z);
+      // Vector3 cameraPosition = new Vector3(m_ClosestTargetTransform.position.x, Mathf.Clamp(m_Camera.transform.position.y, .4f, .6f), m_ClosestTargetTransform.position.z);
+
+      transform.LookAt(characterPosition);
+      // m_Camera.transform.LookAt(cameraPosition);
       float distance = Vector3.Distance(m_ClosestTargetTransform.position, transform.position);
 
       if (distance > m_AutoTargetingStoppingDistance)
@@ -338,11 +343,11 @@ public class PlayerController : MonoBehaviour
     }
     else
     {
-      // if (!m_IsOverridingMouseLook)
-      // {
+      if (!m_IsOverridingMouseLook)
+      {
 
-      m_MouseLook.LookRotation(transform, m_Camera.transform, m_IsOverridingMouseLook, m_ClosestTargetTransform);
-      // }
+        m_MouseLook.LookRotation(transform, m_Camera.transform);
+      }
     }
   }
 

@@ -34,14 +34,13 @@ public class MouseLook
 
     if (isLockedToClosestTarget)
     {
-      Vector3 characterPosition = new Vector3(target.position.x, 0.5f, target.position.z);
-      Vector3 cameraPosition = new Vector3(target.position.x, Mathf.Clamp(camera.position.y, .4f, .6f), target.position.z);
+      // Vector3 characterPosition = new Vector3(target.position.x, target.position.y, target.position.z);
+      // Vector3 cameraPosition = new Vector3(target.position.x, Mathf.Clamp(camera.position.y, .4f, .6f), target.position.z);
 
-      character.LookAt(characterPosition);
-      character.transform.eulerAngles = new Vector3(0f, character.transform.eulerAngles.y, 0f);
+      // character.LookAt(characterPosition);
       // camera.LookAt(cameraPosition);
       m_CharacterTargetRot = character.localRotation;
-      // m_CameraTargetRot = camera.localRotation;
+      m_CameraTargetRot = camera.localRotation;
       // Debug.Log("FUCKINFSIFNDSI");
     }
 
