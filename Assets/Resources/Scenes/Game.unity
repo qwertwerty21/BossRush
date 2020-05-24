@@ -5332,6 +5332,11 @@ PrefabInstance:
       propertyPath: m_Damage
       value: 
       objectReference: {fileID: 1871331998}
+    - target: {fileID: 6731429359236783020, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_SprayFactor
+      value: 0.08
+      objectReference: {fileID: 0}
     - target: {fileID: 6731429359236783024, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.r

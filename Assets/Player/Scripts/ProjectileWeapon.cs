@@ -9,6 +9,8 @@ public class ProjectileWeapon : MonoBehaviour
   [SerializeField] float m_ShotsPerRound = 10f;
   [SerializeField] float m_ReloadTime = 2f;
   [SerializeField] float m_Range = 100f;
+
+  [SerializeField] float m_SprayFactor = .02f;
   [SerializeField] float m_TimeBetweenShots = 0.5f;
   [SerializeField] ParticleSystem m_MuzzleFlash;
   [SerializeField] GameObject m_HitEffect;
@@ -45,8 +47,12 @@ public class ProjectileWeapon : MonoBehaviour
   private void ProcessRaycast()
   {
     RaycastHit hit;
+    Vector3 direction = m_Camera.transform.forward;
+    direction.x += Random.Range(-m_SprayFactor, m_SprayFactor);
+    direction.y += Random.Range(-m_SprayFactor, m_SprayFactor);
+    direction.z += Random.Range(-m_SprayFactor, m_SprayFactor);
 
-    if (Physics.Raycast(m_Camera.transform.position, m_Camera.transform.forward, out hit, m_Range, m_LayerMask))
+    if (Physics.Raycast(m_Camera.transform.position, direction, out hit, m_Range, m_LayerMask))
     {
       Debug.Log("hit collider gameobject " + hit.collider.gameObject);
       if (hit.transform.tag == "Enemy")
