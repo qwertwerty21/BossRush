@@ -21,13 +21,19 @@ public class PlayerController : MonoBehaviour
   [SerializeField] private float m_DashHeight = 1f;
   [SerializeField] private float m_JumpSpeed;
   [SerializeField] private float m_MaxJumps = 2;
+  [SerializeField] private float m_KnockdownThreshold = 10f;
+  [SerializeField] private float m_KnockdownDuration = 3f;
   [SerializeField] private float m_StickToGroundForce;
   [SerializeField] private MouseLook m_MouseLook;
   [SerializeField] private float m_StepInterval;
   [SerializeField] private AudioClip[] m_FootstepSounds; // an array of footstep sounds that will be randomly selected from.
   [SerializeField] private AudioClip m_JumpSound; // the sound played when character leaves the ground.
   [SerializeField] private AudioClip m_LandSound; // the sound played when character touches back on ground.
+  [SerializeField] private float m_AutoTargetingRadius = 3f;
+  [SerializeField] private float m_AutoTargetingRange = 10f;
+  [SerializeField] private float m_AutoTargetingForce = 5f;
 
+  [SerializeField] private float m_AutoTargetingStoppingDistance = 1f;
   private Animator m_Animator;
   private Rigidbody m_RigidBody;
   private Camera m_Camera;
@@ -46,6 +52,18 @@ public class PlayerController : MonoBehaviour
   private AudioSource m_AudioSource;
   private float m_DoubleTapLastTapped = -0.1f;
   private Vector3 m_Impact = Vector3.zero;
+  public bool m_IsLockedOn = false;
+  public Transform m_LockOnTarget;
+
+  public Transform m_ClosestTargetTransform;
+
+  private bool m_IsOverridingMouseLook = false;
+
+  // Layer 8 is the Player Layer
+  // Bit shift the index of the layer (8) to get a bit mask
+  // This would cast rays only against colliders in layer 8.
+  // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
+  private int m_LayerMask = ~(1 << 8);
 
   // Use this for initialization
   private void Awake()
@@ -57,13 +75,14 @@ public class PlayerController : MonoBehaviour
     m_NextStep = m_StepCycle / 2f;
     m_IsJumping = false;
     m_AudioSource = GetComponent<AudioSource>();
-    // m_MouseLook.Init(transform, m_Camera.transform);
+    m_MouseLook.Init(transform, m_Camera.transform);
     m_Animator = GetComponentInChildren<Animator>();
   }
 
   // Update is called once per frame
   private void Update()
   {
+
     RotateView();
 
     // reset jump if grounded
@@ -110,6 +129,8 @@ public class PlayerController : MonoBehaviour
     }
     m_Animator.SetBool("isGrounded", m_CharacterController.isGrounded);
     m_PreviouslyGrounded = m_CharacterController.isGrounded;
+
+    GetClosestTarget();
   }
 
   private void FixedUpdate()
@@ -131,7 +152,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // movement
-    bool canMove = true; // you can be changed later
+    bool canMove = !m_Animator.GetBool("isGuarding"); // you can be changed later
     if (canMove)
     {
       float speed;
@@ -181,6 +202,81 @@ public class PlayerController : MonoBehaviour
     m_MouseLook.UpdateCursorLock();
   }
 
+  private void GetClosestTarget()
+  {
+    // Collider[] hits = Physics.OverlapSphere(transform.position, m_AutoTargetingRadius);
+    // float closestDistance = Mathf.Infinity;
+    // Transform closestTargetTransform = null;
+    // foreach (Collider hit in hits)
+    // {
+    //   Target target = hit.GetComponent<Target>();
+    //   if (target)
+    //   {
+    //     // get distance 
+    //     float distance = Vector3.Distance(target.transform.position, transform.position);
+    //     if (distance < closestDistance)
+    //     {
+    //       closestDistance = distance;
+    //       closestTargetTransform = target.transform;
+    //     }
+    //     Debug.Log("GetClosestTarget" + target);
+    //   }
+    // }
+    // m_ClosestTargetTransform = closestTargetTransform;
+    Gizmos.color = Color.yellow;
+    Gizmos.DrawSphere(transform.position, 1);
+    RaycastHit[] hits = Physics.SphereCastAll(transform.position, m_AutoTargetingRadius, m_Camera.transform.forward, m_AutoTargetingRange, m_LayerMask);
+    float closestDistance = Mathf.Infinity;
+    Transform closestTargetTransform = null;
+    foreach (RaycastHit hit in hits)
+    {
+      Target target = hit.transform.gameObject.GetComponent<Target>();
+      if (target)
+      {
+        // get distance 
+        float distance = Vector3.Distance(target.transform.position, transform.position);
+        if (distance < closestDistance)
+        {
+          closestDistance = distance;
+          closestTargetTransform = target.transform;
+        }
+        Debug.Log("GetClosestTarget" + target);
+      }
+    }
+    m_ClosestTargetTransform = closestTargetTransform;
+    Debug.Log("m_ClosestTargetTransform" + m_ClosestTargetTransform);
+
+
+  }
+
+  public void MoveTowardsClosestTarget()
+  {
+    if (m_ClosestTargetTransform && CrossPlatformInputManager.GetAxis("Vertical") >= 0f)
+    {
+      Debug.Log("MoveTowardsClosestTarget");
+      Vector3 direction = (m_ClosestTargetTransform.position - transform.position).normalized;
+      m_IsOverridingMouseLook = true;
+      // // // rotate to look at
+      float distance = Vector3.Distance(m_ClosestTargetTransform.position, transform.position);
+
+      if (distance > m_AutoTargetingStoppingDistance)
+      {
+        AddImpact(direction, m_AutoTargetingForce);
+      }
+
+      StartCoroutine(ResetCameraLook());
+
+      // m_IsOverridingMouseLook = false;
+    }
+  }
+
+  IEnumerator ResetCameraLook()
+  {
+    yield return new WaitForSeconds(1f);
+
+    m_IsOverridingMouseLook = false;
+  }
+
   private void PlayLandingSound()
   {
     m_AudioSource.clip = m_LandSound;
@@ -189,7 +285,7 @@ public class PlayerController : MonoBehaviour
   }
 
   // call this function to add an impact force:
-  private void AddImpact(Vector3 direction, float force)
+  public void AddImpact(Vector3 direction, float force)
   {
     direction.Normalize();
     if (direction.y < 0) direction.y = -direction.y; // reflect down force on the ground
@@ -266,12 +362,22 @@ public class PlayerController : MonoBehaviour
 
   private void RotateView()
   {
-    m_MouseLook.LookRotation(transform, m_Camera.transform);
+    if (m_IsLockedOn && m_LockOnTarget)
+    {
+      m_MouseLook.LockedLookRotation(transform, m_LockOnTarget.transform, m_Camera.transform);
+    }
+    else
+    {
+      // if (!m_IsOverridingMouseLook)
+      // {
+
+      m_MouseLook.LookRotation(transform, m_Camera.transform, m_IsOverridingMouseLook, m_ClosestTargetTransform);
+      // }
+    }
   }
 
   private void OnControllerColliderHit(ControllerColliderHit hit)
   {
-    // Debug.Log("hit by " + hit.collider.name);
     Rigidbody body = hit.collider.attachedRigidbody;
     //dont move the rigidbody if the character is on top of it
     if (m_CollisionFlags == CollisionFlags.Below)
@@ -310,6 +416,12 @@ public class PlayerController : MonoBehaviour
     }
   }
 
+  IEnumerator RecoverFromKnockdown()
+  {
+    yield return new WaitForSeconds(m_KnockdownDuration);
+    m_Animator.SetBool("isKnockdowned", false);
+  }
+
   private void OnTriggerEnter(Collider otherCollider)
   {
     Debug.Log("Set IsHurt trigger here and take damage");
@@ -318,8 +430,25 @@ public class PlayerController : MonoBehaviour
     {
       BaseHitBox enemyHitbox = otherCollider.gameObject.GetComponent<BaseHitBox>();
       Vector3 direction = enemyHitbox.GetDirection(m_RigidBody);
-      float force = enemyHitbox.m_Damage.m_KnockbackForce;
+      float force = enemyHitbox.m_Damages[0].m_KnockbackForce;
+      float damageAmount = enemyHitbox.m_Damages[0].m_DamageAmount;
+
       AddImpact(direction, force);
+
+      if (damageAmount > m_KnockdownThreshold)
+      {
+        m_Animator.SetBool("isKnockdowned", true);
+        StartCoroutine(RecoverFromKnockdown());
+      }
+      else
+      {
+        m_Animator.SetTrigger("stagger");
+      }
+
+      if (enemyHitbox.m_ShouldDestroyOnCollide)
+      {
+        Destroy(enemyHitbox.transform.gameObject);
+      }
     }
   }
 
@@ -331,8 +460,21 @@ public class PlayerController : MonoBehaviour
     {
       BaseHitBox enemyHitbox = other.GetComponent<BaseHitBox>();
       Vector3 direction = enemyHitbox.GetDirection(m_RigidBody);
-      float force = enemyHitbox.m_Damage.m_KnockbackForce;
+      float force = enemyHitbox.m_Damages[0].m_KnockbackForce;
+      float damageAmount = enemyHitbox.m_Damages[0].m_DamageAmount;
+
       AddImpact(direction, force);
+
+      if (damageAmount > m_KnockdownThreshold)
+      {
+        m_Animator.SetBool("isKnockdowned", true);
+        StartCoroutine(RecoverFromKnockdown());
+      }
+      else
+      {
+        m_Animator.SetTrigger("stagger");
+      }
+
     }
   }
 }

@@ -5277,6 +5277,11 @@ PrefabInstance:
       propertyPath: m_AutoTargetingStoppingDistance
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6731429358307243237, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_AutoTargetingRadius
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6731429358314861765, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
       propertyPath: m_Radius

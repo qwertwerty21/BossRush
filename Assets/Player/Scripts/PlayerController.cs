@@ -29,9 +29,9 @@ public class PlayerController : MonoBehaviour
   [SerializeField] private AudioClip[] m_FootstepSounds; // an array of footstep sounds that will be randomly selected from.
   [SerializeField] private AudioClip m_JumpSound; // the sound played when character leaves the ground.
   [SerializeField] private AudioClip m_LandSound; // the sound played when character touches back on ground.
-  [SerializeField] private float m_AutoTargetingRadius = 10f;
+  [SerializeField] private float m_AutoTargetingRadius = 3f;
+  [SerializeField] private float m_AutoTargetingRange = 10f;
   [SerializeField] private float m_AutoTargetingForce = 5f;
-
   [SerializeField] private float m_AutoTargetingStoppingDistance = 1f;
   private Animator m_Animator;
   private Rigidbody m_RigidBody;
@@ -57,6 +57,12 @@ public class PlayerController : MonoBehaviour
   public Transform m_ClosestTargetTransform;
 
   private bool m_IsOverridingMouseLook = false;
+
+  // Layer 8 is the Player Layer
+  // Bit shift the index of the layer (8) to get a bit mask
+  // This would cast rays only against colliders in layer 8.
+  // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
+  private int m_LayerMask = ~(1 << 8);
 
   // Use this for initialization
   private void Awake()
@@ -197,12 +203,13 @@ public class PlayerController : MonoBehaviour
 
   private void GetClosestTarget()
   {
-    Collider[] hits = Physics.OverlapSphere(transform.position, m_AutoTargetingRadius);
+
+    RaycastHit[] hits = Physics.SphereCastAll(transform.position, m_AutoTargetingRadius, transform.forward, m_AutoTargetingRange, m_LayerMask);
     float closestDistance = Mathf.Infinity;
     Transform closestTargetTransform = null;
-    foreach (Collider hit in hits)
+    foreach (RaycastHit hit in hits)
     {
-      Target target = hit.GetComponent<Target>();
+      Target target = hit.transform.gameObject.GetComponent<Target>();
       if (target)
       {
         // get distance 
@@ -216,6 +223,7 @@ public class PlayerController : MonoBehaviour
       }
     }
     m_ClosestTargetTransform = closestTargetTransform;
+    Debug.Log("m_ClosestTargetTransform" + m_ClosestTargetTransform);
 
   }
 
