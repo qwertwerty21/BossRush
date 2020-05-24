@@ -78,7 +78,7 @@ public class UppercutAttack : MonoBehaviour
     {
       m_Animator.SetBool("isChargingUppercutAttack", false);
       m_Animator.SetTrigger("uppercutAttack");
-      m_Animator.SetBool("canSwitchWeapon", !m_PlayerController.m_IsLockedOn);
+      m_Animator.SetBool("canSwitchWeapon", true);
       m_CurrentChargeDuration = 0f;
       // m_PlayerController.ToggleHitboxColliders("UppercutAttack", true);
       // StartCoroutine(EndUppercutAttack());

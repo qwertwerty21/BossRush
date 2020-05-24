@@ -6,12 +6,10 @@ using System;
 
 public class Sword : MonoBehaviour
 {
-  [SerializeField] private Damage m_Damage;
-  [SerializeField] private float m_AttackDelay = 1f;
-
-
+  [SerializeField] private float m_HitSuspensionDuration = 1f;
   [SerializeField] private float m_MaxChargeDuration = 5f;
 
+  private CustomCrosshair m_CustomCrosshair;
   private float m_CurrentChargeDuration;
   private Animator m_Animator;
 
@@ -23,18 +21,35 @@ public class Sword : MonoBehaviour
 
   private float m_AttackLastTapped = -0.1f;
 
-  IEnumerator SwordAttack()
+  private Rigidbody m_EnemyRigidBody;
+
+  private AIBossController m_EnemyAIBossController;
+
+  private SwordComboType m_CurrentComboType;
+
+  private enum SwordComboType
   {
-    m_Animator.SetTrigger("lightSwordAttack");
-    m_Animator.SetBool("isAttacking", true);
-    yield return new WaitForSecondsRealtime(0.5f);
-    // m_Animator.SetBool("isAttacking", false);
+    LightSwordCombo,
+    HeavySwordCombo
   }
 
-  public void DisableSwordHitboxCollider()
+  IEnumerator ResetCursor()
   {
-    m_PlayerController.ToggleHitboxColliders("LightSwordCombo", true);
+    yield return new WaitForSecondsRealtime(m_HitSuspensionDuration);
+    m_CustomCrosshair.SetCrosshairColor(Color.white);
+    // m_EnemyAIBossController.m_IsNavMeshAgentUpdating = true;
+
   }
+
+  // public void DisableSwordHitboxCollider()
+  // {
+  //   m_PlayerController.ToggleHitboxColliders("LightSwordCombo", true);
+  // }
+
+  // private void OnEnable()
+  // {
+  //   m_CustomCrosshair.EnableCrosshair();
+  // }
 
   // Start is called before the first frame update
   private void Awake()
@@ -44,6 +59,8 @@ public class Sword : MonoBehaviour
     m_PlayerController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerController>();
     m_Animator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
     m_BaseHitBox = gameObject.GetComponent<BaseHitBox>();
+    m_CustomCrosshair = GetComponent<CustomCrosshair>();
+
   }
 
   // Update is called once per frame
@@ -56,6 +73,7 @@ public class Sword : MonoBehaviour
       m_Animator.SetTrigger("isInterruptingJump");
       m_Animator.ResetTrigger("jump");
       m_Animator.SetTrigger("lightSwordAttack");
+      m_CurrentComboType = SwordComboType.LightSwordCombo;
       // if (!m_Animator.GetBool("isGrounded"))
       // {
       //   m_PlayerController.m_GravityMultiplier = .3f;
@@ -77,42 +95,53 @@ public class Sword : MonoBehaviour
       // m_CurrentChargeDuration += Time.deltaTime;
       // Debug.Log("CURRENTCHARGET" + m_CurrentChargeDuration);
     }
-    // if (Input.GetButtonUp("Fire2") || m_CurrentChargeDuration >= m_MaxChargeDuration)
-    // {
-    //   m_Animator.SetBool("isChargingUppercutAttack", false);
-    //   m_Animator.SetTrigger("uppercutAttack");
-    //   m_PlayerController.ToggleHitboxColliders("UppercutAttack", true);
-    //   StartCoroutine(EndUppercutAttack());
 
-    // }
+    if (Input.GetButton("Fire2"))
+    {
+      if (!m_Animator.GetBool("isChargingHeavySwordAttack"))
+      {
+        m_Animator.SetBool("canSwitchWeapon", false);
+        m_Animator.SetBool("isChargingHeavySwordAttack", true);
+      }
+      m_CurrentChargeDuration += Time.deltaTime;
+    }
+
+    if (Input.GetButtonUp("Fire2") || m_CurrentChargeDuration >= m_MaxChargeDuration)
+    {
+      m_Animator.SetBool("isChargingHeavySwordAttack", false);
+      m_Animator.SetTrigger("heavySwordAttack");
+      m_CurrentComboType = SwordComboType.HeavySwordCombo;
+      m_Animator.SetBool("canSwitchWeapon", true);
+      m_CurrentChargeDuration = 0f;
+      // m_PlayerController.ToggleHitboxColliders("UppercutAttack", true);
+      // StartCoroutine(EndUppercutAttack());
+
+    }
   }
 
   private void OnTriggerEnter(Collider otherCollider)
   {
-    Debug.Log("YO YOU HIT SOMETHING WITH SWORD ATTACK" + otherCollider);
     if (otherCollider.gameObject.tag == "Enemy")
     {
-      Rigidbody enemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
+      m_CustomCrosshair.SetCrosshairColor(Color.red);
+      m_EnemyAIBossController = otherCollider.gameObject.GetComponent<AIBossController>();
+      m_EnemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
       Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
-      NavMeshAgent enemyNavMeshAgent = otherCollider.gameObject.GetComponent<NavMeshAgent>();
-      Animator enemyAnimator = otherCollider.gameObject.GetComponent<Animator>();
 
-      Vector3 direction = m_BaseHitBox.GetDirection(enemyRigidBody);
-      float force = m_Damage.m_KnockbackForce;
-      // direction.y = Mathf.Floor(m_YKnockbackForceOverride * m_CurrentChargeDuration);
+      Vector3 direction = m_BaseHitBox.GetDirection(m_EnemyRigidBody);
+      Damage damage = m_BaseHitBox.m_DamageHash[m_CurrentComboType.ToString()];
+      float force = damage.m_KnockbackForce;
 
-      // enemyNavMeshAgent.enabled = false;
+      if (force > 0f)
+      {
+        m_EnemyAIBossController.m_IsNavMeshAgentUpdating = false;
+        m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
+      }
 
-      // Time.timeScale = Mathf.Clamp(1 / (m_TimeScaleSlowdown * m_CurrentChargeDuration), .4f, 1);
-      // Debug.Log("TIMESCALE" + Time.timeScale);
 
-      // StartCoroutine(ResetTimeScale());
+      StartCoroutine(ResetCursor());
+      enemyTarget.TakeDamage(damage);
 
-      enemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
-      // var originalDamageAmount = m_Damage.m_DamageAmount;
-      // m_Damage.m_DamageAmount *= m_CurrentChargeDuration;
-      enemyTarget.TakeDamage(m_Damage);
-      // m_Damage.m_DamageAmount = originalDamageAmount;
     }
   }
 }

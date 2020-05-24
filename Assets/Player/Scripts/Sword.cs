@@ -33,6 +33,11 @@ public class Sword : MonoBehaviour
     HeavySwordCombo
   }
 
+  private void OnEnable()
+  {
+    m_Animator.SetBool("isReloading", false);
+  }
+
   IEnumerator ResetCursor()
   {
     yield return new WaitForSecondsRealtime(m_HitSuspensionDuration);
@@ -111,7 +116,7 @@ public class Sword : MonoBehaviour
       m_Animator.SetBool("isChargingHeavySwordAttack", false);
       m_Animator.SetTrigger("heavySwordAttack");
       m_CurrentComboType = SwordComboType.HeavySwordCombo;
-      m_Animator.SetBool("canSwitchWeapon", !m_PlayerController.m_IsLockedOn);
+      m_Animator.SetBool("canSwitchWeapon", true);
       m_CurrentChargeDuration = 0f;
       // m_PlayerController.ToggleHitboxColliders("UppercutAttack", true);
       // StartCoroutine(EndUppercutAttack());

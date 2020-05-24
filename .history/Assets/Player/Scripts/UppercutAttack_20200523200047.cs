@@ -6,7 +6,6 @@ using System;
 
 public class UppercutAttack : MonoBehaviour
 {
-  [SerializeField] private Damage m_Damage;
 
   [SerializeField] private float m_MaxChargeDuration = 5f;
 
@@ -25,14 +24,16 @@ public class UppercutAttack : MonoBehaviour
 
   private NavMeshAgent m_EnemyNavMeshAgent;
   private Rigidbody m_EnemyRigidBody;
+  private AIBossController m_EnemyAIBossController;
 
-  IEnumerator EndUppercutAttack()
-  {
-    yield return new WaitForSecondsRealtime(0.5f);
-    m_PlayerController.ToggleHitboxColliders("UppercutAttack", false);
-    m_CurrentChargeDuration = 0f;
 
-  }
+  // IEnumerator EndUppercutAttack()
+  // {
+  //   yield return new WaitForSecondsRealtime(0.5f);
+  //   m_PlayerController.ToggleHitboxColliders("UppercutAttack", false);
+  //   m_CurrentChargeDuration = 0f;
+
+  // }
 
   IEnumerator ResetTimeScale()
   {
@@ -46,15 +47,8 @@ public class UppercutAttack : MonoBehaviour
   IEnumerator ResetEnemy()
   {
     yield return new WaitForSecondsRealtime(m_HitTimeScaleSlowdownDuration);
-    if (!m_EnemyNavMeshAgent.enabled)
-    {
+    // m_EnemyAIBossController.m_IsNavMeshAgentUpdating = true;
 
-      m_EnemyNavMeshAgent.enabled = true;
-    }
-    if (!m_EnemyRigidBody.isKinematic)
-    {
-      m_EnemyRigidBody.isKinematic = true;
-    }
   }
 
   // Start is called before the first frame update
@@ -98,30 +92,31 @@ public class UppercutAttack : MonoBehaviour
     if (otherCollider.gameObject.tag == "Enemy")
     {
       m_EnemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
-      m_EnemyNavMeshAgent = otherCollider.gameObject.GetComponent<NavMeshAgent>();
+      m_EnemyAIBossController = otherCollider.gameObject.GetComponent<AIBossController>();
+
       Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
-      Animator enemyAnimator = otherCollider.gameObject.GetComponent<Animator>();
 
-      Vector3 direction = m_BaseHitBox.GetDirection(enemyRigidBody);
-      float force = m_Damage.m_KnockbackForce;
-      direction.y = Mathf.Floor(m_YKnockbackForceOverride * m_CurrentChargeDuration);
+      Vector3 direction = m_BaseHitBox.GetDirection(m_EnemyRigidBody);
+      Damage damage = m_BaseHitBox.m_DamageHash["UppercutAttack"];
+      float force = damage.m_KnockbackForce;
+      direction.y = m_YKnockbackForceOverride;
 
 
 
-      Time.timeScale = Mathf.Clamp(1 / (m_TimeScaleSlowdown * m_CurrentChargeDuration), .4f, 1);
+      Time.timeScale = Mathf.Clamp(1 / (m_TimeScaleSlowdown * m_CurrentChargeDuration), .1f, 1);
       Debug.Log("TIMESCALE" + Time.timeScale);
 
-      enemyRigidBody.isKinematic = false;
-      enemyNavMeshAgent.enabled = false;
+      m_EnemyAIBossController.m_IsNavMeshAgentUpdating = false;
+      m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
+
       StartCoroutine(ResetTimeScale());
       StartCoroutine(ResetEnemy());
 
-      enemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
 
-      var originalDamageAmount = m_Damage.m_DamageAmount;
-      m_Damage.m_DamageAmount *= m_CurrentChargeDuration;
-      enemyTarget.TakeDamage(m_Damage);
-      m_Damage.m_DamageAmount = originalDamageAmount;
+      var originalDamageAmount = damage.m_DamageAmount;
+      damage.m_DamageAmount *= m_CurrentChargeDuration;
+      enemyTarget.TakeDamage(damage);
+      damage.m_DamageAmount = originalDamageAmount;
     }
   }
 }
