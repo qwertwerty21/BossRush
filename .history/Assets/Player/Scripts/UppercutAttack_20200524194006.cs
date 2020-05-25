@@ -15,8 +15,6 @@ public class UppercutAttack : MonoBehaviour
 
   [SerializeField] private float m_TimeScaleSlowdown = .4f;
 
-  [SerializeField] public TimeManager m_TimeManager;
-
   private float m_CurrentChargeDuration;
   private Animator m_Animator;
 
@@ -37,15 +35,14 @@ public class UppercutAttack : MonoBehaviour
 
   // }
 
-  // IEnumerator ResetTimeScale()
-  // {
-  //   yield return new WaitForSecondsRealtime(m_HitTimeScaleSlowdownDuration);
-  //   if (Time.timeScale < 1f)
-  //   {
-  //     Time.timeScale = 1f;
-  //     Time.fixedDeltaTime = 0.02F;
-  //   }
-  // }
+  IEnumerator ResetTimeScale()
+  {
+    yield return new WaitForSecondsRealtime(m_HitTimeScaleSlowdownDuration);
+    if (Time.timeScale < 1f)
+    {
+      Time.timeScale = 1f;
+    }
+  }
 
   IEnumerator ResetEnemy()
   {
@@ -113,15 +110,13 @@ public class UppercutAttack : MonoBehaviour
 
 
 
-      // Time.timeScale = Mathf.Clamp(1 / (m_TimeScaleSlowdown * m_CurrentChargeDuration), .1f, 1);
-      // Time.fixedDeltaTime = 0.02F * Time.timeScale;
-      // Debug.Log("TIMESCALE" + Time.timeScale);
-      m_TimeManager.DoSlowmotion(Mathf.Clamp(1 / (m_TimeScaleSlowdown * m_CurrentChargeDuration), .1f, 1));
+      Time.timeScale = Mathf.Clamp(1 / (m_TimeScaleSlowdown * m_CurrentChargeDuration), .1f, 1);
+      Debug.Log("TIMESCALE" + Time.timeScale);
 
       m_EnemyAIBossController.m_IsNavMeshAgentUpdating = false;
       m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
 
-      // StartCoroutine(ResetTimeScale());
+      StartCoroutine(ResetTimeScale());
       StartCoroutine(ResetEnemy());
 
 

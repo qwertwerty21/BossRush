@@ -6431,6 +6431,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1344058873
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1344058875}
+  - component: {fileID: 1344058874}
+  m_Layer: 0
+  m_Name: TimeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1344058874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344058873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb45c1787ef44f069bb7c93a5baa5c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DefaultSlowdownFactor: 0.05
+  m_SlowdownLength: 2
+--- !u!4 &1344058875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344058873}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.128745, y: 0.30851817, z: 1.5089712}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1390749013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400022, guid: b592d2faa93e6ad46a6d520adf8f123e,
@@ -11732,6 +11777,7 @@ MonoBehaviour:
   m_HitTimeScaleSlowdownDuration: 1
   m_YKnockbackForceOverride: 10
   m_TimeScaleSlowdown: 1
+  m_TimeManager: {fileID: 1344058874}
 --- !u!135 &1871332005
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -19700,6 +19746,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AutoTargetingRadius
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731429358307243237, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_KnockdownThreshold
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731429358307243237, guid: c99eeb7c63e2b4db59f523c0930592e9,
+        type: 3}
+      propertyPath: m_JumpSpeed
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6731429358314861765, guid: c99eeb7c63e2b4db59f523c0930592e9,
         type: 3}
