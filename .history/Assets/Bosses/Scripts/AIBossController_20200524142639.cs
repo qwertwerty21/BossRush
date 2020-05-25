@@ -5,17 +5,24 @@ using UnityEngine.AI;
 
 public abstract class AIBossController : MonoBehaviour
 {
+
+  public bool m_IsNavMeshAgentUpdating = true;
+  [SerializeField] private float m_NavMeshAgentUpdateThreshold = 3f;
   [SerializeField] private GameObject m_Player;
   [SerializeField] float m_MovingTurnSpeed = 360;
   [SerializeField] float m_StationaryTurnSpeed = 180;
-  [SerializeField] float m_initialHealth = 100;
+  [SerializeField] public GameObject[] m_Prefabs;
   private float m_TurnAmount;
   private float m_ForwardAmount;
   protected Animator m_Animator;
 
+  protected NavMeshAgent m_NavMeshAgent;
   protected Rigidbody m_RigidBody;
 
+
   private Vector3 m_Impact = Vector3.zero;
+
+  private bool m_TryToUpdateNavMesh = false;
 
   public GameObject GetPlayer()
   {
@@ -89,6 +96,19 @@ public abstract class AIBossController : MonoBehaviour
     }
   }
 
+  public void InstantiatePrefab(AnimationEvent animationEvent)
+  {
+    foreach (GameObject prefab in m_Prefabs)
+    {
+      if (prefab.name == animationEvent.stringParameter)
+      {
+        Vector3 position = transform.position;
+        position.x += animationEvent.floatParameter;
+        Instantiate(prefab, position, transform.rotation);
+      }
+    }
+  }
+
   public void PlayParticleSystemEffect(string name)
   {
     ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
@@ -102,33 +122,42 @@ public abstract class AIBossController : MonoBehaviour
     }
   }
 
-  void Awake()
+  public void ResetNavMeshAgentUpdate()
   {
+    m_TryToUpdateNavMesh = true;
+  }
+
+  virtual protected void Awake()
+  {
+    m_NavMeshAgent = GetComponent<NavMeshAgent>();
     m_Animator = GetComponent<Animator>();
     m_RigidBody = GetComponent<Rigidbody>();
+
   }
 
-  void OnCollisionEnter(Collision otherCollider)
+  virtual protected void FixedUpdate()
   {
-    if (otherCollider.gameObject.tag == "Ground")
+    m_RigidBody.isKinematic = m_IsNavMeshAgentUpdating;
+    m_NavMeshAgent.updatePosition = m_IsNavMeshAgentUpdating;
+    m_NavMeshAgent.nextPosition = transform.position;
+    // Debug.Log("magnitude" + m_RigidBody.velocity.magnitude);
+    if (m_TryToUpdateNavMesh && Mathf.Approximately(transform.position.y, 0f))
     {
-      NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
-      if (!navMeshAgent.enabled)
-      {
-
-        navMeshAgent.enabled = true;
-      }
+      m_IsNavMeshAgentUpdating = true;
+      m_TryToUpdateNavMesh = false;
     }
   }
 
-  void OnTriggerStay(Collider otherCollider)
-  {
-    var controller = other.GetComponent(CharacterController);
-    if (controller != null)
-    {
-      controller.SimpleMove(forward * slideSpeed);
-    }
-  }
+  // void OnControllerColliderHit(ControllerColliderHit hit)
+  // {
+  //   var hitNormal = hit.normal;
+  //   var controller = hit.collider.GetComponent<CharacterController>();
+  //   if (controller != null)
+  //   {
+  //     Debug.Log("MOVE BITCH GET OUT TH EWYA ");
+  //     controller.SimpleMove((new Vector3(100f * Time.deltaTime, 0, 100f * Time.deltaTime)));
+  //   }
+  // }
 
   // void Update()
   // {

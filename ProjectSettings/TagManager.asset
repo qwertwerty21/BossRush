@@ -9,6 +9,7 @@ TagManager:
   - UI
   - Crosshair
   - Ground
+  - Sword
   layers:
   - Default
   - TransparentFX

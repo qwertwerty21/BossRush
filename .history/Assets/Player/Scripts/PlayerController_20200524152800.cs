@@ -229,21 +229,10 @@ public class PlayerController : MonoBehaviour
 
   public void PlayParticleSystem(string tagName)
   {
-    ParticleSystem[] particleSystems = GameObject.FindWithTag(tagName).GetComponentsInChildren<ParticleSystem>();
-    Debug.Log("PArticleSYSTEMS" + particleSystems.Length);
+    ParticleSystem[] particleSystems = gameObject.FindWithTag(tagName).GetComponentsInChildren<ParticleSystem>();
     foreach (ParticleSystem particleSystem in particleSystems)
     {
-      Debug.Log("Playing ParticleSystem" + particleSystem);
-      particleSystem.Play();
-    }
-  }
 
-  public void StopParticleSystem(string tagName)
-  {
-    ParticleSystem[] particleSystems = GameObject.FindWithTag(tagName).GetComponentsInChildren<ParticleSystem>();
-    foreach (ParticleSystem particleSystem in particleSystems)
-    {
-      particleSystem.Stop();
     }
   }
 

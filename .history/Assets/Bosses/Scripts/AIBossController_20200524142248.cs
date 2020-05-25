@@ -5,17 +5,24 @@ using UnityEngine.AI;
 
 public abstract class AIBossController : MonoBehaviour
 {
+
+  public bool m_IsNavMeshAgentUpdating = true;
+  [SerializeField] private float m_NavMeshAgentUpdateThreshold = 3f;
   [SerializeField] private GameObject m_Player;
   [SerializeField] float m_MovingTurnSpeed = 360;
   [SerializeField] float m_StationaryTurnSpeed = 180;
-  [SerializeField] float m_initialHealth = 100;
+  [SerializeField] public GameObject[] m_Prefabs;
   private float m_TurnAmount;
   private float m_ForwardAmount;
   protected Animator m_Animator;
 
+  protected NavMeshAgent m_NavMeshAgent;
   protected Rigidbody m_RigidBody;
 
+
   private Vector3 m_Impact = Vector3.zero;
+
+  private bool m_TryToUpdateNavMesh = false;
 
   public GameObject GetPlayer()
   {
@@ -89,6 +96,17 @@ public abstract class AIBossController : MonoBehaviour
     }
   }
 
+  public void InstantiatePrefab(AnimationEvent animationEvent)
+  {
+    foreach (GameObject prefab in m_Prefabs)
+    {
+      if (prefab.name == animationEvent.stringParameter)
+      {
+        Instantiate(prefab, transform.position + animationEvent.floatParameter, transform.rotation);
+      }
+    }
+  }
+
   public void PlayParticleSystemEffect(string name)
   {
     ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
@@ -102,26 +120,29 @@ public abstract class AIBossController : MonoBehaviour
     }
   }
 
-  void Awake()
+  public void ResetNavMeshAgentUpdate()
   {
-    m_Animator = GetComponent<Animator>();
-    m_RigidBody = GetComponent<Rigidbody>();
+    m_TryToUpdateNavMesh = true;
   }
 
-  void OnCollisionEnter(Collision otherCollider)
+  virtual protected void Awake()
   {
-    if (otherCollider.gameObject.tag == "Ground")
-    {
-      NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
-      if (!navMeshAgent.enabled)
-      {
+    m_NavMeshAgent = GetComponent<NavMeshAgent>();
+    m_Animator = GetComponent<Animator>();
+    m_RigidBody = GetComponent<Rigidbody>();
 
-        navMeshAgent.enabled = true;
-      }
-      // if (!m_RigidBody.isKinematic)
-      // {
-      //   m_RigidBody.isKinematic = true;
-      // }
+  }
+
+  virtual protected void FixedUpdate()
+  {
+    m_RigidBody.isKinematic = m_IsNavMeshAgentUpdating;
+    m_NavMeshAgent.updatePosition = m_IsNavMeshAgentUpdating;
+    m_NavMeshAgent.nextPosition = transform.position;
+    // Debug.Log("magnitude" + m_RigidBody.velocity.magnitude);
+    if (m_TryToUpdateNavMesh && Mathf.Approximately(transform.position.y, 0f))
+    {
+      m_IsNavMeshAgentUpdating = true;
+      m_TryToUpdateNavMesh = false;
     }
   }
 

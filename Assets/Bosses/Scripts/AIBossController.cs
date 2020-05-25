@@ -96,13 +96,15 @@ public abstract class AIBossController : MonoBehaviour
     }
   }
 
-  public void InstantiatePrefab(string name)
+  public void InstantiatePrefab(AnimationEvent animationEvent)
   {
     foreach (GameObject prefab in m_Prefabs)
     {
-      if (prefab.name == name)
+      if (prefab.name == animationEvent.stringParameter)
       {
-        Instantiate(prefab, transform.position, transform.rotation);
+        Vector3 position = transform.position + transform.forward * animationEvent.floatParameter;
+
+        Instantiate(prefab, position, transform.rotation);
       }
     }
   }

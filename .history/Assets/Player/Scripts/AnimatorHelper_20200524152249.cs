@@ -54,9 +54,4 @@ public class AnimatorHelper : MonoBehaviour
   {
     m_PlayerController.PlayParticleSystem(animationEvent.stringParameter);
   }
-
-  public void StopParticleSystem(AnimationEvent animationEvent)
-  {
-    m_PlayerController.StopParticleSystem(animationEvent.stringParameter);
-  }
 }

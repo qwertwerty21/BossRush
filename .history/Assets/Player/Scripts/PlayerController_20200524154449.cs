@@ -230,7 +230,7 @@ public class PlayerController : MonoBehaviour
   public void PlayParticleSystem(string tagName)
   {
     ParticleSystem[] particleSystems = GameObject.FindWithTag(tagName).GetComponentsInChildren<ParticleSystem>();
-    Debug.Log("PArticleSYSTEMS" + particleSystems.Length);
+    Debug.Log("PArticleSYSTEMS" + particleSystems);
     foreach (ParticleSystem particleSystem in particleSystems)
     {
       Debug.Log("Playing ParticleSystem" + particleSystem);
