@@ -60,7 +60,7 @@ public class ProjectileWeapon : MonoBehaviour
         Debug.Log("HIT " + hit);
         // CreateHitImpact(m_HitEffect, hit);
         Target target = hit.transform.GetComponent<Target>();
-        target.TakeDamage(m_Damage, hit.point);
+        target.TakeDamage(m_Damage, hit.transform.position);
       }
       else
       {

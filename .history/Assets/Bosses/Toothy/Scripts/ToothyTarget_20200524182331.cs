@@ -11,8 +11,7 @@ public class ToothyTarget : Target
 
   private void CreateHitImpact(GameObject effect, Vector3 position)
   {
-    Debug.Log("FUCKING POSITION" + position);
-    GameObject impact = Instantiate(effect, position, Quaternion.identity);
+    GameObject impact = Instantiate(effect, position, Quaternion.Identity);
     Destroy(impact, 1f);
   }
 

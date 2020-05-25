@@ -9,17 +9,15 @@ public class ToothyTarget : Target
 
   private Animator m_Animator;
 
-  private void CreateHitImpact(GameObject effect, Vector3 position)
+  private void CreateHitImpact(GameObject effect, RaycastHit hit)
   {
-    Debug.Log("FUCKING POSITION" + position);
-    GameObject impact = Instantiate(effect, position, Quaternion.identity);
+    GameObject impact = Instantiate(effect, hit.point, Quaternion.LookRotation(hit.normal));
     Destroy(impact, 1f);
   }
 
-  override public void TakeDamage(Damage damage, Vector3 hitPosition)
+  override public void TakeDamage(Damage damage)
   {
-    base.TakeDamage(damage, hitPosition);
-    CreateHitImpact(m_HitEffect, hitPosition);
+    base.TakeDamage(damage);
     if (damage.m_KnockbackForce > 0f)
     {
       m_Animator.SetTrigger("stagger");
