@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
       m_DoubleTapLastTapped = Time.time;
 
     }
-    Debug.Log("GROUNDED" + m_CharacterController.isGrounded);
+
     // landed
     if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
     {

@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour
     }
     else
     {
-      m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
+      m_MoveDir -= Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
     }
 
     // movement

@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
     // apply gravity forces
     if (m_CharacterController.isGrounded)
     {
-      m_MoveDir.y = -m_StickToGroundForce;
+      // m_MoveDir.y = -m_StickToGroundForce;
     }
     else
     {

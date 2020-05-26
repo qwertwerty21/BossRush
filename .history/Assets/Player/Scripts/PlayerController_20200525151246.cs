@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     m_IsJumping = false;
     m_AudioSource = GetComponent<AudioSource>();
     m_MouseLook.Init(transform, m_Camera.transform);
-    m_Animator = GetComponent<Animator>();
+    m_Animator = GetComponentInChildren<Animator>();
   }
 
   // Update is called once per frame
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
       m_DoubleTapLastTapped = Time.time;
 
     }
-    Debug.Log("GROUNDED" + m_CharacterController.isGrounded);
+
     // landed
     if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
     {

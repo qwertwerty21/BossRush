@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
   private Vector3 m_MoveDir = Vector3.zero;
   private CharacterController m_CharacterController;
   private CollisionFlags m_CollisionFlags;
-  private bool m_PreviouslyGrounded;
+  private bool m_PreviouslyGrounded = true;
   private float m_StepCycle;
   private float m_NextStep;
   private bool m_IsJumping;
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
     // apply gravity forces
     if (m_CharacterController.isGrounded)
     {
-      m_MoveDir.y = -m_StickToGroundForce;
+      m_MoveDir.y = -Mathf.Epsilon;
     }
     else
     {

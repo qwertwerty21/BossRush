@@ -20,7 +20,7 @@ public class WeaponSwitcher : MonoBehaviour
   }
   void Awake()
   {
-    m_Animator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
+    m_Animator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
   }
   // Start is called before the first frame update
   void Start()
@@ -56,10 +56,7 @@ public class WeaponSwitcher : MonoBehaviour
       }
     }
 
-    // cant switch if youre reloading
-    bool canSwitchWeapons = !m_Animator.GetBool("isReloading") && !m_Animator.GetBool("isShooting");
-
-    if (m_SelectedWeaponIndex != previousSelectedWeaponIndex && canSwitchWeapons)
+    if (m_SelectedWeaponIndex != previousSelectedWeaponIndex && m_Animator.GetBool("canSwitchWeapon"))
     {
       SelectWeapon();
     }
