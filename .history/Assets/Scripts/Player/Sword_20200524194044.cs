@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
-public class Sword : MonoBehaviour {
+public class Sword : MonoBehaviour
+{
   [SerializeField] private float m_HitSuspensionDuration = 1f;
   [SerializeField] private float m_MaxChargeDuration = 5f;
 
@@ -26,24 +27,28 @@ public class Sword : MonoBehaviour {
 
   private SwordComboType m_CurrentComboType;
 
-  private enum SwordComboType {
+  private enum SwordComboType
+  {
     LightSwordCombo,
     HeavySwordCombo
   }
 
-  private void OnEnable () {
-    m_Animator.SetBool ("isReloading", false);
+  private void OnEnable()
+  {
+    m_Animator.SetBool("isReloading", false);
   }
 
-  IEnumerator ResetCursor () {
-    yield return new WaitForSecondsRealtime (m_HitSuspensionDuration);
-    m_CustomCrosshair.SetCrosshairColor (Color.white);
+  IEnumerator ResetCursor()
+  {
+    yield return new WaitForSecondsRealtime(m_HitSuspensionDuration);
+    m_CustomCrosshair.SetCrosshairColor(Color.white);
     // m_EnemyAIBossController.m_IsNavMeshAgentUpdating = true;
 
   }
 
-  IEnumerator ResetChargeDuration () {
-    yield return new WaitForSecondsRealtime (.5f);
+  IEnumerator ResetChargeDuration()
+  {
+    yield return new WaitForSecondsRealtime(.5f);
     m_CurrentChargeDuration = 0f;
   }
 
@@ -58,24 +63,27 @@ public class Sword : MonoBehaviour {
   // }
 
   // Start is called before the first frame update
-  private void Awake () {
+  private void Awake()
+  {
     m_Camera = Camera.main;
-    m_CharacterController = GameObject.FindGameObjectWithTag ("Player").GetComponentInChildren<CharacterController> ();
-    m_PlayerController = GameObject.FindGameObjectWithTag ("Player").GetComponentInChildren<PlayerController> ();
-    m_Animator = GameObject.FindGameObjectWithTag ("Player").GetComponentInChildren<Animator> ();
-    m_BaseHitBox = gameObject.GetComponent<BaseHitBox> ();
-    m_CustomCrosshair = GetComponent<CustomCrosshair> ();
+    m_CharacterController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<CharacterController>();
+    m_PlayerController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerController>();
+    m_Animator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
+    m_BaseHitBox = gameObject.GetComponent<BaseHitBox>();
+    m_CustomCrosshair = GetComponent<CustomCrosshair>();
 
   }
 
   // Update is called once per frame
-  void Update () {
+  void Update()
+  {
 
-    if (Input.GetButton ("Fire1")) {
+    if (Input.GetButtonDown("Fire1"))
+    {
       // needed so we can attack in mid-air
-      m_Animator.SetTrigger ("isInterruptingJump");
-      m_Animator.ResetTrigger ("jump");
-      m_Animator.SetTrigger ("lightSwordAttack");
+      m_Animator.SetTrigger("isInterruptingJump");
+      m_Animator.ResetTrigger("jump");
+      m_Animator.SetTrigger("lightSwordAttack");
       m_CurrentComboType = SwordComboType.LightSwordCombo;
       // if (!m_Animator.GetBool("isGrounded"))
       // {
@@ -90,6 +98,7 @@ public class Sword : MonoBehaviour {
       // var moveDir = new Vector3(m_Camera.transform.position.x, 0, m_Camera.transform.position.z);
       // m_CharacterController.Move(Vector3.forward * 10f * Time.deltaTime);
 
+
       // if (!m_Animator.GetBool("isChargingUppercutAttack"))
       // {
       //   m_Animator.SetBool("isChargingUppercutAttack", true);
@@ -98,44 +107,51 @@ public class Sword : MonoBehaviour {
       // Debug.Log("CURRENTCHARGET" + m_CurrentChargeDuration);
     }
 
-    if (Input.GetButton ("Fire2")) {
-      if (!m_Animator.GetBool ("isChargingHeavySwordAttack")) {
-        m_Animator.SetBool ("canSwitchWeapon", false);
-        m_Animator.SetBool ("isChargingHeavySwordAttack", true);
+    if (Input.GetButton("Fire2"))
+    {
+      if (!m_Animator.GetBool("isChargingHeavySwordAttack"))
+      {
+        m_Animator.SetBool("canSwitchWeapon", false);
+        m_Animator.SetBool("isChargingHeavySwordAttack", true);
       }
       m_CurrentChargeDuration += Time.deltaTime;
     }
 
-    if (Input.GetButtonUp ("Fire2") || m_CurrentChargeDuration >= m_MaxChargeDuration) {
-      m_Animator.SetBool ("isChargingHeavySwordAttack", false);
-      m_Animator.SetTrigger ("heavySwordAttack");
+    if (Input.GetButtonUp("Fire2") || m_CurrentChargeDuration >= m_MaxChargeDuration)
+    {
+      m_Animator.SetBool("isChargingHeavySwordAttack", false);
+      m_Animator.SetTrigger("heavySwordAttack");
       m_CurrentComboType = SwordComboType.HeavySwordCombo;
-      m_Animator.SetBool ("canSwitchWeapon", true);
-      StartCoroutine (ResetChargeDuration ());
+      m_Animator.SetBool("canSwitchWeapon", true);
+      StartCoroutine(ResetChargeDuration());
       // m_PlayerController.ToggleHitboxColliders("UppercutAttack", true);
       // StartCoroutine(EndUppercutAttack());
 
     }
   }
 
-  private void OnTriggerEnter (Collider otherCollider) {
-    if (otherCollider.gameObject.tag == "Enemy") {
-      m_CustomCrosshair.SetCrosshairColor (Color.red);
-      m_EnemyAIBossController = otherCollider.gameObject.GetComponent<AIBossController> ();
-      m_EnemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody> ();
-      Target enemyTarget = otherCollider.gameObject.GetComponent<Target> ();
+  private void OnTriggerEnter(Collider otherCollider)
+  {
+    if (otherCollider.gameObject.tag == "Enemy")
+    {
+      m_CustomCrosshair.SetCrosshairColor(Color.red);
+      m_EnemyAIBossController = otherCollider.gameObject.GetComponent<AIBossController>();
+      m_EnemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
+      Target enemyTarget = otherCollider.gameObject.GetComponent<Target>();
 
-      Vector3 direction = m_BaseHitBox.GetDirection (m_EnemyRigidBody);
-      Damage damage = m_BaseHitBox.m_DamageHash[m_CurrentComboType.ToString ()];
+      Vector3 direction = m_BaseHitBox.GetDirection(m_EnemyRigidBody);
+      Damage damage = m_BaseHitBox.m_DamageHash[m_CurrentComboType.ToString()];
       float force = damage.m_KnockbackForce;
 
-      if (force > 0f) {
+      if (force > 0f)
+      {
         m_EnemyAIBossController.m_IsNavMeshAgentUpdating = false;
-        m_EnemyRigidBody.AddForce (direction * force, ForceMode.Impulse);
+        m_EnemyRigidBody.AddForce(direction * force, ForceMode.Impulse);
       }
 
-      StartCoroutine (ResetCursor ());
-      enemyTarget.TakeDamage (damage, transform.position);
+
+      StartCoroutine(ResetCursor());
+      enemyTarget.TakeDamage(damage, transform.position);
 
     }
   }

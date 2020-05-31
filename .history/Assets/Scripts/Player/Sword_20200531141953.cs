@@ -71,7 +71,7 @@ public class Sword : MonoBehaviour {
   // Update is called once per frame
   void Update () {
 
-    if (Input.GetButton ("Fire1")) {
+    if (Input.GetButtonUp ("Fire1")) {
       // needed so we can attack in mid-air
       m_Animator.SetTrigger ("isInterruptingJump");
       m_Animator.ResetTrigger ("jump");

@@ -6,8 +6,6 @@ public class ToothyTarget : Target {
 
   [SerializeField] GameObject m_HitEffect;
 
-  [SerializeField] private float m_StaggerThreshold = 5f;
-
   private Animator m_Animator;
 
   private void CreateHitImpact (GameObject effect, Vector3 position) {
@@ -19,7 +17,7 @@ public class ToothyTarget : Target {
   override public void TakeDamage (Damage damage, Vector3 hitPosition) {
     base.TakeDamage (damage, hitPosition);
     CreateHitImpact (m_HitEffect, hitPosition);
-    if (damage.m_KnockbackForce > m_StaggerThreshold) {
+    if (damage.m_KnockbackForce > 0f) {
       m_Animator.SetTrigger ("stagger");
     }
   }
