@@ -16350,7 +16350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Name: LightSwordCombo
   m_DamageAmount: 5
-  m_KnockbackForce: 3
+  m_KnockbackForce: 0
 --- !u!114 &993760609
 MonoBehaviour:
   m_ObjectHideFlags: 0
