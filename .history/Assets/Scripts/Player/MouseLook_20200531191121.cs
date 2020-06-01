@@ -33,6 +33,7 @@ public class MouseLook {
       // camera.LookAt(cameraPosition);
       m_CharacterTargetRot = character.localRotation;
       // m_CameraTargetRot = camera.localRotation;
+      // Debug.Log("FUCKINFSIFNDSI");
     }
 
     float yRot = CrossPlatformInputManager.GetAxis ("Mouse X") * XSensitivity;

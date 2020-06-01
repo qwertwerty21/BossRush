@@ -12,6 +12,7 @@ public class BaseBossStateMachineBehaviour : StateMachineBehaviour {
     m_Agent = m_Boss.GetComponent<UnityEngine.AI.NavMeshAgent> ();
     m_AIBossController = m_Boss.GetComponent<AIBossController> ();
     m_Player = m_AIBossController.GetPlayer ();
+
     // SetDistanceFromPlayer(animator);
   }
 

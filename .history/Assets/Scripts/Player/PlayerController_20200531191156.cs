@@ -337,6 +337,7 @@ public class PlayerController : MonoBehaviour {
     BaseHitBox[] hitboxes = GetComponentsInChildren<BaseHitBox> ();
     for (int i = 0; i < hitboxes.Length; i++) {
       if (name == hitboxes[i].m_HitBoxName) {
+        Debug.Log ("ENabled mofo" + name);
         hitboxes[i].m_Collider.enabled = isEnabled;
       }
     }
@@ -355,6 +356,7 @@ public class PlayerController : MonoBehaviour {
   }
 
   private void OnTriggerEnter (Collider otherCollider) {
+    Debug.Log ("Set IsHurt trigger here and take damage");
     bool isGuarding = m_Animator.GetBool ("isGuarding");
     if (otherCollider.gameObject.tag == "EnemyHitBox" && !isGuarding) {
       BaseHitBox enemyHitbox = otherCollider.gameObject.GetComponent<BaseHitBox> ();
@@ -378,6 +380,7 @@ public class PlayerController : MonoBehaviour {
   }
 
   private void OnParticleCollision (GameObject other) {
+    Debug.Log ("Particle Collission" + other);
     bool isGuarding = m_Animator.GetBool ("isGuarding");
     if (other.tag == "EnemyHitBox" && !isGuarding) {
       BaseHitBox enemyHitbox = other.GetComponent<BaseHitBox> ();

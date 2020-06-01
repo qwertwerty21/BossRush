@@ -25,6 +25,7 @@ public class ToothyAIBossController : AIBossController {
       // attack
       m_Animator.SetInteger ("state", m_State["Combat"]);
     } else {
+      // Debug.Log("chase " + distanceFromPlayer);
       //chase 
       m_Animator.SetInteger ("state", m_State["Chase"]);
     }

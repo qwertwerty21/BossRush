@@ -49,6 +49,7 @@ public class ProjectileWeapon : MonoBehaviour {
     if (Physics.Raycast (m_Camera.transform.position, direction, out hit, m_Range, m_LayerMask)) {
       if (hit.transform.tag == "Enemy") {
         m_CustomCrosshair.SetCrosshairColor (Color.red);
+        Debug.Log ("HIT " + hit);
         // CreateHitImpact(m_HitEffect, hit);
         Target target = hit.transform.GetComponent<Target> ();
         target.TakeDamage (m_Damage, hit.point);

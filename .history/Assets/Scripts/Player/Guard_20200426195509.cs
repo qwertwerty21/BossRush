@@ -1,39 +1,46 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
-public class Guard : MonoBehaviour {
+public class Guard : MonoBehaviour
+{
   private Animator m_Animator;
 
   private PlayerController m_PlayerController;
 
+
   // Start is called before the first frame update
-  private void Awake () {
-    m_PlayerController = GameObject.FindGameObjectWithTag ("Player").GetComponentInChildren<PlayerController> ();
-    m_Animator = GameObject.FindGameObjectWithTag ("Player").GetComponentInChildren<Animator> ();
+  private void Awake()
+  {
+    m_PlayerController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerController>();
+    m_Animator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
   }
 
   // Update is called once per frame
-  void Update () {
-    if (Input.GetKeyDown (KeyCode.LeftShift)) {
+  void Update()
+  {
+    if (Input.GetKeyDown(KeyCode.LeftShift))
+    {
 
-      m_Animator.SetBool ("canSwitchWeapon", false);
-      m_Animator.SetTrigger ("block");
-      m_Animator.SetBool ("isGuarding", true);
-      m_PlayerController.DisableHitboxColliders ();
+      m_Animator.SetBool("canSwitchWeapon", false);
+      m_Animator.SetTrigger("block");
+      m_Animator.SetBool("isGuarding", true);
+      m_PlayerController.DisableHitboxColliders();
 
     }
-    if (Input.GetKeyUp (KeyCode.LeftShift)) {
-      m_Animator.SetBool ("isGuarding", false);
-      m_Animator.SetBool ("canSwitchWeapon", !m_PlayerController.m_IsLockedOn);
+    if (Input.GetKeyUp(KeyCode.LeftShift))
+    {
+      m_Animator.SetBool("isGuarding", false);
+      m_Animator.SetBool("canSwitchWeapon", !m_PlayerController.m_IsLockedOn);
 
     }
   }
 
   // private void OnTriggerEnter(Collider otherCollider)
   // {
+  //   Debug.Log("YO YOU HIT SOMETHING WITH UPPERCUT ATTACK" + otherCollider);
   //   if (otherCollider.gameObject.tag == "Enemy")
   //   {
   //     Rigidbody enemyRigidBody = otherCollider.gameObject.GetComponent<Rigidbody>();
@@ -48,6 +55,7 @@ public class Guard : MonoBehaviour {
   //     enemyNavMeshAgent.enabled = false;
 
   //     Time.timeScale = Mathf.Clamp(1 / (m_TimeScaleSlowdown * m_CurrentChargeDuration), .4f, 1);
+  //     Debug.Log("TIMESCALE" + Time.timeScale);
 
   //     StartCoroutine(ResetTimeScale());
 

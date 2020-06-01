@@ -21,10 +21,12 @@ public class ToothyAIBossController : AIBossController {
     var distanceFromPlayer = GetDistanceFromPlayer ();
 
     if (distanceFromPlayer <= m_AttackRange) {
+      Debug.Log ("attack " + m_State["Combat"]);
 
       // attack
       m_Animator.SetInteger ("state", m_State["Combat"]);
     } else {
+      // Debug.Log("chase " + distanceFromPlayer);
       //chase 
       m_Animator.SetInteger ("state", m_State["Chase"]);
     }

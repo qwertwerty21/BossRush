@@ -130,6 +130,7 @@ public abstract class AIBossController : MonoBehaviour {
   //   var controller = hit.collider.GetComponent<CharacterController>();
   //   if (controller != null)
   //   {
+  //     Debug.Log("MOVE BITCH GET OUT TH EWYA ");
   //     controller.SimpleMove((new Vector3(100f * Time.deltaTime, 0, 100f * Time.deltaTime)));
   //   }
   // }

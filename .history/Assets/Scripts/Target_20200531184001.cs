@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Target : MonoBehaviour {
   public float m_Health = 50f;
+
   public Material m_DamageMaterial;
+
   private Material m_OriginalMaterial;
   private SkinnedMeshRenderer m_SkinnedMeshRenderer;
 
@@ -18,6 +20,7 @@ public class Target : MonoBehaviour {
   }
 
   IEnumerator HighlightMaterials () {
+
     m_SkinnedMeshRenderer.material = m_DamageMaterial;
     yield return new WaitForSeconds (.5f);
     m_SkinnedMeshRenderer.material = m_OriginalMaterial;

@@ -18,6 +18,7 @@ public class Target : MonoBehaviour {
   }
 
   IEnumerator HighlightMaterials () {
+
     m_SkinnedMeshRenderer.material = m_DamageMaterial;
     yield return new WaitForSeconds (.5f);
     m_SkinnedMeshRenderer.material = m_OriginalMaterial;

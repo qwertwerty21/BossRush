@@ -378,6 +378,7 @@ public class PlayerController : MonoBehaviour {
   }
 
   private void OnParticleCollision (GameObject other) {
+    Debug.Log ("Particle Collission" + other);
     bool isGuarding = m_Animator.GetBool ("isGuarding");
     if (other.tag == "EnemyHitBox" && !isGuarding) {
       BaseHitBox enemyHitbox = other.GetComponent<BaseHitBox> ();

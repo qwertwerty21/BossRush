@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class ChooseAttack : BaseBossStateMachineBehaviour {
+public class ChooseAttack : BaseBossStateMachineBehaviour
+{
   [SerializeField] private string[] m_AvailableAttacks;
 
-  override public void OnStateEnter (Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-    base.OnStateEnter (animator, stateInfo, layerIndex);
-    string randomAttack = m_AvailableAttacks[Random.Range (0, m_AvailableAttacks.Length)];
-    animator.SetTrigger (randomAttack);
+  override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+  {
+    base.OnStateEnter(animator, stateInfo, layerIndex);
+    Debug.Log("randomAttack " + m_AvailableAttacks.Length);
+    string randomAttack = m_AvailableAttacks[Random.Range(0, m_AvailableAttacks.Length)];
+    animator.SetTrigger(randomAttack);
   }
 
-  override public void OnStateUpdate (Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-    base.OnStateUpdate (animator, stateInfo, layerIndex);
+  override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+  {
+    base.OnStateUpdate(animator, stateInfo, layerIndex);
+    // Debug.Log("player position" + m_Player.transform.position);
     // m_Agent.SetDestination(m_Player.transform.position);
     // m_BossController.Move(m_Agent.desiredVelocity);
 

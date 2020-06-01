@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class AIBossController : MonoBehaviour {
+public abstract class AIBossController : MonoBehaviour
+{
 
   public bool m_IsNavMeshAgentUpdating = true;
   [SerializeField] private float m_NavMeshAgentUpdateThreshold = 3f;
@@ -18,27 +19,30 @@ public abstract class AIBossController : MonoBehaviour {
   protected NavMeshAgent m_NavMeshAgent;
   protected Rigidbody m_RigidBody;
 
+
   private Vector3 m_Impact = Vector3.zero;
 
   private bool m_TryToUpdateNavMesh = false;
 
-  public GameObject GetPlayer () {
+  public GameObject GetPlayer()
+  {
     return m_Player;
   }
 
-  public virtual void Move (Vector3 move) {
+  public virtual void Move(Vector3 move)
+  {
 
     // convert the world relative moveInput vector into a local-relative
     // turn amount and forward amount required to head in the desired
     // direction.
-    if (move.magnitude > 1f) move.Normalize ();
-    move = transform.InverseTransformDirection (move);
+    if (move.magnitude > 1f) move.Normalize();
+    move = transform.InverseTransformDirection(move);
     // CheckGroundStatus();
-    move = Vector3.ProjectOnPlane (move, Vector3.up);
-    m_TurnAmount = Mathf.Atan2 (move.x, move.z);
+    move = Vector3.ProjectOnPlane(move, Vector3.up);
+    m_TurnAmount = Mathf.Atan2(move.x, move.z);
     m_ForwardAmount = move.z;
 
-    ApplyExtraTurnRotation ();
+    ApplyExtraTurnRotation();
 
     // // control and velocity handling is different when grounded and airborne:
     // if (m_IsGrounded)
@@ -47,78 +51,98 @@ public abstract class AIBossController : MonoBehaviour {
     // }
 
     // send input and other state parameters to the animator
-    UpdateLocomotionAnimator (move);
+    UpdateLocomotionAnimator(move);
   }
 
-  public virtual void RotateTowards (Transform target) {
+  public virtual void RotateTowards(Transform target)
+  {
     Vector3 direction = (target.position - transform.position).normalized;
     direction.y = 0f;
-    Quaternion lookRotation = Quaternion.LookRotation (direction);
-    transform.rotation = Quaternion.Slerp (transform.rotation, lookRotation, Time.deltaTime * m_MovingTurnSpeed);
+    Quaternion lookRotation = Quaternion.LookRotation(direction);
+    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * m_MovingTurnSpeed);
   }
 
-  private void ApplyExtraTurnRotation () {
+  private void ApplyExtraTurnRotation()
+  {
     // help the character turn faster (this is in addition to root rotation in the animation)
-    float turnSpeed = Mathf.Lerp (m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
-    transform.Rotate (0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
+    float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
+    transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
   }
 
   // set animator params in here
-  private void UpdateLocomotionAnimator (Vector3 move) {
+  private void UpdateLocomotionAnimator(Vector3 move)
+  {
     // update the animator parameters
-    m_Animator.SetFloat ("horizontal", m_TurnAmount);
-    m_Animator.SetFloat ("vertical", m_ForwardAmount);
+    m_Animator.SetFloat("horizontal", m_TurnAmount);
+    m_Animator.SetFloat("vertical", m_ForwardAmount);
   }
 
-  public float GetDistanceFromPlayer () {
-    float distanceFromPlayer = Vector3.Distance (transform.position, m_Player.transform.position);
+  public float GetDistanceFromPlayer()
+  {
+    float distanceFromPlayer = Vector3.Distance(transform.position, m_Player.transform.position);
     return distanceFromPlayer;
   }
 
-  public void ToggleHitboxColliders (string name, bool isEnabled) {
-    BaseHitBox[] hitboxes = GetComponentsInChildren<BaseHitBox> ();
-    for (int i = 0; i < hitboxes.Length; i++) {
-      if (name == hitboxes[i].m_HitBoxName) {
+  public void ToggleHitboxColliders(string name, bool isEnabled)
+  {
+    BaseHitBox[] hitboxes = GetComponentsInChildren<BaseHitBox>();
+    Debug.Log("toggle swipe hitboxes" + hitboxes);
+    for (int i = 0; i < hitboxes.Length; i++)
+    {
+      if (name == hitboxes[i].m_HitBoxName)
+      {
         hitboxes[i].m_Collider.enabled = isEnabled;
       }
     }
   }
 
-  public void InstantiatePrefab (AnimationEvent animationEvent) {
-    foreach (GameObject prefab in m_Prefabs) {
-      if (prefab.name == animationEvent.stringParameter) {
+  public void InstantiatePrefab(AnimationEvent animationEvent)
+  {
+    foreach (GameObject prefab in m_Prefabs)
+    {
+      if (prefab.name == animationEvent.stringParameter)
+      {
         Vector3 position = transform.position + transform.forward * animationEvent.floatParameter;
 
-        Instantiate (prefab, position, transform.rotation);
+        Instantiate(prefab, position, transform.rotation);
       }
     }
   }
 
-  public void PlayParticleSystemEffect (string name) {
-    ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem> ();
-    for (int i = 0; i < particleSystems.Length; i++) {
-      if (name == particleSystems[i].name) {
-        particleSystems[i].Play ();
+  public void PlayParticleSystemEffect(string name)
+  {
+    ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
+    Debug.Log("play  particleSystems" + particleSystems);
+    for (int i = 0; i < particleSystems.Length; i++)
+    {
+      if (name == particleSystems[i].name)
+      {
+        particleSystems[i].Play();
       }
     }
   }
 
-  public void ResetNavMeshAgentUpdate () {
+  public void ResetNavMeshAgentUpdate()
+  {
     m_TryToUpdateNavMesh = true;
   }
 
-  virtual protected void Awake () {
-    m_NavMeshAgent = GetComponent<NavMeshAgent> ();
-    m_Animator = GetComponent<Animator> ();
-    m_RigidBody = GetComponent<Rigidbody> ();
+  virtual protected void Awake()
+  {
+    m_NavMeshAgent = GetComponent<NavMeshAgent>();
+    m_Animator = GetComponent<Animator>();
+    m_RigidBody = GetComponent<Rigidbody>();
 
   }
 
-  virtual protected void FixedUpdate () {
+  virtual protected void FixedUpdate()
+  {
     m_RigidBody.isKinematic = m_IsNavMeshAgentUpdating;
     m_NavMeshAgent.updatePosition = m_IsNavMeshAgentUpdating;
     m_NavMeshAgent.nextPosition = transform.position;
-    if (m_TryToUpdateNavMesh && Mathf.Approximately (transform.position.y, 0f)) {
+    // Debug.Log("magnitude" + m_RigidBody.velocity.magnitude);
+    if (m_TryToUpdateNavMesh && Mathf.Approximately(transform.position.y, 0f))
+    {
       m_IsNavMeshAgentUpdating = true;
       m_TryToUpdateNavMesh = false;
     }
@@ -130,6 +154,7 @@ public abstract class AIBossController : MonoBehaviour {
   //   var controller = hit.collider.GetComponent<CharacterController>();
   //   if (controller != null)
   //   {
+  //     Debug.Log("MOVE BITCH GET OUT TH EWYA ");
   //     controller.SimpleMove((new Vector3(100f * Time.deltaTime, 0, 100f * Time.deltaTime)));
   //   }
   // }

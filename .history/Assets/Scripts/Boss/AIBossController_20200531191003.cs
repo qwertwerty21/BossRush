@@ -96,6 +96,7 @@ public abstract class AIBossController : MonoBehaviour {
 
   public void PlayParticleSystemEffect (string name) {
     ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem> ();
+    Debug.Log ("play  particleSystems" + particleSystems);
     for (int i = 0; i < particleSystems.Length; i++) {
       if (name == particleSystems[i].name) {
         particleSystems[i].Play ();
@@ -118,6 +119,7 @@ public abstract class AIBossController : MonoBehaviour {
     m_RigidBody.isKinematic = m_IsNavMeshAgentUpdating;
     m_NavMeshAgent.updatePosition = m_IsNavMeshAgentUpdating;
     m_NavMeshAgent.nextPosition = transform.position;
+    // Debug.Log("magnitude" + m_RigidBody.velocity.magnitude);
     if (m_TryToUpdateNavMesh && Mathf.Approximately (transform.position.y, 0f)) {
       m_IsNavMeshAgentUpdating = true;
       m_TryToUpdateNavMesh = false;
@@ -130,6 +132,7 @@ public abstract class AIBossController : MonoBehaviour {
   //   var controller = hit.collider.GetComponent<CharacterController>();
   //   if (controller != null)
   //   {
+  //     Debug.Log("MOVE BITCH GET OUT TH EWYA ");
   //     controller.SimpleMove((new Vector3(100f * Time.deltaTime, 0, 100f * Time.deltaTime)));
   //   }
   // }
