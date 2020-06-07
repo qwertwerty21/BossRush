@@ -9,9 +9,13 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour
 {
+
   [SerializeField] public float m_GravityMultiplier;
   [SerializeField] private float m_Health;
   [SerializeField] private bool m_IsWalking;
+  [SerializeField] private float m_Acceleration = .5f;
+  [SerializeField] private float m_Deceleration = .5f;
+  [SerializeField] private float m_MaxSpeed = 12f;
   [SerializeField] private float m_WalkSpeed;
   // [SerializeField] private float m_RunSpeed; // no running for now
   [SerializeField] [Range(0f, 1f)] private float m_RunStepLengthen;
@@ -40,6 +44,7 @@ public class PlayerController : MonoBehaviour
   private float m_CurrentJumpCount = 0f;
   private float m_YRotation;
   private Vector2 m_LocomotionInput;
+  private float m_CurrentSpeed;
   private Vector3 m_MoveDir = Vector3.zero;
   private CharacterController m_CharacterController;
   private CollisionFlags m_CollisionFlags;
@@ -151,8 +156,7 @@ public class PlayerController : MonoBehaviour
     bool canMove = !m_Animator.GetBool("isGuarding") && !m_Animator.GetBool("isKnockdowned"); // you can be changed later
     if (canMove)
     {
-      float speed;
-      SetLocomotionInput(out speed);
+      SetLocomotionInput();
       // always move along the camera forward as it is the direction that it being aimed at
       Vector3 desiredMove = transform.forward * m_LocomotionInput.y + transform.right * m_LocomotionInput.x;
 
@@ -162,8 +166,8 @@ public class PlayerController : MonoBehaviour
         m_CharacterController.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
       desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
 
-      m_MoveDir.x = desiredMove.x * speed;
-      m_MoveDir.z = desiredMove.z * speed;
+      m_MoveDir.x = desiredMove.x * m_CurrentSpeed;
+      m_MoveDir.z = desiredMove.z * m_CurrentSpeed;
 
       // dash
       if (m_CanDash)
@@ -180,7 +184,7 @@ public class PlayerController : MonoBehaviour
         m_CanDash = false;
       }
 
-      ProgressStepCycle(speed);
+      ProgressStepCycle(m_CurrentSpeed);
     }
     else
     {
@@ -318,7 +322,7 @@ public class PlayerController : MonoBehaviour
     m_FootstepSounds[0] = m_AudioSource.clip;
   }
 
-  private void SetLocomotionInput(out float speed)
+  private void SetLocomotionInput()
   {
     // Read input
     float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
@@ -327,12 +331,29 @@ public class PlayerController : MonoBehaviour
 #if !MOBILE_INPUT
     // On standalone builds, walk/run speed is modified by a key press.
     // keep track of whether or not the character is walking or running
-    // m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+    // m_IsWalking = !Input.GetKey (KeyCode.LeftShift);
 #endif
 
     // set the desired speed to be walking or running
-    // speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
-    speed = m_WalkSpeed;
+    // float speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
+    float speed = m_WalkSpeed;
+
+    if (vertical != 0f)
+    {
+      m_CurrentSpeed += m_Acceleration * Time.fixedDeltaTime;
+      m_CurrentSpeed = Mathf.Clamp(m_CurrentSpeed, m_WalkSpeed, m_MaxSpeed);
+    }
+    else
+    {
+      m_CurrentSpeed -= m_Deceleration * Time.fixedDeltaTime;
+      m_CurrentSpeed = Mathf.Clamp(m_CurrentSpeed, 0f, m_CurrentSpeed);
+    }
+
+    vertical += 1f / m_CurrentSpeed;
+
+
+    print("m_CurrentSpeed" + m_CurrentSpeed);
+    // speed = m_WalkSpeed;
     m_LocomotionInput = new Vector2(horizontal, vertical);
 
     m_Animator.SetFloat("horizontal", horizontal);

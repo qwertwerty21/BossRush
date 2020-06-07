@@ -5238,10 +5238,7 @@ MonoBehaviour:
   m_GravityMultiplier: 1
   m_Health: 0
   m_IsWalking: 0
-  m_Acceleration: 0.5
-  m_MaxSpeed: 12
-  m_WalkSpeed: 2
-  m_RunSpeed: 6
+  m_WalkSpeed: 4
   m_RunStepLengthen: 1
   m_DoubleTapDelay: 0.2
   m_DashThrust: 8
